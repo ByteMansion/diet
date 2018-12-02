@@ -49,21 +49,21 @@ int main(int argc, const char * argv[]) {
 	s.root = root;
 	
 	// postorder
-	vector<int> result = s.postorder_traversal(s.root);
+	vector<int> result = s.postorderTraversal(s.root);
 	print_list(result);
-	result = s.recursive_postorder_traversal(s.root);
+	result = s.recursive_postorderTraversal(s.root);
 	print_list(result);
 	
 	// inorder
-	result = s.inorder_traversal(root);
+	result = s.inorderTraversal(root);
 	print_list(result);
-	result = s.recursive_inorder_traversal(root);
+	result = s.recursive_inorderTraversal(root);
 	print_list(result);
 	
 	//preorder
-	result = s.preorder_traversal(root);
+	result = s.preorderTraversal(root);
 	print_list(result);
-	result = s.recursive_preorder_traversal(root);
+	result = s.recursive_preorderTraversal(root);
 	print_list(result);
 	
 	delete root;

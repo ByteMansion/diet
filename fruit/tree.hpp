@@ -29,19 +29,20 @@ public:
 
 public:
 	// postorder traversal
-	vector<int> postorder_traversal(TreeNode *root);
-	vector<int> recursive_postorder_traversal(TreeNode *root);
+	vector<int> postorderTraversal(TreeNode *root);
+	vector<int> recursive_postorderTraversal(TreeNode *root);
 	
 	// inorder traversal
-	vector<int> inorder_traversal(TreeNode *root);
-	vector<int> recursive_inorder_traversal(TreeNode *root);
+	vector<int> inorderTraversal(TreeNode *root);
+	vector<int> recursive_inorderTraversal(TreeNode *root);
 	
 	// preorder traversal
-	vector<int> preorder_traversal(TreeNode *root);
-	vector<int> recursive_preorder_traversal(TreeNode *root);
+	vector<int> preorderTraversal(TreeNode *root);
+	vector<int> recursive_preorderTraversal(TreeNode *root);
 
 	// Leetcode 814: Binary Tree Pruning
 	TreeNode* pruneTree(TreeNode* root);
+	TreeNode* recursive_pruneTree(TreeNode *root);
 
 private:
 

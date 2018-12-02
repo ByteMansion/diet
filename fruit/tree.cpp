@@ -20,7 +20,7 @@ using namespace std;
  *  root    root node of binary tree
  * @return  vector of tree member
  */
-vector<int> Solution::postorder_traversal(TreeNode *root)
+vector<int> Solution::postorderTraversal(TreeNode *root)
 {
 	vector<int> result{};
 	if(root == nullptr)
@@ -54,24 +54,24 @@ vector<int> Solution::postorder_traversal(TreeNode *root)
  * @param
  *  root    root node of binary tree
  */
-void postorder_traversal_helper(TreeNode *root, vector<int>& result)
+void postorderTraversalHelper(TreeNode *root, vector<int>& result)
 {
     if(root == nullptr) {
         return;
     }
     if(root->left) {
-        postorder_traversal_helper(root->left, result);
+        postorderTraversalHelper(root->left, result);
     }
     if(root->right) {
-        postorder_traversal_helper(root->right, result);
+        postorderTraversalHelper(root->right, result);
     }
     result.push_back(root->val);
 }
 
-vector<int> Solution::recursive_postorder_traversal(TreeNode *root)
+vector<int> Solution::recursive_postorderTraversal(TreeNode *root)
 {
 	vector<int> result{};
-    postorder_traversal_helper(root, result);
+    postorderTraversalHelper(root, result);
 	
 	return result;
 }
@@ -81,7 +81,7 @@ vector<int> Solution::recursive_postorder_traversal(TreeNode *root)
  * @param
  *  root	root node of binary tree
  */
-vector<int> Solution::inorder_traversal(TreeNode *root)
+vector<int> Solution::inorderTraversal(TreeNode *root)
 {
 	vector<int> result{};
 	if(root == nullptr)
@@ -111,24 +111,24 @@ vector<int> Solution::inorder_traversal(TreeNode *root)
 /**
  * @brief	recursive inorder traversal
  */
-void inorder_traversal_helper(TreeNode *root, vector<int>& result)
+void inorderTraversalHelper(TreeNode *root, vector<int>& result)
 {
 	if(root == nullptr)
 		return;
 	
 	if(root->left) {
-		inorder_traversal_helper(root->left, result);
+		inorderTraversalHelper(root->left, result);
 	}
 	result.push_back(root->val);
 	if(root->right) {
-		inorder_traversal_helper(root->right, result);
+		inorderTraversalHelper(root->right, result);
 	}
 }
 
-vector<int> Solution::recursive_inorder_traversal(TreeNode *root)
+vector<int> Solution::recursive_inorderTraversal(TreeNode *root)
 {
 	vector<int> result{};
-	inorder_traversal_helper(root, result);
+	inorderTraversalHelper(root, result);
 	
 	return result;
 }
@@ -136,7 +136,7 @@ vector<int> Solution::recursive_inorder_traversal(TreeNode *root)
 /**
  * @brief	non-recursive preorder traversal
  */
-vector<int> Solution::preorder_traversal(TreeNode *root)
+vector<int> Solution::preorderTraversal(TreeNode *root)
 {
 	vector<int> result{};
 	if(root == nullptr)
@@ -165,24 +165,24 @@ vector<int> Solution::preorder_traversal(TreeNode *root)
 /**
  * @brief	recursive preorder traversal
  */
-void preorder_traversal_helper(TreeNode *root, vector<int>& result)
+void preorderTraversalHelper(TreeNode *root, vector<int>& result)
 {
 	if(root == nullptr)
 		return;
 	
 	result.push_back(root->val);
 	if(root->left) {
-		preorder_traversal_helper(root->left, result);
+		preorderTraversalHelper(root->left, result);
 	}
 	if(root->right) {
-		preorder_traversal_helper(root->right, result);
+		preorderTraversalHelper(root->right, result);
 	}
 }
 
-vector<int> Solution::recursive_preorder_traversal(TreeNode *root)
+vector<int> Solution::recursive_preorderTraversal(TreeNode *root)
 {
 	vector<int> result{};
-	preorder_traversal_helper(root, result);
+	preorderTraversalHelper(root, result);
 	
 	return result;
 }
@@ -201,7 +201,46 @@ vector<int> Solution::recursive_preorder_traversal(TreeNode *root)
 TreeNode* Solution::pruneTree(TreeNode *root)
 {
     TreeNode *result = nullptr;
-
+//	if(root == nullptr)
+//		return result;
+//	
+//	TreeNode *pNode = root;
+//	TreeNode *pFlag = nullptr;
+//	stack<TreeNode *> sNode;
+//	
+//	while (pNode != nullptr || !sNode.empty()) {
+//		while (pNode != nullptr) {
+//			sNode.push(pNode);
+//			pNode = pNode->left;
+//		}
+//		pNode = sNode.top();
+//		if(pNode->right == nullptr) {
+//			if(pNode->val == 0) {
+//				pNode->val = -1;
+//			}
+//			pNode = nullptr;
+//			sNode.pop();
+////			pFlag = pNode;
+//		} else {
+//			pNode = pNode->right;
+//		}
+//	}
 
 	return result;
+}
+
+/**
+ * @brief	Leetcode 814: Binary Tree Pruning
+ *  recursion method, Accepted Solutions Runtime Distribution 33%
+ */
+TreeNode* Solution::recursive_pruneTree(TreeNode *root)
+{
+	if(root == nullptr)
+		return nullptr;
+	root->left = recursive_pruneTree(root->left);
+	root->right = recursive_pruneTree(root->right);
+	if(root->left == nullptr && root->right == nullptr && root->val == 0)
+		return nullptr;
+	
+	return root;
 }
