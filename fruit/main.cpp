@@ -29,16 +29,24 @@ int main(int argc, const char * argv[]) {
  *    4  5    6
  *        \  / \
  *         7 8  9
+ * ----------------------
+ *          1
+ *       /     \
+ *      0       1
+ *     / \     /
+ *    1  0    0
+ *        \  / \
+ *         0 1  0
  */
 	TreeNode *root  = new TreeNode(1);
-	TreeNode *node2 = new TreeNode(2);
-	TreeNode *node3 = new TreeNode(3);
-	TreeNode *node4 = new TreeNode(4);
-	TreeNode *node5 = new TreeNode(5);
-	TreeNode *node6 = new TreeNode(6);
-	TreeNode *node7 = new TreeNode(7);
-	TreeNode *node8 = new TreeNode(8);
-	TreeNode *node9 = new TreeNode(9);
+	TreeNode *node2 = new TreeNode(0);
+	TreeNode *node3 = new TreeNode(1);
+	TreeNode *node4 = new TreeNode(1);
+	TreeNode *node5 = new TreeNode(0);
+	TreeNode *node6 = new TreeNode(0);
+	TreeNode *node7 = new TreeNode(0);
+	TreeNode *node8 = new TreeNode(1);
+	TreeNode *node9 = new TreeNode(0);
 
 	root->left   = node2; root->right  = node3;
 	node2->left  = node4; node2->right = node5;
@@ -47,9 +55,11 @@ int main(int argc, const char * argv[]) {
 	node6->left  = node8; node6->right = node9;
 
 	s.root = root;
-	
+	vector<int> result{};
+	TreeNode *pResult = nullptr;
+#if 0
 	// postorder
-	vector<int> result = s.postorderTraversal(s.root);
+	result = s.postorderTraversal(s.root);
 	print_list(result);
 	result = s.recursive_postorderTraversal(s.root);
 	print_list(result);
@@ -65,7 +75,16 @@ int main(int argc, const char * argv[]) {
 	print_list(result);
 	result = s.recursive_preorderTraversal(root);
 	print_list(result);
+#endif
+	// leetcode 814: binary tree pruning
+	pResult = s.recursive_pruneTree(root);
+	result = s.preorderTraversal(pResult);
+	print_list(result);
+	pResult = s.pruneTree(root);
+	result = s.preorderTraversal(pResult);
+	print_list(result);
 	
+
 	delete root;
 	delete node2;
 	delete node3;

@@ -197,41 +197,70 @@ vector<int> Solution::recursive_preorderTraversal(TreeNode *root)
  * @param
  * 	root	head node root of a binary tree
  * @return	pointer to a TreeNode node.
+ *
+ * --------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
  */
 TreeNode* Solution::pruneTree(TreeNode *root)
 {
-    TreeNode *result = nullptr;
-//	if(root == nullptr)
-//		return result;
-//	
-//	TreeNode *pNode = root;
-//	TreeNode *pFlag = nullptr;
-//	stack<TreeNode *> sNode;
-//	
-//	while (pNode != nullptr || !sNode.empty()) {
-//		while (pNode != nullptr) {
-//			sNode.push(pNode);
-//			pNode = pNode->left;
-//		}
-//		pNode = sNode.top();
-//		if(pNode->right == nullptr) {
-//			if(pNode->val == 0) {
-//				pNode->val = -1;
-//			}
-//			pNode = nullptr;
-//			sNode.pop();
-////			pFlag = pNode;
-//		} else {
-//			pNode = pNode->right;
-//		}
-//	}
+    TreeNode *result = root;
+	if(root == nullptr)
+		return result;
+	
+	TreeNode *pNode = root;
+	TreeNode *pFlag = nullptr;
+	stack<TreeNode *> sNode;
+	
+	while (pNode != nullptr || !sNode.empty()) {
+		while (pNode != nullptr) {
+			sNode.push(pNode);
+			pNode = pNode->left;
+		}
+		pNode = sNode.top();
+		if (pNode->right == nullptr || pNode->right == pFlag) {
+			if((pNode->left == nullptr || pNode->left->val == -1) &&
+			   (pNode->right == nullptr || pNode->right->val == -1) &&
+			   pNode->val == 0) {
+				pNode->val = -1;
+			}
+			pFlag = pNode;
+			pNode = nullptr;
+			sNode.pop();
+		} else {
+			pNode = pNode->right;
+		}
+	}
 
+	if (root->val == -1) {
+		return nullptr;
+	}
+	sNode.push(root);
+	while (!sNode.empty()) {
+		root = sNode.top();
+		sNode.pop();
+		if (root->left != nullptr) {
+			if (root->left->val == -1) {
+				root->left = nullptr;
+			} else {
+				sNode.push(root->left);
+			}
+		}
+		if (root->right != nullptr) {
+			if (root->right->val == -1) {
+				root->right = nullptr;
+			} else {
+				sNode.push(root->right);
+			}
+		}
+	}
 	return result;
 }
 
 /**
  * @brief	Leetcode 814: Binary Tree Pruning
- *  recursion method, Accepted Solutions Runtime Distribution 33%
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 33%
  */
 TreeNode* Solution::recursive_pruneTree(TreeNode *root)
 {
