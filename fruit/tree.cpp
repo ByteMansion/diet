@@ -12,13 +12,16 @@
 
 #include <stack>
 
-using namespace std;
+using std::stack;
 
 /**
  * @brief   non-recursive postorder traversal
  * @param
  *  root    root node of binary tree
  * @return  vector of tree member
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
  */
 vector<int> Solution::postorderTraversal(TreeNode *root)
 {
@@ -80,6 +83,9 @@ vector<int> Solution::recursive_postorderTraversal(TreeNode *root)
  * @brief	non-recursive implementation of inorder traversal
  * @param
  *  root	root node of binary tree
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
  */
 vector<int> Solution::inorderTraversal(TreeNode *root)
 {
@@ -135,6 +141,9 @@ vector<int> Solution::recursive_inorderTraversal(TreeNode *root)
 
 /**
  * @brief	non-recursive preorder traversal
+ *
+ * --------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
  */
 vector<int> Solution::preorderTraversal(TreeNode *root)
 {
@@ -211,6 +220,8 @@ TreeNode* Solution::pruneTree(TreeNode *root)
 	TreeNode *pFlag = nullptr;
 	stack<TreeNode *> sNode;
 	
+	// assign -1 to the root node of subtree not containing a 1
+	// postorder traversal
 	while (pNode != nullptr || !sNode.empty()) {
 		while (pNode != nullptr) {
 			sNode.push(pNode);
@@ -231,6 +242,8 @@ TreeNode* Solution::pruneTree(TreeNode *root)
 		}
 	}
 
+	// assign nullptr to the node whose value is -1
+	// preorder traversal
 	if (root->val == -1) {
 		return nullptr;
 	}
@@ -238,18 +251,18 @@ TreeNode* Solution::pruneTree(TreeNode *root)
 	while (!sNode.empty()) {
 		root = sNode.top();
 		sNode.pop();
-		if (root->left != nullptr) {
-			if (root->left->val == -1) {
-				root->left = nullptr;
-			} else {
-				sNode.push(root->left);
-			}
-		}
 		if (root->right != nullptr) {
 			if (root->right->val == -1) {
 				root->right = nullptr;
 			} else {
 				sNode.push(root->right);
+			}
+		}
+		if (root->left != nullptr) {
+			if (root->left->val == -1) {
+				root->left = nullptr;
+			} else {
+				sNode.push(root->left);
 			}
 		}
 	}

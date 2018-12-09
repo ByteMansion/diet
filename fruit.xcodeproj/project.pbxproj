@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		635B465B21BBC7AB007790F0 /* array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 635B465921BBC7AB007790F0 /* array.cpp */; };
 		63AE69C821B3B044005E3436 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63AE69C321B3B044005E3436 /* util.cpp */; };
 		63AE69C921B3B044005E3436 /* tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63AE69C421B3B044005E3436 /* tree.cpp */; };
 		63AE69CA21B3B044005E3436 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63AE69C521B3B044005E3436 /* main.cpp */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		635B465921BBC7AB007790F0 /* array.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = array.cpp; sourceTree = "<group>"; };
+		635B465A21BBC7AB007790F0 /* array.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = array.hpp; sourceTree = "<group>"; };
 		63AE69B921B3B02B005E3436 /* fruit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fruit; sourceTree = BUILT_PRODUCTS_DIR; };
 		63AE69C321B3B044005E3436 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		63AE69C421B3B044005E3436 /* tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tree.cpp; sourceTree = "<group>"; };
@@ -66,6 +69,8 @@
 				63AE69C521B3B044005E3436 /* main.cpp */,
 				63AE69C421B3B044005E3436 /* tree.cpp */,
 				63AE69C721B3B044005E3436 /* tree.hpp */,
+				635B465921BBC7AB007790F0 /* array.cpp */,
+				635B465A21BBC7AB007790F0 /* array.hpp */,
 				63AE69C321B3B044005E3436 /* util.cpp */,
 				63AE69C621B3B044005E3436 /* util.hpp */,
 			);
@@ -129,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63AE69C821B3B044005E3436 /* util.cpp in Sources */,
+				635B465B21BBC7AB007790F0 /* array.cpp in Sources */,
 				63AE69CA21B3B044005E3436 /* main.cpp in Sources */,
 				63AE69C921B3B044005E3436 /* tree.cpp in Sources */,
 			);

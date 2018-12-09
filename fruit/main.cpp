@@ -10,16 +10,18 @@
 
 #include "tree.hpp"
 #include "util.hpp"
+#include "array.hpp"
 
 #include <iostream>
 #include <vector>
 
 using std::cout;
 using std::vector;
+using std::endl;
+using std::begin;
+using std::end;
 
 int main(int argc, const char * argv[]) {
-	
-	Solution s;
 	
 /**
  *          1
@@ -54,6 +56,7 @@ int main(int argc, const char * argv[]) {
 	node5->right = node7;
 	node6->left  = node8; node6->right = node9;
 
+	Solution s;
 	s.root = root;
 	vector<int> result{};
 	TreeNode *pResult = nullptr;
@@ -75,7 +78,7 @@ int main(int argc, const char * argv[]) {
 	print_list(result);
 	result = s.recursive_preorderTraversal(root);
 	print_list(result);
-#endif
+
 	// leetcode 814: binary tree pruning
 	pResult = s.recursive_pruneTree(root);
 	result = s.preorderTraversal(pResult);
@@ -83,7 +86,7 @@ int main(int argc, const char * argv[]) {
 	pResult = s.pruneTree(root);
 	result = s.preorderTraversal(pResult);
 	print_list(result);
-	
+#endif
 
 	delete root;
 	delete node2;
@@ -95,5 +98,18 @@ int main(int argc, const char * argv[]) {
 	delete node8;
 	delete node9;
 
+	Solution_A obj;
+	vector<int> nums;
+	obj.nums = nums;
+//	nums = {1, 2, 7, 9, 6};
+	nums = {3, 3, 4, 2,1};
+	//obj.stl_nextPermutation(nums);
+	obj.nextPermutation(nums);
+	
+	for (auto iter = begin(nums); iter != end(nums); iter++) {
+		cout << *iter << " ";
+	}
+	cout << endl;
+	
 	return 0;
 }
