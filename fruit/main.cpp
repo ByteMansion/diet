@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 using std::cout;
 using std::vector;
@@ -21,8 +22,25 @@ using std::endl;
 using std::begin;
 using std::end;
 
+template <typename T, typename... Args>
+void fruit_log(T s, Args... args) {
+	cout << s << "\t";
+	vector<std::string> var = {to_string(args)...};
+	for (auto iter = begin(var); iter != end(var); iter++) {
+		cout << *iter << " ";
+	}
+	cout << endl;
+};
+template <typename T>
+void printArray(vector<T>& nums) {
+	for (auto iter = begin(nums); iter < end(nums); iter++) {
+		cout << *iter << "\t";
+	}
+	cout << endl;
+}
+
 int main(int argc, const char * argv[]) {
-	
+#if 0
 /**
  *          1
  *       /     \
@@ -60,7 +78,7 @@ int main(int argc, const char * argv[]) {
 	s.root = root;
 	vector<int> result{};
 	TreeNode *pResult = nullptr;
-#if 0
+
 	// postorder
 	result = s.postorderTraversal(s.root);
 	print_list(result);
@@ -86,7 +104,6 @@ int main(int argc, const char * argv[]) {
 	pResult = s.pruneTree(root);
 	result = s.preorderTraversal(pResult);
 	print_list(result);
-#endif
 
 	delete root;
 	delete node2;
@@ -97,19 +114,16 @@ int main(int argc, const char * argv[]) {
 	delete node7;
 	delete node8;
 	delete node9;
-
+#endif
 	Solution_A obj;
 	vector<int> nums;
-	obj.nums = nums;
 //	nums = {1, 2, 7, 9, 6};
-	nums = {3, 3, 4, 2,1};
-	//obj.stl_nextPermutation(nums);
-	obj.nextPermutation(nums);
-	
-	for (auto iter = begin(nums); iter != end(nums); iter++) {
-		cout << *iter << " ";
-	}
-	cout << endl;
+//	nums = {3, 3, 4, 2, 1};
+	nums = {1, 5, 2};
+//	obj.stl_nextPermutation(nums);
+	printArray(nums);
+	obj.stlSrc_nextPermutation(nums);
+	printArray(nums);
 	
 	return 0;
 }
