@@ -11,8 +11,14 @@
 #include "tree.hpp"
 
 #include <stack>
+#include <list>
+#include <queue>
 
 using std::stack;
+using std::list;
+using std::queue;
+using std::pair;
+using std::move;
 
 /**
  * @brief   non-recursive postorder traversal
@@ -285,4 +291,143 @@ TreeNode* Solution::recursive_pruneTree(TreeNode *root)
 		return nullptr;
 	
 	return root;
+}
+
+/**
+ * @brief	Leetcode 102: Binary Tree Level Order Traversal
+ *
+ * --------------------------------------------------------
+ */
+vector<vector<int>> Solution::levelOrder(TreeNode* root) {
+	vector<vector<int>> result;
+	if (root == nullptr) {
+		return result;
+	}
+	vector<int>	level;
+	
+	queue<TreeNode*> sLevel1;
+	queue<TreeNode*> sLevel2;
+	sLevel1.push(root);
+	while (true) {
+		while (!sLevel1.empty()) {
+			TreeNode *node = sLevel1.front();
+			sLevel1.pop();
+			level.push_back(node->val);
+			if (node->left) {
+				sLevel2.push(node->left);
+			}
+			if (node->right) {
+				sLevel2.push(node->right);
+			}
+		}
+		result.push_back(level);
+		level.clear();
+		if (sLevel2.empty()) {
+			break;
+		}
+		sLevel1 = sLevel2;
+	}
+
+	return result;
+}
+
+
+/**
+ * @brief	Leetcode 310: Minimum Height Trees
+ *
+ * this problem is related to BFS and graph.
+ * the solution below is by graph theory.
+ * --------------------------------------------
+ * Accepted Solutions Runtime Distribution 83%
+ */
+vector<int> Solution::findMinHeightTrees(int n, vector<pair<int, int>>& edges)
+{
+	// adjacent node list
+	vector<vector<int>> adjacencyList(n);
+	for (int i = 0; i < n; ++i) {
+		adjacencyList[i] = vector<int>();
+	}
+	// get node degree
+	vector<int> degree(n, 0);
+	for (auto const& edge : edges) {
+		adjacencyList[edge.first].push_back(edge.second);
+		adjacencyList[edge.second].push_back(edge.first);
+		++degree[edge.first];
+		++degree[edge.second];
+	}
+	
+	vector<int> leafNodes;
+	for (int i = 0; i < n; ++i) {
+		if (degree[i] == 1) {
+			leafNodes.push_back(i);
+			degree[i] = 0;
+		}
+	}
+	
+	int numNodes = n;
+	while (numNodes > 2) {
+		vector<int> newLeafNodes;
+		numNodes -= leafNodes.size();
+		for (auto node : leafNodes) {
+			for (auto neigh : adjacencyList[node]) {
+				--degree[neigh];
+				if (degree[neigh] == 1) {
+					newLeafNodes.push_back(neigh);
+				}
+			}
+		}
+		leafNodes = move(newLeafNodes);
+	}
+	
+	if (n == 1) {
+		leafNodes.push_back(0);
+	}
+	return leafNodes;
+}
+/**
+ * @brief	Leetcode 310: Minimum Height Trees
+ *
+ * --------------------------------------------
+ * Accepted Solutions Runtime Distribution 83%
+ */
+vector<int> Solution::findMinHeightTrees2(int n, vector<pair<int, int>>& edges)
+{
+	if (n < 2) return {0};
+
+	vector<int> indegres(n, 0);
+	vector<vector<int>> graph(n);
+
+	for (auto& p: edges) {
+		graph[p.first].push_back(p.second);
+		graph[p.second].push_back(p.first);
+		indegres[p.first]++;
+		indegres[p.second]++;
+	}
+
+	queue<int> que;
+	for (int i = 0; i < n; i++)
+	if (indegres[i] == 1)
+	que.push(i);
+
+
+	while (n > 2) {
+		size_t k = que.size();
+		n -= k;
+		
+		for (int i = 0; i < k; i++) {
+			auto u = que.front(); que.pop();
+			
+			for (auto v: graph[u])
+				if (--indegres[v] == 1)
+					que.push(v);
+					}
+	}
+
+	vector<int> res;
+	while (!que.empty()) {
+		res.push_back(que.front());
+		que.pop();
+	}
+
+	return res;
 }

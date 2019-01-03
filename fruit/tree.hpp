@@ -15,6 +15,7 @@
 #include <vector>
 
 using std::vector;
+using std::pair;
 
 struct TreeNode {
 	int val;
@@ -44,7 +45,12 @@ public:
 	TreeNode* pruneTree(TreeNode* root);
 	TreeNode* recursive_pruneTree(TreeNode *root);
 	
+	// Leetcode 102: Binary Tree Level Order Traversal
+	vector<vector<int>> levelOrder(TreeNode* root);
 	
+	// Leetcode 310: Minimum Height Trees
+	vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges);
+	vector<int> findMinHeightTrees2(int n, vector<pair<int, int>>& edges);
 
 private:
 
