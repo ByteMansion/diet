@@ -296,15 +296,18 @@ TreeNode* Solution::recursive_pruneTree(TreeNode *root)
 /**
  * @brief	Leetcode 102: Binary Tree Level Order Traversal
  *
+ *  this problem can be solved in BFS and DFS method.
+ *  this solution is implementated by BFS.
  * --------------------------------------------------------
  */
-vector<vector<int>> Solution::levelOrder(TreeNode* root) {
+vector<vector<int>> Solution::levelOrder(TreeNode* root)
+{
 	vector<vector<int>> result;
 	if (root == nullptr) {
 		return result;
 	}
 	vector<int>	level;
-	
+
 	queue<TreeNode*> sLevel1;
 	queue<TreeNode*> sLevel2;
 	sLevel1.push(root);
@@ -330,7 +333,18 @@ vector<vector<int>> Solution::levelOrder(TreeNode* root) {
 
 	return result;
 }
+/**
+ * @brief   depth first traversal
+ *
+ *  this solution is implementated by DFS.
+ */
+vector<vector<int>> Solution::levelOrder2(TreeNode* root)
+{
+    vector<vector<int>> result;
 
+
+    return result;
+}
 
 /**
  * @brief	Leetcode 310: Minimum Height Trees

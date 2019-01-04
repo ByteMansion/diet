@@ -47,6 +47,7 @@ public:
 	
 	// Leetcode 102: Binary Tree Level Order Traversal
 	vector<vector<int>> levelOrder(TreeNode* root);
+	vector<vector<int>> levelOrder2(TreeNode* root);
 	
 	// Leetcode 310: Minimum Height Trees
 	vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges);
