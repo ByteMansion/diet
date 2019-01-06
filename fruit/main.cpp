@@ -40,7 +40,7 @@ void printArray(vector<T>& nums) {
 }
 
 int main(int argc, const char * argv[]) {
-#if 0
+
 /**
  *          1
  *       /     \
@@ -59,14 +59,14 @@ int main(int argc, const char * argv[]) {
  *         0 1  0
  */
 	TreeNode *root  = new TreeNode(1);
-	TreeNode *node2 = new TreeNode(0);
-	TreeNode *node3 = new TreeNode(1);
-	TreeNode *node4 = new TreeNode(1);
-	TreeNode *node5 = new TreeNode(0);
-	TreeNode *node6 = new TreeNode(0);
-	TreeNode *node7 = new TreeNode(0);
-	TreeNode *node8 = new TreeNode(1);
-	TreeNode *node9 = new TreeNode(0);
+	TreeNode *node2 = new TreeNode(2);
+	TreeNode *node3 = new TreeNode(3);
+	TreeNode *node4 = new TreeNode(4);
+	TreeNode *node5 = new TreeNode(5);
+	TreeNode *node6 = new TreeNode(6);
+	TreeNode *node7 = new TreeNode(7);
+	TreeNode *node8 = new TreeNode(8);
+	TreeNode *node9 = new TreeNode(9);
 
 	root->left   = node2; root->right  = node3;
 	node2->left  = node4; node2->right = node5;
@@ -76,9 +76,15 @@ int main(int argc, const char * argv[]) {
 
 	Solution s;
 	s.root = root;
-	vector<int> result{};
-	TreeNode *pResult = nullptr;
-
+	//TreeNode *pResult = nullptr;
+	
+	// leetcode 102
+	vector<vector<int>> result = s.levelOrderBottom(s.root);
+	for (auto& level: result) {
+		print_list(level);
+	}
+	
+#if 0
 	// postorder
 	result = s.postorderTraversal(s.root);
 	print_list(result);
@@ -104,7 +110,8 @@ int main(int argc, const char * argv[]) {
 	pResult = s.pruneTree(root);
 	result = s.preorderTraversal(pResult);
 	print_list(result);
-
+#endif
+	
 	delete root;
 	delete node2;
 	delete node3;
@@ -114,16 +121,6 @@ int main(int argc, const char * argv[]) {
 	delete node7;
 	delete node8;
 	delete node9;
-#endif
-	Solution_A obj;
-	vector<int> nums;
-//	nums = {1, 2, 7, 9, 6};
-//	nums = {3, 3, 4, 2, 1};
-	nums = {1, 5, 2};
-//	obj.stl_nextPermutation(nums);
-	printArray(nums);
-	obj.stlSrc_nextPermutation(nums);
-	printArray(nums);
 	
 	return 0;
 }
