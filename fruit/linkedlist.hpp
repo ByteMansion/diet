@@ -17,6 +17,7 @@ class Solution_l {
 public:
     // Leetcode 92: Reverse Linked List II
     ListNode* reverseBetween(ListNode* head, int m, int n);
+    ListNode* reverseBetween2(ListNode* head, int m, int n);
 
 private:
     ListNode* head;
