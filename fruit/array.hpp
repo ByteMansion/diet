@@ -17,23 +17,20 @@
 using std::vector;
 
 class Solution_A {
-public:
-	vector<int> nums;
-	
+
 public:
 	// Leetcode 31: Next Permutation
 	void nextPermutation(vector<int>& nums);
-	void stlSrc_nextPermutation(vector<int>& nums);
-	void stl_nextPermutation(vector<int>& nums);
-	
+	void nextPermutation2(vector<int>& nums);
+	void nextPermutation3(vector<int>& nums);
+
 	// Leetcode 47: Permutation II
 	vector<vector<int>> permuteUnique(vector<int>& nums);
 	vector<vector<int>> permuteUnique2(vector<int>& nums);
 
-
-	
 private:
-	
+    vector<int> nums;
+
 };
 
 

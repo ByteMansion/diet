@@ -10,6 +10,9 @@
 
 #incldue "linkedlist.hpp"
 
+#incldue <vector>
+
+using std::vector;
 
 /**
  * @brief   Leetcode 92: Reverse Linked List II
@@ -89,6 +92,14 @@ ListNode* Solution_l::reverseBetween2(ListNode* head, int m, int n)
 }
 
 
+/**
+ * Leetcode 23: Merge k Sorted Lists
+ *
+ */
+ListNode* mergeKLists(vector<ListNode*>& lists)
+{
+    
+}
 
 
 

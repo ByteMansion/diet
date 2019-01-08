@@ -19,31 +19,29 @@ using std::pair;
 
 struct TreeNode {
 	int val;
-	TreeNode *left;
-	TreeNode *right;
+	TreeNode* left;
+	TreeNode* ight;
 	TreeNode(int x): val(x), left(nullptr), right(nullptr){}
 };
 
 class Solution {
-public:
-  TreeNode *root;
 
 public:
 	// postorder traversal
-	vector<int> postorderTraversal(TreeNode *root);
-	vector<int> recursive_postorderTraversal(TreeNode *root);
+	vector<int> postorderTraversal(TreeNode* root);
+	vector<int> postorderTraversal2(TreeNode* root);
 	
 	// inorder traversal
-	vector<int> inorderTraversal(TreeNode *root);
-	vector<int> recursive_inorderTraversal(TreeNode *root);
+	vector<int> inorderTraversal(TreeNode* root);
+	vector<int> inorderTraversal(TreeNode* root);
 	
 	// preorder traversal
-	vector<int> preorderTraversal(TreeNode *root);
-	vector<int> recursive_preorderTraversal(TreeNode *root);
+	vector<int> preorderTraversal(TreeNode* root);
+	vector<int> preorderTraversal(TreeNode* root);
 
 	// Leetcode 814: Binary Tree Pruning
 	TreeNode* pruneTree(TreeNode* root);
-	TreeNode* recursive_pruneTree(TreeNode *root);
+	TreeNode* recursive_pruneTree(TreeNode* root);
 	
 	// Leetcode 102: Binary Tree Level Order Traversal
 	vector<vector<int>> levelOrder(TreeNode* root);
@@ -54,6 +52,7 @@ public:
 	vector<int> findMinHeightTrees2(int n, vector<pair<int, int>>& edges);
 
 private:
+  TreeNode* root;
 
 };
 

@@ -48,7 +48,7 @@ void Solution_A::nextPermutation(vector<int>& nums) {
  * @brief	Leetcode 31: Next Permutation
  *			This solution is implementation of STL function next_permutation.
  */
-void Solution_A::stlSrc_nextPermutation(vector<int>& nums)
+void Solution_A::nextPermutation2(vector<int>& nums)
 {
 	auto last = nums.end();
 	auto first = nums.begin();
@@ -78,7 +78,7 @@ void Solution_A::stlSrc_nextPermutation(vector<int>& nums)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 99.36%
  */
-void Solution_A::stl_nextPermutation(vector<int>& nums)
+void Solution_A::nextPermutation3(vector<int>& nums)
 {
 	next_permutation(nums.begin(), nums.end());
 }

@@ -77,7 +77,7 @@ void postorderTraversalHelper(TreeNode *root, vector<int>& result)
     result.push_back(root->val);
 }
 
-vector<int> Solution::recursive_postorderTraversal(TreeNode *root)
+vector<int> Solution::postorderTraversal2(TreeNode *root)
 {
 	vector<int> result{};
     postorderTraversalHelper(root, result);
@@ -93,14 +93,14 @@ vector<int> Solution::recursive_postorderTraversal(TreeNode *root)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
-vector<int> Solution::inorderTraversal(TreeNode *root)
+vector<int> Solution::inorderTraversal(TreeNode* root)
 {
 	vector<int> result{};
 	if(root == nullptr)
 		return result;
 	
-	TreeNode *pNode = root;
-	stack<TreeNode *> sNode;
+	TreeNode* pNode = root;
+	stack<TreeNode*> sNode;
 	
 	while (pNode != nullptr || !sNode.empty()) {
 		while (pNode != nullptr) {
@@ -123,7 +123,7 @@ vector<int> Solution::inorderTraversal(TreeNode *root)
 /**
  * @brief	recursive inorder traversal
  */
-void inorderTraversalHelper(TreeNode *root, vector<int>& result)
+void inorderTraversalHelper(TreeNode* root, vector<int>& result)
 {
 	if(root == nullptr)
 		return;
@@ -137,7 +137,7 @@ void inorderTraversalHelper(TreeNode *root, vector<int>& result)
 	}
 }
 
-vector<int> Solution::recursive_inorderTraversal(TreeNode *root)
+vector<int> Solution::inorderTraversal(TreeNode* root)
 {
 	vector<int> result{};
 	inorderTraversalHelper(root, result);
@@ -151,14 +151,14 @@ vector<int> Solution::recursive_inorderTraversal(TreeNode *root)
  * --------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
-vector<int> Solution::preorderTraversal(TreeNode *root)
+vector<int> Solution::preorderTraversal(TreeNode* root)
 {
 	vector<int> result{};
 	if(root == nullptr)
 		return result;
 	
-	TreeNode *pNode = root;
-	stack<TreeNode *> sNode;
+	TreeNode* pNode = root;
+	stack<TreeNode*> sNode;
 	sNode.push(pNode);
 	
 	while (!sNode.empty()) {
@@ -180,7 +180,7 @@ vector<int> Solution::preorderTraversal(TreeNode *root)
 /**
  * @brief	recursive preorder traversal
  */
-void preorderTraversalHelper(TreeNode *root, vector<int>& result)
+void preorderTraversalHelper(TreeNode* root, vector<int>& result)
 {
 	if(root == nullptr)
 		return;
@@ -194,7 +194,7 @@ void preorderTraversalHelper(TreeNode *root, vector<int>& result)
 	}
 }
 
-vector<int> Solution::recursive_preorderTraversal(TreeNode *root)
+vector<int> Solution::recursive_preorderTraversal(TreeNode* root)
 {
 	vector<int> result{};
 	preorderTraversalHelper(root, result);
@@ -216,15 +216,15 @@ vector<int> Solution::recursive_preorderTraversal(TreeNode *root)
  * --------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
-TreeNode* Solution::pruneTree(TreeNode *root)
+TreeNode* Solution::pruneTree(TreeNode* root)
 {
-    TreeNode *result = root;
+    TreeNode* result = root;
 	if(root == nullptr)
 		return result;
 	
-	TreeNode *pNode = root;
-	TreeNode *pFlag = nullptr;
-	stack<TreeNode *> sNode;
+	TreeNode* pNode = root;
+	TreeNode* pFlag = nullptr;
+	stack<TreeNode*> sNode;
 	
 	// assign -1 to the root node of subtree not containing a 1
 	// postorder traversal
@@ -281,7 +281,7 @@ TreeNode* Solution::pruneTree(TreeNode *root)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 33%
  */
-TreeNode* Solution::recursive_pruneTree(TreeNode *root)
+TreeNode* Solution::pruneTree(TreeNode* root)
 {
 	if(root == nullptr)
 		return nullptr;
@@ -313,7 +313,7 @@ vector<vector<int>> Solution::levelOrder(TreeNode* root)
 	sLevel1.push(root);
 	while (true) {
 		while (!sLevel1.empty()) {
-			TreeNode *node = sLevel1.front();
+			TreeNode* node = sLevel1.front();
 			sLevel1.pop();
 			level.push_back(node->val);
 			if (node->left) {
