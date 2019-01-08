@@ -14,6 +14,7 @@
 /**
  * @brief   Leetcode 92: Reverse Linked List II
  *
+ * -------------------------------------------
  * Accepted Solutions Runtime Distribution 55%
  */
 ListNode* Solution_l::reverseBetween(ListNode* head, int m, int n)
@@ -48,6 +49,7 @@ ListNode* Solution_l::reverseBetween(ListNode* head, int m, int n)
 /**
  * @brief   Leetcode 92: Reverse Linked List II
  *
+ * -------------------------------------------
  * Accepted Solutions Runtime Distribution 55%
  */
 ListNode* Solution_l::reverseBetween2(ListNode* head, int m, int n)
@@ -80,7 +82,7 @@ ListNode* Solution_l::reverseBetween2(ListNode* head, int m, int n)
         index += 1;
     }
     if(front != nullptr) front->next = nodeN;
-    else { nodeN->next = nodeM; head = nodeN;}
+    else { head = nodeN;}
     nodeM->next = back;
 
     return head;
