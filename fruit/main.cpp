@@ -1,6 +1,6 @@
 /**
- * @file  main.cpp
- * @brief test problem solutions
+ * @file    main.cpp
+ * @brief   test the validity of solutions
  *
  * @author  Changrui
  * @date    2018/11/28

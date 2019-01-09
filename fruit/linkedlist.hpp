@@ -1,5 +1,6 @@
 /**
- * @brief	solutions of leetcode problems related to linked list
+ * @file    linkedlist.hpp
+ * @brief	Data structures and function declarations
  *
  * @author	Changrui
  * @date	2019/1/7

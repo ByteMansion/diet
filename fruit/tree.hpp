@@ -1,6 +1,6 @@
 /**
  * @file	tree.hpp
- * @brief	Data structures of leetcode problems needed and class solutions
+ * @brief	Data structures and function declarations
  *
  * @author	Changrui
  * @date	2018/11/28

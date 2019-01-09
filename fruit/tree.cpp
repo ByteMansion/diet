@@ -1,6 +1,6 @@
 /**
  * @file	tree.cpp
- * @brief	All functions are solutions of leetcode problems.
+ * @brief	All function implementations related to tree
  *
  * @author	Changrui
  * @date	2018/11/28

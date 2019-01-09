@@ -1,6 +1,6 @@
 /**
  * @file	linkedlist.cpp
- * @brief	All functions are solutions of leetcode problems.
+ * @brief	All function implementations related to linked list
  *
  * @author	Changrui
  * @date	2019/1/7
