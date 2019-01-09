@@ -18,6 +18,7 @@ using std::priority_queue;
 using std::less;
 using std::greater;
 using std::move;
+using std::queue;
 
 /**
  * @brief   Leetcode 92: Reverse Linked List II
@@ -122,39 +123,39 @@ ListNode* reverseBetween2(ListNode* head, int m, int n)
  */
 ListNode* mergeKLists(vector<ListNode*>& lists)
 {
-	if(lists.empty())
-		return nullptr;
-	
-	ListNode* index = nullptr;
-	ListNode* head = nullptr;
-	auto cmp = [](ListNode* m, ListNode* n){return (m->val > n->val);};
-	priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> pQueue(cmp);
-	ListNode* node = nullptr;
-	for(int i = 0; i < lists.size(); i++) {
-		node = lists[i];
-		if(node != nullptr) {
-			pQueue.push(node);
-			node = node->next;
-		}
-	}
-	
-	while(!pQueue.empty()) {
-		node = pQueue.top();
-		pQueue.pop();
-		if(index == nullptr) {
-			index = node;
-			head = index;
-		} else {
-			index->next = node;
-			index = index->next;
-		}
-		node = node->next;
-		if(node != nullptr) {
-			pQueue.push(node);
-		}
-	}
-	
-	return head;
+    if(lists.empty())
+        return nullptr;
+
+    ListNode* index = nullptr;
+    ListNode* head = nullptr;
+    auto cmp = [](ListNode* m, ListNode* n){return (m->val > n->val);};
+    priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> pQueue(cmp);
+    ListNode* node = nullptr;
+    for(int i = 0; i < lists.size(); i++) {
+        node = lists[i];
+        if(node != nullptr) {
+            pQueue.push(node);
+            node = node->next;
+        }
+    }
+
+    while(!pQueue.empty()) {
+        node = pQueue.top();
+        pQueue.pop();
+        if(index == nullptr) {
+            index = node;
+            head = index;
+        } else {
+            index->next = node;
+            index = index->next;
+        }
+        node = node->next;
+        if(node != nullptr) {
+            pQueue.push(node);
+        }
+    }
+
+    return head;
 }
 
 
