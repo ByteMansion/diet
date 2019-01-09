@@ -29,7 +29,7 @@ using std::move;
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
-vector<int> Solution::postorderTraversal(TreeNode *root)
+vector<int> postorderTraversal(TreeNode *root)
 {
 	vector<int> result{};
 	if(root == nullptr)
@@ -63,7 +63,7 @@ vector<int> Solution::postorderTraversal(TreeNode *root)
  * @param
  *  root    root node of binary tree
  */
-void postorderTraversalHelper(TreeNode *root, vector<int>& result)
+static void postorderTraversalHelper(TreeNode *root, vector<int>& result)
 {
     if(root == nullptr) {
         return;
@@ -77,7 +77,7 @@ void postorderTraversalHelper(TreeNode *root, vector<int>& result)
     result.push_back(root->val);
 }
 
-vector<int> Solution::postorderTraversal2(TreeNode *root)
+vector<int> postorderTraversal2(TreeNode *root)
 {
 	vector<int> result{};
     postorderTraversalHelper(root, result);
@@ -93,7 +93,7 @@ vector<int> Solution::postorderTraversal2(TreeNode *root)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
-vector<int> Solution::inorderTraversal(TreeNode* root)
+vector<int> inorderTraversal(TreeNode* root)
 {
 	vector<int> result{};
 	if(root == nullptr)
@@ -123,7 +123,7 @@ vector<int> Solution::inorderTraversal(TreeNode* root)
 /**
  * @brief	recursive inorder traversal
  */
-void inorderTraversalHelper(TreeNode* root, vector<int>& result)
+static void inorderTraversalHelper(TreeNode* root, vector<int>& result)
 {
 	if(root == nullptr)
 		return;
@@ -137,7 +137,7 @@ void inorderTraversalHelper(TreeNode* root, vector<int>& result)
 	}
 }
 
-vector<int> Solution::inorderTraversal(TreeNode* root)
+vector<int> inorderTraversal2(TreeNode* root)
 {
 	vector<int> result{};
 	inorderTraversalHelper(root, result);
@@ -151,7 +151,7 @@ vector<int> Solution::inorderTraversal(TreeNode* root)
  * --------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
-vector<int> Solution::preorderTraversal(TreeNode* root)
+vector<int> preorderTraversal(TreeNode* root)
 {
 	vector<int> result{};
 	if(root == nullptr)
@@ -180,7 +180,7 @@ vector<int> Solution::preorderTraversal(TreeNode* root)
 /**
  * @brief	recursive preorder traversal
  */
-void preorderTraversalHelper(TreeNode* root, vector<int>& result)
+static void preorderTraversalHelper(TreeNode* root, vector<int>& result)
 {
 	if(root == nullptr)
 		return;
@@ -194,7 +194,7 @@ void preorderTraversalHelper(TreeNode* root, vector<int>& result)
 	}
 }
 
-vector<int> Solution::recursive_preorderTraversal(TreeNode* root)
+vector<int> preorderTraversal2(TreeNode* root)
 {
 	vector<int> result{};
 	preorderTraversalHelper(root, result);
@@ -216,7 +216,7 @@ vector<int> Solution::recursive_preorderTraversal(TreeNode* root)
  * --------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
-TreeNode* Solution::pruneTree(TreeNode* root)
+TreeNode* pruneTree(TreeNode* root)
 {
     TreeNode* result = root;
 	if(root == nullptr)
@@ -281,12 +281,12 @@ TreeNode* Solution::pruneTree(TreeNode* root)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 33%
  */
-TreeNode* Solution::pruneTree(TreeNode* root)
+TreeNode* pruneTree2(TreeNode* root)
 {
 	if(root == nullptr)
 		return nullptr;
-	root->left = recursive_pruneTree(root->left);
-	root->right = recursive_pruneTree(root->right);
+	root->left = pruneTree2(root->left);
+	root->right = pruneTree2(root->right);
 	if(root->left == nullptr && root->right == nullptr && root->val == 0)
 		return nullptr;
 	
@@ -299,8 +299,9 @@ TreeNode* Solution::pruneTree(TreeNode* root)
  *  this problem can be solved in BFS and DFS method.
  *  this solution is implementated by BFS.
  * --------------------------------------------------------
+ * Accepted Solutions Runtime Distribution 99%
  */
-vector<vector<int>> Solution::levelOrder(TreeNode* root)
+vector<vector<int>> levelOrder(TreeNode* root)
 {
 	vector<vector<int>> result;
 	if (root == nullptr) {
@@ -308,42 +309,66 @@ vector<vector<int>> Solution::levelOrder(TreeNode* root)
 	}
 	vector<int>	level;
 
-	queue<TreeNode*> sLevel1;
-	queue<TreeNode*> sLevel2;
-	sLevel1.push(root);
+	queue<TreeNode*> qLevel1;
+	qLevel1.push(root);
 	while (true) {
-		while (!sLevel1.empty()) {
-			TreeNode* node = sLevel1.front();
-			sLevel1.pop();
+		queue<TreeNode*> qLevel2;
+		while (!qLevel1.empty()) {
+			TreeNode* node = qLevel1.front();
+			qLevel1.pop();
 			level.push_back(node->val);
 			if (node->left) {
-				sLevel2.push(node->left);
+				qLevel2.push(node->left);
 			}
 			if (node->right) {
-				sLevel2.push(node->right);
+				qLevel2.push(node->right);
 			}
 		}
 		result.push_back(level);
 		level.clear();
-		if (sLevel2.empty()) {
+		if (qLevel2.empty()) {
 			break;
 		}
-		sLevel1 = sLevel2;
+		qLevel1 = move(qLevel2);
 	}
 
 	return result;
 }
+
 /**
- * @brief   depth first traversal
+ * @brief	Leetcode 107: Binary Tree Level Order Traversal II
  *
- *  this solution is implementated by DFS.
+ * -----------------------------------------------------------
+ * Accepted Solutions Runtime Distribution 99%
  */
-vector<vector<int>> Solution::levelOrder2(TreeNode* root)
+vector<vector<int>> levelOrderBottom(TreeNode* root)
 {
-    vector<vector<int>> result;
-
-
-    return result;
+	vector<vector<int>> result;
+	if (root == nullptr) {
+		return result;
+	}
+	queue<TreeNode*> qLevel;
+	qLevel.push(root);
+	
+	while (!qLevel.empty()) {
+		vector<int> level;
+		size_t qSize = qLevel.size();
+		for (uint32_t i = 0; i < qSize; i++) {
+			TreeNode *node = qLevel.front();
+			qLevel.pop();
+			level.push_back(node->val);
+			if (node->left) {
+				qLevel.push(node->left);
+			}
+			if (node->right) {
+				qLevel.push(node->right);
+			}
+		}
+		result.push_back(level);
+	}
+	std::reverse(result.begin(), result.end());
+	
+	return result;
 }
 
 /**
@@ -354,7 +379,7 @@ vector<vector<int>> Solution::levelOrder2(TreeNode* root)
  * --------------------------------------------
  * Accepted Solutions Runtime Distribution 83%
  */
-vector<int> Solution::findMinHeightTrees(int n, vector<pair<int, int>>& edges)
+vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges)
 {
 	// adjacent node list
 	vector<vector<int>> adjacencyList(n);
@@ -404,7 +429,7 @@ vector<int> Solution::findMinHeightTrees(int n, vector<pair<int, int>>& edges)
  * --------------------------------------------
  * Accepted Solutions Runtime Distribution 83%
  */
-vector<int> Solution::findMinHeightTrees2(int n, vector<pair<int, int>>& edges)
+vector<int> findMinHeightTrees2(int n, vector<pair<int, int>>& edges)
 {
 	if (n < 2) return {0};
 

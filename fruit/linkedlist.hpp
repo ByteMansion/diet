@@ -6,7 +6,14 @@
  *
  * Copyright © 2018 ChangruiShao. All rights reserved.
  */
+
+#ifndef linkedlist_hpp
+#define linkedlist_hpp
+
 #include <cstdio>
+#include <vector>
+
+using std::vector;
 
 struct ListNode {
     int val;
@@ -14,15 +21,13 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
-class Solution_l {
-public:
-    // Leetcode 92: Reverse Linked List II
-    ListNode* reverseBetween(ListNode* head, int m, int n);
-    ListNode* reverseBetween2(ListNode* head, int m, int n);
 
-    // Leetcode 23: Merge k Sorted Lists
-    ListNode* mergeKLists(vector<ListNode*>& lists);
+// Leetcode 92: Reverse Linked List II
+ListNode* reverseBetween(ListNode* head, int m, int n);
+ListNode* reverseBetween2(ListNode* head, int m, int n);
 
-private:
-    ListNode* head;
-};
+// Leetcode 23: Merge k Sorted Lists
+ListNode* mergeKLists(vector<ListNode*>& lists);
+
+
+#endif

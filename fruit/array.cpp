@@ -22,7 +22,7 @@ using std::reverse;
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 34%
  */
-void Solution_A::nextPermutation(vector<int>& nums) {
+void nextPermutation(vector<int>& nums) {
 	if(nums.empty() || nums.size() == 1)
 		return;
 	
@@ -48,7 +48,7 @@ void Solution_A::nextPermutation(vector<int>& nums) {
  * @brief	Leetcode 31: Next Permutation
  *			This solution is implementation of STL function next_permutation.
  */
-void Solution_A::nextPermutation2(vector<int>& nums)
+void nextPermutation2(vector<int>& nums)
 {
 	auto last = nums.end();
 	auto first = nums.begin();
@@ -78,7 +78,7 @@ void Solution_A::nextPermutation2(vector<int>& nums)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 99.36%
  */
-void Solution_A::nextPermutation3(vector<int>& nums)
+void nextPermutation3(vector<int>& nums)
 {
 	next_permutation(nums.begin(), nums.end());
 }
@@ -90,7 +90,7 @@ void Solution_A::nextPermutation3(vector<int>& nums)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 45%
  */
-vector<vector<int>> Solution_A::permuteUnique(vector<int>& nums)
+vector<vector<int>> permuteUnique(vector<int>& nums)
 {
 	vector<vector<int>> result;
 	
@@ -115,7 +115,7 @@ bool permutation2(vector<int>& nums)
 {
 	return false;
 }
-vector<vector<int>> Solution_A::permuteUnique2(vector<int>& nums)
+vector<vector<int>> permuteUnique2(vector<int>& nums)
 {
 	vector<vector<int>> result;
 	

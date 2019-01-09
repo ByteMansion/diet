@@ -11,6 +11,7 @@
 #include "tree.hpp"
 #include "util.hpp"
 #include "array.hpp"
+#include "linkedlist.hpp"
 
 #include <iostream>
 #include <vector>
@@ -39,6 +40,17 @@ void printArray(vector<T>& nums) {
 	cout << endl;
 }
 
+void printList(ListNode* head)
+{
+	ListNode* index = head;
+	while (index != nullptr) {
+		cout << index->val << " ";
+		index = index->next;
+	}
+	cout << endl;
+}
+// test tree related solutions
+#if 0
 int main(int argc, const char * argv[]) {
 
 /**
@@ -73,44 +85,6 @@ int main(int argc, const char * argv[]) {
 	node3->left  = node6;
 	node5->right = node7;
 	node6->left  = node8; node6->right = node9;
-
-	Solution s;
-	s.root = root;
-	//TreeNode *pResult = nullptr;
-	
-	// leetcode 102
-	vector<vector<int>> result = s.levelOrderBottom(s.root);
-	for (auto& level: result) {
-		print_list(level);
-	}
-	
-#if 0
-	// postorder
-	result = s.postorderTraversal(s.root);
-	print_list(result);
-	result = s.recursive_postorderTraversal(s.root);
-	print_list(result);
-	
-	// inorder
-	result = s.inorderTraversal(root);
-	print_list(result);
-	result = s.recursive_inorderTraversal(root);
-	print_list(result);
-	
-	//preorder
-	result = s.preorderTraversal(root);
-	print_list(result);
-	result = s.recursive_preorderTraversal(root);
-	print_list(result);
-
-	// leetcode 814: binary tree pruning
-	pResult = s.recursive_pruneTree(root);
-	result = s.preorderTraversal(pResult);
-	print_list(result);
-	pResult = s.pruneTree(root);
-	result = s.preorderTraversal(pResult);
-	print_list(result);
-#endif
 	
 	delete root;
 	delete node2;
@@ -121,6 +95,25 @@ int main(int argc, const char * argv[]) {
 	delete node7;
 	delete node8;
 	delete node9;
+	
+	return 0;
+}
+#endif
+// test list related solutions
+int main()
+{
+	ListNode *head  = new ListNode(1);
+	ListNode *node1 = new ListNode(2);
+	ListNode *node2 = new ListNode(3);
+	ListNode *node3 = new ListNode(4);
+	ListNode *node4 = new ListNode(5);
+	head->next  = node1;  node1->next = node2;
+	node2->next = node3;  node3->next = node4;
+	printList(head);
+	
+	ListNode* result = reverseBetween2(head, 1, 4);
+	printList(result);
+	
 	
 	return 0;
 }
