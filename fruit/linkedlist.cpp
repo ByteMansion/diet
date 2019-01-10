@@ -5,7 +5,7 @@
  * @author	Changrui
  * @date	2019/1/7
  *
- * Copyright © 2018 ChangruiShao. All rights reserved.
+ * Copyright © 2019 ChangruiShao. All rights reserved.
  */
 
 #include "linkedlist.hpp"
@@ -114,6 +114,39 @@ ListNode* reverseBetween2(ListNode* head, int m, int n)
 	return head;
 }
 
+/**
+ * Leetcode 21: Merge Two Sorted Lists
+ *
+ */
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
+{
+    if(l1 == nullptr && l2 == nullptr) {
+        return nullptr;
+    } else if(l1 == nullptr) {
+        return l2;
+    } else if(l2 == nullptr) {
+        return l1;
+    }
+
+    ListNode* head = new ListNode(-1);
+    ListNode* index = head;
+    while(l1 != nullptr && l2 != nullptr) {
+        if(l1->val > l2->val) {
+            index->next = l2;
+            l2 = l2->next;
+        } else {
+            index->next = l1;
+            l1 = l1->next;
+        }
+        index = index->next;
+    }
+    if(l1 == nullptr) index->next = l2;
+    if(l2 == nullptr) index->next = l1;
+
+    ListNode* result = head->next;
+    delete index;
+    return result;
+}
 
 /**
  * Leetcode 23: Merge k Sorted Lists

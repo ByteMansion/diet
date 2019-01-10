@@ -5,6 +5,7 @@
   * @author Changrui
   * @date   2018/11/29
   *
+  * Copyright © 2018 ChangruiShao. All rights reserved.
   */
 #ifndef util_hpp
 #define util_hpp
