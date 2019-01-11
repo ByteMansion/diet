@@ -200,7 +200,7 @@ ListNode* mergeKLists(vector<ListNode*>& lists)
  */
 static ListNode* divideAndConquerSortedLists(vector<ListNode*>& lists, int start, int end)
 {
-    ListNode* result;
+    ListNode* result = nullptr;
     if(start+1 < end) {
         ListNode* result1 = divideAndConquerSortedLists(lists, start, (start+end)/2);
         ListNode* result2 = divideAndConquerSortedLists(lists, (start+end)/2+1, end);
@@ -223,8 +223,50 @@ ListNode* mergeKLists2(vector<ListNode*>& lists)
     }
 
     // devide and conquer
-    ListNode* result = divideAndConquerSortedLists(lists, 0, lists.size()-1);
+    ListNode* result = divideAndConquerSortedLists(lists, 0, (int)lists.size()-1);
 
     return result;
 }
 
+/**
+ * Leetcode 61: Rotate List
+ *
+ */
+ListNode* rotateRight(ListNode* head, int k)
+{
+	if (head == nullptr || k == 0) {
+		return head;
+	}
+	ListNode* index = head;
+	size_t length = 0;
+	while (index != nullptr) {
+		index = index->next;
+		length++;
+	}
+	k = k % length;
+	if (k == 0) {
+		return head;
+	}
+	// set flag
+	ListNode* prev = nullptr;
+	ListNode* post = nullptr;
+	ListNode* tail = nullptr;
+	index = head;
+	size_t position = 1;
+	while (index != nullptr) {
+		if (position == length - k) {
+			prev = index;
+			post = index->next;
+		}
+		if (index->next == nullptr) {
+			tail = index;
+		}
+		index = index->next;
+		position++;
+	}
+	// adjust pointers
+	tail->next = head;
+	prev->next = nullptr;
+	
+	return post;
+}

@@ -34,5 +34,7 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
 ListNode* mergeKLists(vector<ListNode*>& lists);
 ListNode* mergeKLists2(vector<ListNode*>& lists);
 
+// Leetcode 61: Rotate List
+ListNode* rotateRight(ListNode* head, int k);
 
 #endif
