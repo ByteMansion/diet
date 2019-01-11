@@ -144,7 +144,7 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
     if(l2 == nullptr) index->next = l1;
 
     ListNode* result = head->next;
-    delete index;
+    delete head;
     return result;
 }
 
@@ -192,6 +192,39 @@ ListNode* mergeKLists(vector<ListNode*>& lists)
 }
 
 
+/**
+ * Leetcode 23: Merge k Sorted Lists
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 65%
+ */
+static ListNode* divideAndConquerSortedLists(vector<ListNode*>& lists, int start, int end)
+{
+    ListNode* result;
+    if(start+1 < end) {
+        ListNode* result1 = divideAndConquerSortedLists(lists, start, (start+end)/2);
+        ListNode* result2 = divideAndConquerSortedLists(lists, (start+end)/2+1, end);
+        result = mergeTwoLists(result1, result2);
+    } else if(start+1 == end) {
+        return mergeTwoLists(lists[start], lists[end]);
+    } else if(start == end) {
+        return lists[start];
+    }
+    return result;
+}
 
+ListNode* mergeKLists2(vector<ListNode*>& lists)
+{
+    if(lists.empty() || lists.size() == 0) {
+        return nullptr;
+    }
+    if(lists.size() == 1) {
+        return lists[0];
+    }
 
+    // devide and conquer
+    ListNode* result = divideAndConquerSortedLists(lists, 0, lists.size()-1);
+
+    return result;
+}
 
