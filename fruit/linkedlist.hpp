@@ -37,4 +37,8 @@ ListNode* mergeKLists2(vector<ListNode*>& lists);
 // Leetcode 61: Rotate List
 ListNode* rotateRight(ListNode* head, int k);
 
+// Leetcode 725: Split Linked List in Parts
+vector<ListNode*> splitListToParts(ListNode* root, int k);
+
+
 #endif

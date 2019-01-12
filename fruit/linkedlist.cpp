@@ -115,7 +115,7 @@ ListNode* reverseBetween2(ListNode* head, int m, int n)
 }
 
 /**
- * Leetcode 21: Merge Two Sorted Lists
+ * @brief	Leetcode 21: Merge Two Sorted Lists
  *
  */
 ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
@@ -149,7 +149,7 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
 }
 
 /**
- * Leetcode 23: Merge k Sorted Lists
+ * @brief	Leetcode 23: Merge k Sorted Lists
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 65%
@@ -193,7 +193,7 @@ ListNode* mergeKLists(vector<ListNode*>& lists)
 
 
 /**
- * Leetcode 23: Merge k Sorted Lists
+ * @brief	Leetcode 23: Merge k Sorted Lists
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 65%
@@ -229,7 +229,7 @@ ListNode* mergeKLists2(vector<ListNode*>& lists)
 }
 
 /**
- * Leetcode 61: Rotate List
+ * @brief	Leetcode 61: Rotate List
  *
  */
 ListNode* rotateRight(ListNode* head, int k)
@@ -237,6 +237,7 @@ ListNode* rotateRight(ListNode* head, int k)
 	if (head == nullptr || k == 0) {
 		return head;
 	}
+	// get the length of this list and rotate position
 	ListNode* index = head;
 	size_t length = 0;
 	while (index != nullptr) {
@@ -269,4 +270,69 @@ ListNode* rotateRight(ListNode* head, int k)
 	prev->next = nullptr;
 	
 	return post;
+}
+
+/**
+ * @brief	Leetcode 725: Split Linked List in Parts
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 99%
+ */
+vector<ListNode*> splitListToParts(ListNode* root, int k)
+{
+	if (root == nullptr) {
+		return vector<ListNode*>(k, nullptr);
+	}
+	if (k == 1) {
+		return vector<ListNode*>(1, root);
+	}
+	// get the length of this list
+	ListNode* index = root;
+	size_t length = 0;
+	while (index != nullptr) {
+		index = index->next;
+		length++;
+	}
+	
+	vector<ListNode*> result(k, nullptr);
+	// fill result vector with nodes in list
+	// last elements in list maybe nullptr
+	if (k >= length) {
+		index = root;
+		size_t position = 0;
+		while (index != nullptr) {
+			result[position++] = index;
+			ListNode* post = index->next;
+			index->next = nullptr;
+			index = post;
+		}
+	} else {
+		// all elements in list are not nullptr
+		size_t dist = length / k;  // minimal distance of each element in result
+		size_t mode = length % k;  // count of maximum distance elements in result
+		
+		size_t distance = dist;  // distance of each element in result
+		size_t position = 0;  // position of elements in result
+		size_t distCnt  = 0;
+		index = root;
+		while (index != nullptr) {
+			if(position < mode) {
+				distance = dist + 1;
+			} else {
+				distance = dist;
+			}
+			distCnt++;
+			if(distCnt == distance) {
+				result[position++] = root;
+				root = index->next;
+				index->next = nullptr;
+				index = root;
+				distCnt = 0;
+			} else {
+				index = index->next;
+			}
+		}
+	}
+	
+	return result;
 }
