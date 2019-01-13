@@ -336,3 +336,43 @@ vector<ListNode*> splitListToParts(ListNode* root, int k)
 	
 	return result;
 }
+
+/**
+ * @brief	Leetcode 328: Odd Even Linked List
+ */
+ListNode* oddEvenList(ListNode* head)
+{
+	if (head == nullptr) {
+		return nullptr;
+	}
+	if (head->next == nullptr) {
+		return head;
+	}
+	ListNode* odd    = head;
+	ListNode* even   = head->next;
+	ListNode* cornor = even;
+	ListNode* index  = head;
+	size_t    pos    = 0;
+	
+	while (index != nullptr) {
+		pos++;
+		if (pos < 3) {
+			index = index->next;
+			continue;
+		}
+		ListNode* post = index->next;
+		if (pos % 2) {
+			odd->next = index;
+			odd = odd->next;
+		} else {
+			even->next = index;
+			even = even->next;
+		}
+		index = post;
+	}
+
+	odd->next = cornor;
+	even->next = nullptr;
+	
+	return head;
+}

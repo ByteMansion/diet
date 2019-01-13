@@ -117,7 +117,7 @@ int main()
 //    l2->next = n1; n1->next = n2;
 //	printList(l2);
 	
-	ListNode* result = rotateRight(head, 10);
+	ListNode* result = oddEvenList(head);
 	printList(result);
 	
     delete head;

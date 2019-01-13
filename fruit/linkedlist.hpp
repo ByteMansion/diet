@@ -40,5 +40,9 @@ ListNode* rotateRight(ListNode* head, int k);
 // Leetcode 725: Split Linked List in Parts
 vector<ListNode*> splitListToParts(ListNode* root, int k);
 
+// Leetcode 328: Odd Even Linked List
+ListNode* oddEvenList(ListNode* head);
 
+	
+	
 #endif
