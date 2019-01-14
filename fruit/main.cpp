@@ -99,6 +99,7 @@ int main(int argc, const char * argv[]) {
 	return 0;
 }
 #endif
+#if 0
 // test list related solutions
 int main()
 {
@@ -127,4 +128,33 @@ int main()
 //    delete n1; delete n2;
 
 	return 0;
+}
+#endif
+// test random list 
+int main()
+{
+    RandomListNode* head = new RandomListNode(0);
+    RandomListNode* node1 = new RandomListNode(1);
+    RandomListNode* node2 = new RandomListNode(2);
+    RandomListNode* node3 = new RandomListNode(3);
+    RandomListNode* node4 = new RandomListNode(4);
+    head->next  = node1;  node1->next = node2;
+    node2->next = node3;  node3->next = node4;
+    head->random  = node3;  node1->random = node2;
+    node2->random = node1;  node3->random = node1;
+    node4->random = node3;
+
+    RandomListNode* result = copyRandomList(head);
+    while(result != nullptr) {
+        cout << result->label << " ";
+        result = result->next;
+    }
+    cout << endl;
+
+    delete head;  delete node1;
+    delete node2; delete node3;
+    delete node4;
+
+
+    return 0;
 }

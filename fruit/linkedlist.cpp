@@ -339,6 +339,7 @@ vector<ListNode*> splitListToParts(ListNode* root, int k)
 
 /**
  * @brief	Leetcode 328: Odd Even Linked List
+ *
  */
 ListNode* oddEvenList(ListNode* head)
 {
@@ -375,4 +376,37 @@ ListNode* oddEvenList(ListNode* head)
 	even->next = nullptr;
 	
 	return head;
+}
+
+/**
+ * @brief   Leetcode 138: Copy List with Random Pointer
+ *
+ */
+RandomListNode* copyRandomList(RandomListNode* head)
+{
+    if(head == nullptr || head->random == nullptr) {
+        return nullptr;
+    }
+
+    RandomListNode* index = head;
+    while(index != nullptr) {
+        if(index == head->random) {
+            break;
+        }
+        index = index->next;
+    }
+
+    RandomListNode* randomHead = nullptr;
+    while(index != nullptr) {
+        RandomListNode* result = new RandomListNode(index->label);
+        result->random = index->random;
+        result->next = index->next;
+        if(randomHead == nullptr) {
+            randomHead = result;
+        }
+        index = index->next;
+        result = result->next;
+    }
+
+    return randomHead;
 }

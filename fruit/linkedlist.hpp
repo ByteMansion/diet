@@ -22,6 +22,11 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
+struct RandomListNode {
+    int label;
+    RandomListNode *next, *random;
+    RandomListNode(int x) : label(x), next(nullptr), random(nullptr) {}
+};
 
 // Leetcode 92: Reverse Linked List II
 ListNode* reverseBetween(ListNode* head, int m, int n);
@@ -43,6 +48,7 @@ vector<ListNode*> splitListToParts(ListNode* root, int k);
 // Leetcode 328: Odd Even Linked List
 ListNode* oddEvenList(ListNode* head);
 
-	
+// Leetcode 138: Copy List with Random Pointer
+RandomListNode* copyRandomList(RandomListNode* head);
 	
 #endif
