@@ -13,6 +13,7 @@
 #include <vector>
 #include <queue>
 #include <algorithm>
+#include <map>
 
 using std::vector;
 using std::priority_queue;
@@ -21,6 +22,7 @@ using std::greater;
 using std::move;
 using std::queue;
 using std::find;
+using std::map;
 
 /**
  * @brief   Leetcode 92: Reverse Linked List II
@@ -383,6 +385,9 @@ ListNode* oddEvenList(ListNode* head)
 /**
  * @brief   Leetcode 138: Copy List with Random Pointer
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 2.75%
+ * Space complexity is O(n), time complexity is O(n).
  */
 RandomListNode* copyRandomList(RandomListNode* head)
 {
@@ -394,35 +399,41 @@ RandomListNode* copyRandomList(RandomListNode* head)
     RandomListNode* index = head;
     RandomListNode* randomHead = nullptr;
 	RandomListNode* iResult = nullptr;
+    map<RandomListNode*, RandomListNode*> mapping;
     while(index != nullptr) {
 		if (find(visited.begin(), visited.end(), index) == visited.end()) {
 			iResult = new RandomListNode(index->label);
 			visited.push_back(index);
+            mapping[index] = iResult;
 			if (randomHead == nullptr) {
 				randomHead = iResult;
 			}
 		}
 		// copy next pointer
-		if (find(visited.begin(), visited.end(), index->next) != visited.end()) {
-			iResult->next = index->next;
-		} else {
-			if (index->next != nullptr) {
-				RandomListNode* newNode = new RandomListNode(index->next->label);
-				iResult->next = newNode;
-				visited.push_back(index->next);
-			}
-		}
+        if(index->next != nullptr) {
+        	auto pNode = find(visited.begin(), visited.end(), index->next);
+        	if (pNode == visited.end()) {
+                RandomListNode* newNode = new RandomListNode(index->next->label);
+                iResult->next = newNode;
+                visited.push_back(index->next);
+                mapping[index->next] =  iResult->next;
+            } else {
+                iResult->next = mapping[index->next];
+            }
+        }
 		// copy random pointer
-		if (find(visited.begin(), visited.end(), index->random) != visited.end()) {
-			iResult->random = index->random;
-		} else {
-			if (index->random != nullptr) {
-				RandomListNode* newNode = new RandomListNode(index->random->label);
-				iResult->random = newNode;
-				visited.push_back(index->random);
-			}
-		}
-		
+        if(index->random != nullptr) {
+            auto pNode = find(visited.begin(), visited.end(), index->random) ;
+            if (pNode == visited.end()) {
+                RandomListNode* newNode = new RandomListNode(index->random->label);
+                iResult->random = newNode;
+                visited.push_back(index->random);
+                mapping[index->random] =  iResult->random;
+            } else {
+                iResult->random = mapping[index->random];
+            }
+        }
+
 		// iterate
 		index = index->next;
 		iResult = iResult->next;
@@ -430,3 +441,4 @@ RandomListNode* copyRandomList(RandomListNode* head)
 
     return randomHead;
 }
+
