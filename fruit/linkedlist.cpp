@@ -447,7 +447,7 @@ RandomListNode* copyRandomList(RandomListNode* head)
  * @brief   Leetcode 138: Copy List with Random Pointer
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution %
+ * Accepted Solutions Runtime Distribution 97%
  */
 RandomListNode* copyRandomList2(RandomListNode* head)
 {
@@ -468,7 +468,9 @@ RandomListNode* copyRandomList2(RandomListNode* head)
     // set random pointer of cloned pointer
     index = head;
     while(index != nullptr) {
-        index->next->random = index->random->next;
+		if (index->random != nullptr) {
+			index->next->random = index->random->next;
+		}
         index = index->next->next;
     }
 
@@ -479,7 +481,9 @@ RandomListNode* copyRandomList2(RandomListNode* head)
         iResult = index->next;
         iPost = index->next->next;
         index->next = iPost;
-        iResult->next = iPost->next;
+		if (iPost != nullptr) {
+			iResult->next = iPost->next;
+		}
         index = iPost;
     }
 

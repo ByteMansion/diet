@@ -140,11 +140,11 @@ int main()
     RandomListNode* node4 = new RandomListNode(4);
     head->next  = node1;  node1->next = node2;
     node2->next = node3;  node3->next = node4;
-    head->random  = node3;  node1->random = node2;
+    head->random  = node3;  node1->random = nullptr;
     node2->random = node1;  node3->random = node1;
     node4->random = node3;
 
-    RandomListNode* result = copyRandomList(head);
+    RandomListNode* result = copyRandomList2(head);
     while(result != nullptr) {
         cout << result->label << " ";
         result = result->next;
