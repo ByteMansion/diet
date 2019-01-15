@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using std::vector;
 using std::priority_queue;
@@ -19,6 +20,7 @@ using std::less;
 using std::greater;
 using std::move;
 using std::queue;
+using std::find;
 
 /**
  * @brief   Leetcode 92: Reverse Linked List II
@@ -384,28 +386,46 @@ ListNode* oddEvenList(ListNode* head)
  */
 RandomListNode* copyRandomList(RandomListNode* head)
 {
-    if(head == nullptr || head->random == nullptr) {
+    if(head == nullptr) {
         return nullptr;
     }
 
+	vector<RandomListNode*> visited;
     RandomListNode* index = head;
-    while(index != nullptr) {
-        if(index == head->random) {
-            break;
-        }
-        index = index->next;
-    }
-
     RandomListNode* randomHead = nullptr;
+	RandomListNode* iResult = nullptr;
     while(index != nullptr) {
-        RandomListNode* result = new RandomListNode(index->label);
-        result->random = index->random;
-        result->next = index->next;
-        if(randomHead == nullptr) {
-            randomHead = result;
-        }
-        index = index->next;
-        result = result->next;
+		if (find(visited.begin(), visited.end(), index) == visited.end()) {
+			iResult = new RandomListNode(index->label);
+			visited.push_back(index);
+			if (randomHead == nullptr) {
+				randomHead = iResult;
+			}
+		}
+		// copy next pointer
+		if (find(visited.begin(), visited.end(), index->next) != visited.end()) {
+			iResult->next = index->next;
+		} else {
+			if (index->next != nullptr) {
+				RandomListNode* newNode = new RandomListNode(index->next->label);
+				iResult->next = newNode;
+				visited.push_back(index->next);
+			}
+		}
+		// copy random pointer
+		if (find(visited.begin(), visited.end(), index->random) != visited.end()) {
+			iResult->random = index->random;
+		} else {
+			if (index->random != nullptr) {
+				RandomListNode* newNode = new RandomListNode(index->random->label);
+				iResult->random = newNode;
+				visited.push_back(index->random);
+			}
+		}
+		
+		// iterate
+		index = index->next;
+		iResult = iResult->next;
     }
 
     return randomHead;
