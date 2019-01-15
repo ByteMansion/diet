@@ -399,8 +399,9 @@ RandomListNode* copyRandomList(RandomListNode* head)
     RandomListNode* index = head;
     RandomListNode* randomHead = nullptr;
 	RandomListNode* iResult = nullptr;
-    map<RandomListNode*, RandomListNode*> mapping;
+    map<RandomListNode*, RandomListNode*> mapping;  // map new cloned node to old one
     while(index != nullptr) {
+        // copy unvisited node
 		if (find(visited.begin(), visited.end(), index) == visited.end()) {
 			iResult = new RandomListNode(index->label);
 			visited.push_back(index);
@@ -442,3 +443,45 @@ RandomListNode* copyRandomList(RandomListNode* head)
     return randomHead;
 }
 
+/**
+ * @brief   Leetcode 138: Copy List with Random Pointer
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution %
+ */
+RandomListNode* copyRandomList2(RandomListNode* head)
+{
+    if(head == nullptr) {
+        return nullptr;
+    }
+    // set new cloned node behind original node
+    RandomListNode* index = head;
+    RandomListNode* iResult = nullptr;
+    RandomListNode* iPost = nullptr;
+    while(index != nullptr) {
+        iResult = new RandomListNode(index->label);
+        iPost   = index->next;
+        index->next = iResult;
+        iResult->next = iPost;
+        index = index->next->next;
+    }
+    // set random pointer of cloned pointer
+    index = head;
+    while(index != nullptr) {
+        index->next->random = index->random->next;
+        index = index->next->next;
+    }
+
+    // get new cloned list by changing pointer direction
+    index = head;
+    RandomListNode* randomHead = head->next;
+    while(index != nullptr) {
+        iResult = index->next;
+        iPost = index->next->next;
+        index->next = iPost;
+        iResult->next = iPost->next;
+        index = iPost;
+    }
+
+    return randomHead;
+}
