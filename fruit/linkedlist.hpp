@@ -51,5 +51,11 @@ ListNode* oddEvenList(ListNode* head);
 // Leetcode 138: Copy List with Random Pointer
 RandomListNode* copyRandomList(RandomListNode* head);
 RandomListNode* copyRandomList2(RandomListNode* head);
-	
+
+// Leetcode 82: Remove Duplicates from Sorted List II
+ListNode* deleteDuplicates(ListNode* head);
+
+
+
+
 #endif

@@ -489,3 +489,47 @@ RandomListNode* copyRandomList2(RandomListNode* head)
 
     return randomHead;
 }
+
+/**
+ * Leetcode 82: Remove Duplicates from Sorted List II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+
+ListNode* deleteDuplicates(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return head;
+    }
+
+    ListNode* resultHead  = nullptr;
+    ListNode* resultIndex = nullptr;
+    ListNode* index       = head;
+    size_t    cnt         = 1;
+
+    while(index != nullptr) {
+        while(index->next != nullptr && index->next->val == index->val) {
+            index = index->next;
+            cnt++;
+        }
+        if(cnt == 1) {
+            if(resultIndex == nullptr) {
+                resultIndex = index;
+                resultHead = resultIndex;
+            } else {
+                resultIndex->next = index;
+                resultIndex = resultIndex->next;
+            }
+        }
+
+        index = index->next;
+        cnt = 1;
+    }
+    if(resultIndex != nullptr) {
+        resultIndex->next = nullptr;
+    }
+
+    return resultHead;
+}
+
