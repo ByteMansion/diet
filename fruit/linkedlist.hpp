@@ -58,6 +58,9 @@ ListNode* deleteDuplicates(ListNode* head);
 // Leetcode 86: Partition List
 ListNode* partition(ListNode* head, int x);
 
+// Leetcode 143: Reorder List
+void reorderList(ListNode* head);
+void reorderList2(ListNode* head);
 
 
 #endif

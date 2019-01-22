@@ -580,3 +580,73 @@ ListNode* partition(ListNode* head, int x)
 
     return resultHead;
 }
+
+/**
+ * @brief   Leetcode 143: Reorder List
+ *  This method uses a map to save half list. Space complexity is 
+ *  O(n), time complexity is O(n).
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 65%
+ */
+void reorderList(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return;
+    }
+
+    ListNode* index = head;
+    map<int, ListNode*> mList;
+    size_t nodeCnt = 0;
+    size_t halfCnt = 0;
+
+    while(index != nullptr) {
+        nodeCnt++;
+        index = index->next;
+    }
+
+    if(nodeCnt % 2) {
+        halfCnt = nodeCnt / 2 + 1;
+    } else {
+        halfCnt = nodeCnt / 2;
+    }
+
+    size_t num = 1;
+    index = head;
+    while(num <= halfCnt) {
+        mList[num++] = index;
+        index = index->next;
+    }
+
+    num = nodeCnt / 2;
+    while(index != nullptr) {
+        ListNode* post = mList[num]->next;
+        ListNode* postIndex = index->next;
+        mList[num]->next = index;
+        if(num == nodeCnt / 2){
+           if(nodeCnt % 2) {
+               index->next = mList[halfCnt];
+               mList[halfCnt]->next = nullptr;
+           } else {
+               index->next = nullptr;
+            }
+        } else {
+            index->next = post;
+        }
+        index = postIndex;
+        num--;
+    }
+}
+
+/**
+ * @brief   Reorder List
+ *  This method traverses list two times and space complexity is
+ *  O(1), time complexity is O(n).
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution %
+ */
+void reorderList2(ListNode* head)
+{
+    
+}
+
