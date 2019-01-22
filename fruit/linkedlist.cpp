@@ -596,7 +596,7 @@ void reorderList(ListNode* head)
     }
 
     ListNode* index = head;
-    map<int, ListNode*> mList;
+    map<size_t, ListNode*> mList;
     size_t nodeCnt = 0;
     size_t halfCnt = 0;
 
@@ -639,7 +639,7 @@ void reorderList(ListNode* head)
 }
 
 /**
- * @brief   Reorder List
+ * @brief   Leetcode 143: Reorder List
  *  This method traverses list two times and space complexity is
  *  O(1), time complexity is O(n).
  * -------------------------------------------
@@ -682,7 +682,7 @@ void reorderList2(ListNode* head)
         halfLength = length / 2;
     }
 
-    size_t num = 0;
+    size_t num = 1;
     index = head;
     while(num++ < halfLength) {
         index = index->next;

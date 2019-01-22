@@ -99,7 +99,7 @@ int main(int argc, const char * argv[]) {
 	return 0;
 }
 #endif
-#if 0
+
 // test list related solutions
 int main()
 {
@@ -112,25 +112,20 @@ int main()
 	node2->next = node3;  node3->next = node4;
 	printList(head);
 	
-//	ListNode* l2 = new ListNode(1);
-//	ListNode* n1 = new ListNode(3);
-//    ListNode* n2 = new ListNode(5);
-//    l2->next = n1; n1->next = n2;
-//	printList(l2);
-	
-	ListNode* result = oddEvenList(head);
-	printList(result);
+//	reorderList(head);
+//	printList(head);
+	reorderList2(head);
+	printList(head);
 	
     delete head;
     delete node1; delete node2;
     delete node3; delete node4;
-//    delete l2;
-//    delete n1; delete n2;
 
 	return 0;
 }
-#endif
-// test random list 
+
+#if 0
+// test RandomListNode
 int main()
 {
     RandomListNode* head = new RandomListNode(0);
@@ -144,7 +139,7 @@ int main()
     node2->random = node1;  node3->random = node1;
     node4->random = node3;
 
-    RandomListNode* result = copyRandomList2(head);
+    RandomListNode* result = reorderList(head);
     while(result != nullptr) {
         cout << result->label << " ";
         result = result->next;
@@ -158,3 +153,5 @@ int main()
 
     return 0;
 }
+#endif
+
