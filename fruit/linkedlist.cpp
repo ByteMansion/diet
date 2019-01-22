@@ -645,8 +645,60 @@ void reorderList(ListNode* head)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution %
  */
+static ListNode* reverseList(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    ListNode* last = nullptr;
+    ListNode* post = nullptr;
+    ListNode* index = head;
+    while(index != nullptr) {
+        post = index->next;
+        index->next = last;
+        last = index;
+        index = post;
+    }
+
+    return last;
+}
 void reorderList2(ListNode* head)
 {
-    
+    if(head == nullptr || head->next == nullptr) {
+        return;
+    }
+
+    ListNode* index = head;
+    size_t length = 0;
+    while(index != nullptr) {
+        length++;
+        index = index->next;
+    }
+
+    size_t halfLength = 0;
+    if(length % 2) {
+        halfLength = length / 2 + 1;
+    } else {
+        halfLength = length / 2;
+    }
+
+    size_t num = 0;
+    index = head;
+    while(num++ < halfLength) {
+        index = index->next;
+    }
+
+    ListNode* middleIndex = reverseList(index->next);
+    index->next = nullptr;
+
+    index = head;
+    while(middleIndex != nullptr) {
+        ListNode* post = index->next;
+        ListNode* middlePost = middleIndex->next;
+        index->next = middleIndex;
+        middleIndex->next = post;
+        middleIndex = middlePost;
+        index = post;
+    }
 }
 
