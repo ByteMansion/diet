@@ -55,6 +55,8 @@ RandomListNode* copyRandomList2(RandomListNode* head);
 // Leetcode 82: Remove Duplicates from Sorted List II
 ListNode* deleteDuplicates(ListNode* head);
 
+// Leetcode 86: Partition List
+ListNode* partition(ListNode* head, int x);
 
 
 

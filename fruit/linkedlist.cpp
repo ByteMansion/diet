@@ -533,3 +533,50 @@ ListNode* deleteDuplicates(ListNode* head)
     return resultHead;
 }
 
+/**
+ * @brief   Leetcode 86: Pertition List
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+ListNode* partition(ListNode* head, int x)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return head;
+    }
+
+    ListNode* resultHead = nullptr;
+    ListNode* lessIndex = nullptr;
+    ListNode* greatIndex = nullptr;
+    ListNode* index = head;
+
+    while(index != nullptr) {
+        if(index->val < x) {
+            if(lessIndex == nullptr) {
+                lessIndex = index;
+                resultHead = lessIndex;
+            } else {
+                lessIndex->next = index;
+                lessIndex = lessIndex->next;
+            }
+        } else {
+            if(greatIndex == nullptr) {
+                greatIndex = index;
+                head = greatIndex;
+            } else {
+                greatIndex->next = index;
+                greatIndex = greatIndex->next;
+            }
+        }
+        index = index->next;
+    }
+    if(lessIndex != nullptr && greatIndex != nullptr) {
+        lessIndex->next = head;
+        greatIndex->next = nullptr;
+    } else {
+        resultHead = head;
+    }
+
+
+    return resultHead;
+}
