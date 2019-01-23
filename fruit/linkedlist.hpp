@@ -65,5 +65,7 @@ void reorderList2(ListNode* head);
 // Leetcode 445: Add Two Numbers II
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 
+// Leetcode 148: Sort List
+ListNode* sortList(ListNode* head);
 
 #endif

@@ -770,3 +770,40 @@ ListNode* addTwoNumbers(ListNode* index1, ListNode* index2)
 
     return result;
 }
+
+/**
+ * Leetcode 148: Sort List
+ *
+ */
+ListNode* sortList(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return head;
+    }
+
+    ListNode* index = head;
+    auto cmp = [](ListNode* m, ListNode* n){return (m->val > n->val);};
+    priority_queue<ListNode*, vector<ListNode*>, decltype(cmp)> pQueue(cmp);
+
+    while(index != nullptr) {
+        pQueue.push(index);
+        index = index->next;
+    }
+    ListNode* result = nullptr;
+    ListNode* front = nullptr;
+    while(!pQueue.empty()) {
+        front = pQueue.top();
+        if(result == nullptr) {
+            index = front;
+            result = index;
+        } else {
+            index->next = front;
+            index = index->next;
+        }
+        pQueue.pop();
+    }
+    front->next = nullptr;
+
+    return result;
+
+}
