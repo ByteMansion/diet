@@ -62,5 +62,8 @@ ListNode* partition(ListNode* head, int x);
 void reorderList(ListNode* head);
 void reorderList2(ListNode* head);
 
+// Leetcode 445: Add Two Numbers II
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
+
 
 #endif

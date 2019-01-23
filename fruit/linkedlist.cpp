@@ -643,7 +643,7 @@ void reorderList(ListNode* head)
  *  This method traverses list two times and space complexity is
  *  O(1), time complexity is O(n).
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution %
+ * Accepted Solutions Runtime Distribution 100%
  */
 static ListNode* reverseList(ListNode* head)
 {
@@ -702,3 +702,71 @@ void reorderList2(ListNode* head)
     }
 }
 
+/**
+ * @brief   Leetcode 445: Add Two Numbers II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 99%
+ */
+static size_t getLengthofList(ListNode* head)
+{
+    if(head == nullptr) {
+        return 0;
+    }
+    ListNode* index = head;
+    size_t length = 0;
+    while(index != nullptr) {
+        length++;
+        index = index->next;
+    }
+
+    return length;
+}
+ListNode* addTwoNumbers(ListNode* index1, ListNode* index2)
+{
+    size_t length1 = getLengthofList(index1);
+    size_t length2 = getLengthofList(index2);
+
+    if(length1 < length2) {
+        ListNode* tmp = index1;
+        index1 = index1;
+        index2 = tmp;
+    }
+    ListNode* result = index1;
+
+    stack<ListNode*> sList1;
+    stack<ListNode*> sList2;
+    while(index1 != nullptr) {
+        sList1.push(index1);
+        index1 = index1->next;
+    }
+    while(index2 != nullptr) {
+        sList2.push(index2);
+        index2 = index2->next;
+    }
+    size_t sum = 0;
+    size_t increase = 0;
+    while(!sList1.empty() && !sList2.empty()) {
+        index1 = sList1.top();
+        sList1.pop();
+        index2 =sList2.top();
+        sList2.pop();
+        sum = index1->val + index2->val + increase;
+        index1->val = sum % 10;
+        increase = sum / 10;
+    }
+    while(!sList1.empty()) {
+        index1 = sList1.top();
+        sList1.pop();
+        sum = index1->val + increase;
+        index1->val = sum % 10;
+        increase = sum / 10;
+    }
+    if(increase != 0) {
+        ListNode* node = new ListNode(1);
+        node->next = result;
+        result = node;
+    }
+
+    return result;
+}
