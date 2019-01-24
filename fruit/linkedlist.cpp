@@ -14,6 +14,7 @@
 #include <queue>
 #include <algorithm>
 #include <map>
+#include <stack>
 
 using std::vector;
 using std::priority_queue;
@@ -23,6 +24,7 @@ using std::move;
 using std::queue;
 using std::find;
 using std::map;
+using std::stack;
 
 /**
  * @brief   Leetcode 92: Reverse Linked List II
