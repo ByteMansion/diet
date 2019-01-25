@@ -776,6 +776,8 @@ ListNode* addTwoNumbers(ListNode* index1, ListNode* index2)
 /**
  * Leetcode 148: Sort List
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 71%
  */
 ListNode* sortList(ListNode* head)
 {
@@ -808,4 +810,72 @@ ListNode* sortList(ListNode* head)
 
     return result;
 
+}
+
+/**
+ * @brief   Leetcode 148: Sort List
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+static ListNode* mergeList(ListNode* left, ListNode* right)
+{
+    ListNode dummy(INT_MIN);
+    ListNode* tail = &dummy;
+
+    while(left && right) {
+        if(left->val < right->val) {
+            tail->next = left;
+            left = left->next;
+        } else {
+            tail->next = right;
+            right = right->next;
+        }
+
+        tail = tail->next;
+    }
+
+    tail->next = (left == nullptr) ? right : left;
+
+    return dummy.next;
+}
+/**
+ * The key of this question is how to find the middle node of a list.
+ * In each iteration, fast node moves forward two steps, one step ahead of slow node.
+ * Finally, the node before slow node is the middle of list when fast node hits the tail.
+ */
+static ListNode* sortListHelperMergeSort(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    if(head->next->next == nullptr) {
+        ListNode* left = head;
+        ListNode* right = head->next;
+        left->next = nullptr;
+        return mergeList(left, right);
+    }
+
+    ListNode* fast = head;
+    ListNode* slow = head;
+    ListNode* pslow = head;
+    while(fast != nullptr) {
+        if(fast->next == nullptr) {
+            break;
+        }
+        fast = fast->next->next;
+        if(pslow != slow) {
+            pslow = slow;
+        }
+        slow = slow->next;
+    }
+    pslow->next = nullptr;
+    ListNode* left = sortListHelperMergeSort(head);
+    ListNode* right = sortListHelperMergeSort(slow);
+    return mergeList(left, right);
+}
+
+ListNode* sortList2(ListNode* head)
+{
+    return sortListHelperMergeSort(head);
 }

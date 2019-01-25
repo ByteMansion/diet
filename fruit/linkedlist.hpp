@@ -67,5 +67,6 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 
 // Leetcode 148: Sort List
 ListNode* sortList(ListNode* head);
+ListNode* sortList2(ListNode* head);
 
 #endif
