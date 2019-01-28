@@ -69,4 +69,10 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 ListNode* sortList(ListNode* head);
 ListNode* sortList2(ListNode* head);
 
+// Leetcode 24: Swap Nodes in Pairs
+ListNode* swapPairs(ListNode* head);
+
+
+
+
 #endif

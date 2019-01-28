@@ -879,3 +879,32 @@ ListNode* sortList2(ListNode* head)
 {
     return sortListHelperMergeSort(head);
 }
+
+/**
+ * @brief   Swap Nodes in Pairs
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+ListNode* swapPairs(ListNode* head)
+{
+	if (head == nullptr || head->next == nullptr) {
+		return head;
+	}
+	
+	ListNode dummy(INT_MIN);
+	ListNode* index = head;
+	ListNode* prev = &dummy;
+	while (index != nullptr && index->next != nullptr) {
+		ListNode* last = index->next->next;
+		ListNode* post = index->next;
+		index->next = last;
+		post->next = index;
+		prev->next = post;
+		
+		prev = index;
+		index = last;
+	}
+	
+	return dummy.next;
+}
