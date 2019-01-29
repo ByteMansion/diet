@@ -72,6 +72,8 @@ ListNode* sortList2(ListNode* head);
 // Leetcode 24: Swap Nodes in Pairs
 ListNode* swapPairs(ListNode* head);
 
+// Leetcode 25: Reverse Nodes in k-Group
+ListNode* reverseKGroup(ListNode* head, int k);
 
 
 

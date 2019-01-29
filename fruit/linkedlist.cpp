@@ -908,3 +908,54 @@ ListNode* swapPairs(ListNode* head)
 	
 	return dummy.next;
 }
+
+/**
+ * @brief   Leetcode 25: Reverse Nodes in k-Group
+ *
+ */
+static ListNode* getKthNode(ListNode* head, int k) {
+    int i = 1;
+    while(i <= k) {
+        if(head == nullptr) {
+            break;
+        }
+        head = head->next;
+        i += 1;
+    }
+    if(i == k) {
+        return head;
+    }
+
+    return nullptr;
+}
+
+ListNode* reverseKGroup(ListNode* head, int k)
+{
+    if(k <= 1) {
+        return head;
+    }
+
+    ListNode dummy(INT_MIN);
+    ListNode* index = head;
+    ListNode* prev = &dummy;
+    while(index != nullptr) {
+        ListNode* last = getKthNode(index, k);
+        if(last == nullptr) {
+            break;
+        }
+        int i = 0;
+        while(i++ < k) {
+            ListNode* post = index->next;
+            ListNode* end = index->next->next;
+            index->next = end;
+            post->next = prev->next;
+            prev->next = post;
+
+            index = post;
+        }
+
+        index = last;
+    }
+
+    return dummy.next;
+}
