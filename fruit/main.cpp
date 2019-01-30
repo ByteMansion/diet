@@ -112,10 +112,8 @@ int main()
 	node2->next = node3;  node3->next = node4;
 	printList(head);
 	
-//	reorderList(head);
-//	printList(head);
-	reorderList2(head);
-	printList(head);
+	ListNode* result = reverseKGroup(head, 3);
+	printList(result);
 	
     delete head;
     delete node1; delete node2;

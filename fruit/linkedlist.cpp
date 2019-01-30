@@ -914,47 +914,50 @@ ListNode* swapPairs(ListNode* head)
  *
  */
 static ListNode* getKthNode(ListNode* head, int k) {
+	if(head == nullptr) {
+		return nullptr;
+	}
     int i = 1;
-    while(i <= k) {
-        if(head == nullptr) {
-            break;
+    while(i < k) {
+        if(head->next == nullptr) {
+			return nullptr;
         }
         head = head->next;
         i += 1;
     }
-    if(i == k) {
-        return head;
-    }
-
-    return nullptr;
+	return head;
 }
 
 ListNode* reverseKGroup(ListNode* head, int k)
 {
-    if(k <= 1) {
+    if(k <= 1 || head == nullptr) {
         return head;
     }
 
     ListNode dummy(INT_MIN);
+	dummy.next = head;
     ListNode* index = head;
     ListNode* prev = &dummy;
+	ListNode* post = nullptr;
+	ListNode* end = nullptr;
+	
     while(index != nullptr) {
-        ListNode* last = getKthNode(index, k);
-        if(last == nullptr) {
-            break;
-        }
-        int i = 0;
-        while(i++ < k) {
-            ListNode* post = index->next;
-            ListNode* end = index->next->next;
-            index->next = end;
-            post->next = prev->next;
-            prev->next = post;
-
-            index = post;
-        }
-
-        index = last;
+		ListNode* last = getKthNode(index, k);
+		if (last == nullptr) {
+			break;
+		}
+		int i = 1;
+		end = last->next;
+		while (i < k) {
+			post = index->next;
+			index->next = end;
+			end = index;
+			index = post;
+			i += 1;
+		}
+		
+		prev = index;
+		index = index->next;
     }
 
     return dummy.next;
