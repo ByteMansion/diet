@@ -79,5 +79,8 @@ ListNode* reverseKGroup(ListNode* head, int k);
 bool hasCycle(ListNode* head);
 bool hasCycle2(ListNode* head);
 
+// Leetcode 142: Linked List Cycle II
+ListNode* detectCycle(ListNode* head);
+ListNode* detectCycle2(ListNode* head);
 
 #endif

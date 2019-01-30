@@ -16,6 +16,7 @@
 #include <map>
 #include <stack>
 #include <unordered_map>
+#include <unordered_set>
 #include <set>
 
 using std::vector;
@@ -28,6 +29,7 @@ using std::find;
 using std::map;
 using std::stack;
 using std::unordered_map;
+using std::unordered_set;
 using std::set;
 
 /**
@@ -1029,4 +1031,57 @@ bool hasCycle2(ListNode* head)
     }
 
     return true;
+}
+
+/**
+ * @brief   Leetcode 142: Linked List Cycle II
+ *  This method needs O(n) extra space.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 0.87%
+ */
+ListNode* detectCycle(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return nullptr;
+    }
+
+    unordered_set<ListNode*> sList;
+    ListNode* index = head;
+    while(index != nullptr) {
+        if(find(sList.begin(), sList.end(), index) != sList.end()) {
+            return index;
+        }
+        sList.insert(index);
+        index = index->next;
+    }
+
+    return nullptr;
+}
+
+/**
+ * @brief   Leetcode 142: Linked List Cycle II
+ *
+ */
+ListNode* detectCycle2(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return nullptr;
+    }
+    ListNode* fast = head->next->next;
+    ListNode* slow = head;
+    while(fast != slow) {
+        if(fast == nullptr || fast->next == nullptr) {
+            return nullptr;
+        }
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+
+    fast = head;
+    while(fast != slow) {
+        fast = fast->next;
+        slow = slow->next;
+    }
+    return fast;
 }
