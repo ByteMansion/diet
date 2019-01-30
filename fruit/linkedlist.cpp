@@ -15,6 +15,8 @@
 #include <algorithm>
 #include <map>
 #include <stack>
+#include <unordered_map>
+#include <set>
 
 using std::vector;
 using std::priority_queue;
@@ -25,6 +27,8 @@ using std::queue;
 using std::find;
 using std::map;
 using std::stack;
+using std::unordered_map;
+using std::set;
 
 /**
  * @brief   Leetcode 92: Reverse Linked List II
@@ -970,4 +974,59 @@ ListNode* reverseKGroup(ListNode* head, int k)
     }
 
     return dummy.next;
+}
+
+/**
+ * @brief   Leetcode 141: Linked List Cycle
+ *  This solution has high space complexity O(n).
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 0.82%
+ */
+bool hasCycle(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return false;
+    }
+
+    set<ListNode*> sList;
+    while(head != nullptr) {
+        if(find(sList.begin(), sList.end(), head) != sList.end()) {
+            return true;
+        }
+        sList.insert(head);
+        head = head->next;
+    }
+
+    return false;
+}
+ /**
+  * @brief  Leetcode 141: Linked List Cycle
+  *  This method decreases space complexity to O(1) using two pointers --
+  *  one moves fast, but another slow. If the linked list has a cycle, fast pointer and 
+  *  slow pointer meet at certain node finally.
+  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+  */
+bool hasCycle2(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return false;
+    }
+    ListNode* fast = head->next->next;
+    ListNode* slow = head;
+    while(fast != slow) {
+        if(fast == nullptr) {
+            return false;
+        }
+        slow = slow->next;
+        if(fast->next) {
+            fast = fast->next->next;
+        } else {
+            fast = fast->next;
+        }
+    }
+
+    return true;
 }

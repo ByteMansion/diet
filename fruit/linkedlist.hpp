@@ -75,6 +75,9 @@ ListNode* swapPairs(ListNode* head);
 // Leetcode 25: Reverse Nodes in k-Group
 ListNode* reverseKGroup(ListNode* head, int k);
 
+// Leetcode 141: Linked List Cycle
+bool hasCycle(ListNode* head);
+bool hasCycle2(ListNode* head);
 
 
 #endif
