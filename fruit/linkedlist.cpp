@@ -958,7 +958,6 @@ ListNode* reverseKGroup(ListNode* head, int k)
     ListNode dummy(INT_MIN);
     ListNode* index = head;
     ListNode* prev = &dummy;
-	ListNode* post = nullptr;
 	ListNode* end = nullptr;
 
     while(index != nullptr) {
@@ -1061,27 +1060,27 @@ ListNode* detectCycle(ListNode* head)
 
 /**
  * @brief   Leetcode 142: Linked List Cycle II
+ *	Floyd's cycle detection algorithm
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
  */
 ListNode* detectCycle2(ListNode* head)
 {
-    if(head == nullptr || head->next == nullptr) {
-        return nullptr;
-    }
-    ListNode* fast = head->next->next;
-    ListNode* slow = head;
-    while(fast != slow) {
-        if(fast == nullptr || fast->next == nullptr) {
-            return nullptr;
-        }
-        fast = fast->next->next;
-        slow = slow->next;
-    }
-
-    fast = head;
-    while(fast != slow) {
-        fast = fast->next;
-        slow = slow->next;
-    }
-    return fast;
+	ListNode* fast = head;
+	ListNode* slow = head;
+	while (fast && slow && fast->next) {
+		fast = fast->next->next;
+		slow = slow->next;
+		if (fast == slow) {
+			slow = head;
+			while (slow != fast) {
+				slow = slow->next;
+				fast = fast->next;
+			}
+			return slow;
+		}
+	}
+	
+	return nullptr;
 }
