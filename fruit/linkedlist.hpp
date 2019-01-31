@@ -28,6 +28,23 @@ struct RandomListNode {
     RandomListNode(int x) : label(x), next(nullptr), random(nullptr) {}
 };
 
+class Node {
+public:
+    int val;
+    Node* prev;
+    Node* next;
+    Node* child;
+
+    Node() {}
+
+    Node(int _val, Node* _prev, Node* _next, Node* _child) {
+        val = _val;
+        prev = _prev;
+        next = _next;
+        child = _child;
+    }
+};
+
 // Leetcode 92: Reverse Linked List II
 ListNode* reverseBetween(ListNode* head, int m, int n);
 ListNode* reverseBetween2(ListNode* head, int m, int n);
@@ -82,5 +99,8 @@ bool hasCycle2(ListNode* head);
 // Leetcode 142: Linked List Cycle II
 ListNode* detectCycle(ListNode* head);
 ListNode* detectCycle2(ListNode* head);
+
+// Leetcode 430: Flatten a Multilevel Doubly Linked List
+Node* flatten(Node* head);
 
 #endif

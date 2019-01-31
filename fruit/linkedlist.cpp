@@ -1081,6 +1081,36 @@ ListNode* detectCycle2(ListNode* head)
 			return slow;
 		}
 	}
-	
+
 	return nullptr;
+}
+
+/**
+ * @brief   Leetcode 430: Flatten a Multilevel Doubly Linked List
+ *
+ */
+Node* flatten(Node* head)
+{
+    if(head == nullptr) {
+        return nullptr;
+    }
+    Node* resultHead = head;
+    while(head != nullptr) {
+        if(head->child == nullptr) {
+            head = head->next;
+        } else {
+            Node* post = head->next;
+            Node* childHead = flatten(head->child);
+            Node* index = childHead;
+            while(index != nullptr) {
+                index = index->next;
+            }
+            head->child = nullptr;
+            head->next = childHead;
+            index->prev->next = post;
+            head = post;
+        }
+    }
+
+    return resultHead;
 }
