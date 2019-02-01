@@ -1120,3 +1120,43 @@ Node* flatten(Node* head)
 
     return resultHead;
 }
+
+/**
+ * @brief   Leetcode 147: Insertion Sort List
+ *
+ */
+ListNode* insertionSortList(ListNode* head)
+{
+    if(head == nullptr || head->next == nullptr) {
+        return head;
+    }
+
+    ListNode* iNode = head;
+    ListNode* post  = iNode->next;
+    ListNode  dummy(INT_MIN);
+    ListNode* prev = &dummy;
+
+    while(iNode != nullptr) {
+        post = iNode->next;
+        ListNode* index = dummy.next;
+        ListNode* prev = &dummy;
+        while(index != nullptr) {
+            if(index->val <= iNode->val) {
+                prev = index;
+                index = index->next;
+            } else {
+                prev->next = iNode;
+                iNode->next = index;
+                break;
+            }
+        }
+        if(index == nullptr) {
+            prev->next = iNode;
+            iNode->next = nullptr;
+        }
+
+        iNode = post;
+    }
+
+    return dummy.next;
+}
