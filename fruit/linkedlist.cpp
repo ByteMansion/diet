@@ -1175,7 +1175,7 @@ int numComponents(ListNode* head, vector<int>& G)
     // map values in list to its index
     map<int, int> valToIndex;
     ListNode* index = head;
-    size_t pos = 0;
+    int pos = 0;
     while(index != nullptr) {
         valToIndex[index->val] = pos;
         index = index->next;
@@ -1189,7 +1189,7 @@ int numComponents(ListNode* head, vector<int>& G)
         bList[valToIndex[ele]] = 1;
     }
 
-    size_t result = 0;
+    int result = 0;
     for(int i = 1; i < listLength; i++) {
         if(bList[i-1] == 1 && bList[i] == 0) {
             result += 1;
@@ -1213,7 +1213,7 @@ int numComponents2(ListNode* head, vector<int>& G)
         setOfListValues.insert(i);
     }
     ListNode* index = head;
-    size_t result = 0;
+    int result = 0;
     while(index != nullptr) {
         if(setOfListValues.find(index->val) != setOfListValues.end()) {
             result++;
@@ -1227,4 +1227,42 @@ int numComponents2(ListNode* head, vector<int>& G)
     }
 
     return result;
+}
+
+/**
+ * @brief	Leetcode 234: Palindrome Linked List
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 97%
+ */
+bool isPalindrome(ListNode* head)
+{
+	if (head == nullptr || head->next == nullptr) {
+		return true;
+	}
+	size_t length = getLengthofList(head);
+	ListNode* index = head;
+	ListNode dummy(0);
+	ListNode* prev = &dummy;
+	ListNode* last = nullptr;
+	for (int i = 0; i < length/2; i++) {
+		ListNode* post = index->next;
+		prev->next = index;
+		index->next = last;
+		last = index;
+		index = post;
+	}
+	if (length % 2) {
+		index = index->next;
+	}
+	prev = dummy.next;
+	while (index != nullptr) {
+		if (prev->val != index->val) {
+			return false;
+		}
+		prev = prev->next;
+		index = index->next;
+	}
+	
+	return true;
 }

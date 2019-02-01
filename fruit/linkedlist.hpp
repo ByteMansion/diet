@@ -110,7 +110,8 @@ ListNode* insertionSortList(ListNode* head);
 int numComponents(ListNode* head, vector<int>& G);
 int numComponents2(ListNode* head, vector<int>& G);
 
-
+// Leetcode 234: Palindrome Linked List
+bool isPalindrome(ListNode* head);
 
 
 #endif
