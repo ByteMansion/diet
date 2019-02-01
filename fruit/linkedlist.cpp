@@ -1124,6 +1124,8 @@ Node* flatten(Node* head)
 /**
  * @brief   Leetcode 147: Insertion Sort List
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 72%
  */
 ListNode* insertionSortList(ListNode* head)
 {
@@ -1132,14 +1134,12 @@ ListNode* insertionSortList(ListNode* head)
     }
 
     ListNode* iNode = head;
-    ListNode* post  = iNode->next;
     ListNode  dummy(INT_MIN);
-    ListNode* prev = &dummy;
 
     while(iNode != nullptr) {
-        post = iNode->next;
+        ListNode* post  = iNode->next;
         ListNode* index = dummy.next;
-        ListNode* prev = &dummy;
+        ListNode* prev  = &dummy;
         while(index != nullptr) {
             if(index->val <= iNode->val) {
                 prev = index;
