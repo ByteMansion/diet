@@ -106,6 +106,9 @@ Node* flatten(Node* head);
 // Leetcode 147: Insertion Sort List
 ListNode* insertionSortList(ListNode* head);
 
+// Leetcode 817: Linked List Components
+int numComponents(ListNode* head, vector<int>& G);
+int numComponents2(ListNode* head, vector<int>& G);
 
 
 

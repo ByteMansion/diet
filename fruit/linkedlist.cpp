@@ -18,6 +18,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <set>
+#include <bitset>
 
 using std::vector;
 using std::priority_queue;
@@ -31,6 +32,7 @@ using std::stack;
 using std::unordered_map;
 using std::unordered_set;
 using std::set;
+using std::bitset;
 
 /**
  * @brief   Leetcode 92: Reverse Linked List II
@@ -1159,4 +1161,70 @@ ListNode* insertionSortList(ListNode* head)
     }
 
     return dummy.next;
+}
+
+/**
+ * @brief   Leetcode 817: Linked List Components
+ *  This method is positive solution.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 31%
+ */
+int numComponents(ListNode* head, vector<int>& G)
+{
+    // map values in list to its index
+    map<int, int> valToIndex;
+    ListNode* index = head;
+    size_t pos = 0;
+    while(index != nullptr) {
+        valToIndex[index->val] = pos;
+        index = index->next;
+        pos += 1;
+    }
+
+    // set the bit as 1 if the element exists in G
+    size_t listLength = valToIndex.size();
+    bitset<10000> bList;
+    for(auto& ele: G) {
+        bList[valToIndex[ele]] = 1;
+    }
+
+    size_t result = 0;
+    for(int i = 1; i < listLength; i++) {
+        if(bList[i-1] == 1 && bList[i] == 0) {
+            result += 1;
+        }
+    }
+    if(bList[listLength - 1] == 1)
+        return result+1;
+    return result;
+}
+
+/**
+ * @brief   Leetcode 817: Linked List Components
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 92%
+ */
+int numComponents2(ListNode* head, vector<int>& G)
+{
+    unordered_set<int> setOfListValues;
+    for(auto& i: G) {
+        setOfListValues.insert(i);
+    }
+    ListNode* index = head;
+    size_t result = 0;
+    while(index != nullptr) {
+        if(setOfListValues.find(index->val) != setOfListValues.end()) {
+            result++;
+        }
+        while(index && setOfListValues.find(index->val) != setOfListValues.end()) {
+            index = index->next;
+        }
+        if(index != nullptr) {
+            index = index->next;
+        }
+    }
+
+    return result;
 }
