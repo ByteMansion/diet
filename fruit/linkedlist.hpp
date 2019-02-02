@@ -8,8 +8,8 @@
  * Copyright © 2019 ChangruiShao. All rights reserved.
  */
 
-#ifndef linkedlist_hpp
-#define linkedlist_hpp
+#ifndef _linkedlist_hpp
+#define _linkedlist_hpp
 
 #include <cstdio>
 #include <vector>

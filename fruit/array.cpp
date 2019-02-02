@@ -117,6 +117,8 @@ vector<vector<int>> permuteUnique(vector<int>& nums)
 /**
  * @brief	Leetcode 47: Permutation II
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
  */
 vector<vector<int>> permuteUnique2(vector<int>& nums)
 {
@@ -138,5 +140,14 @@ vector<vector<int>> permuteUnique2(vector<int>& nums)
 	}
 
 	return result;
+}
+
+/**
+ * @brief   Leetcode 46: Permutations
+ *
+ */
+vector<vector<int>> permute(vector<int>& nums)
+{
+    return permuteUnique(nums);
 }
 

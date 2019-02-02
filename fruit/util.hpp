@@ -7,8 +7,8 @@
   *
   * Copyright © 2018 ChangruiShao. All rights reserved.
   */
-#ifndef util_hpp
-#define util_hpp
+#ifndef _util_hpp
+#define _util_hpp
 
 #include <vector>
 #include <iostream>

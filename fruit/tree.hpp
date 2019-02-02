@@ -8,8 +8,8 @@
  * Copyright © 2018 ChangruiShao. All rights reserved.
  */
 
-#ifndef tree_hpp
-#define tree_hpp
+#ifndef _tree_hpp
+#define _tree_hpp
 
 #include <stdio.h>
 #include <vector>

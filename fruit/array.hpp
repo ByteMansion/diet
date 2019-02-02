@@ -8,8 +8,8 @@
  * Copyright © 2018 ChangruiShao. All rights reserved.
  */
 
-#ifndef array_hpp
-#define array_hpp
+#ifndef _array_hpp
+#define _array_hpp
 
 #include <stdio.h>
 #include <vector>
@@ -25,6 +25,7 @@ void nextPermutation3(vector<int>& nums);
 vector<vector<int>> permuteUnique(vector<int>& nums);
 vector<vector<int>> permuteUnique2(vector<int>& nums);
 
-
+// Leetcode 46: Permutation
+vector<vector<int>> permute(vector<int>& nums);
 
 #endif /* array_hpp */
