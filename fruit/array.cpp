@@ -20,22 +20,28 @@ using std::reverse;
  * @brief	Leetcode 31: Next Permutation
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 34%
+ * Accepted Solutions Runtime Distribution 100%
  */
-void nextPermutation(vector<int>& nums) {
+void nextPermutation(vector<int>& nums)
+{
 	if(nums.empty() || nums.size() == 1)
 		return;
-	
+
+    // find first number which is less than its post element.
 	int backward = int(nums.size()) - 1;;
 	int foreward = backward - 1;
 	while (nums[foreward] >= nums[backward]) {
 		foreward--;
 		backward--;
+        // if this array is in descending order, reverse it and then return result.
 		if (foreward == -1) {
 			sort(nums.begin(), nums.end());
 			return;
 		}
 	}
+    // find last element, bigger than target number, which is to the right
+    // of target, and then swap the two elements, sort all elements to the right of
+    // target position in ascending order.
 	for (int j = int(nums.size()) - 1; j >= foreward; j--) {
 		if (nums[j] > nums[foreward]) {
 			swap(nums[j], nums[foreward]);
@@ -44,9 +50,10 @@ void nextPermutation(vector<int>& nums) {
 		}
 	}
 }
+
 /**
  * @brief	Leetcode 31: Next Permutation
- *			This solution is implementation of STL function next_permutation.
+ *	This solution is implementation of STL function next_permutation.
  */
 void nextPermutation2(vector<int>& nums)
 {
@@ -88,12 +95,12 @@ void nextPermutation3(vector<int>& nums)
  *			Given a collection of numbers that might contain duplicates, return
  * 			all possible unique permutations.
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 45%
+ * Accepted Solutions Runtime Distribution 100%
  */
 vector<vector<int>> permuteUnique(vector<int>& nums)
 {
 	vector<vector<int>> result;
-	
+
 	if (nums.empty() || nums.size() == 0) {
 		return result;
 	}
@@ -102,8 +109,8 @@ vector<vector<int>> permuteUnique(vector<int>& nums)
 	while (next_permutation(nums.begin(), nums.end())) {
 		result.push_back(nums);
 	}
-	
-	
+
+
 	return result;
 }
 
@@ -111,26 +118,25 @@ vector<vector<int>> permuteUnique(vector<int>& nums)
  * @brief	Leetcode 47: Permutation II
  *
  */
-bool permutation2(vector<int>& nums)
-{
-	return false;
-}
 vector<vector<int>> permuteUnique2(vector<int>& nums)
 {
 	vector<vector<int>> result;
-	
+
 	if (nums.empty()) {
 		return result;
 	}
-	
+
 	sort(nums.begin(), nums.end());
-	
 	result.push_back(nums);
-	
-	while (permutation2(nums)) {
+
+	while (1) {
+        nextPermutation(nums);
+        if(nums == result[0]) {
+            break;
+        }
 		result.push_back(nums);
 	}
-	
+
 	return result;
 }
 
