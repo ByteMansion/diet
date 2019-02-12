@@ -180,3 +180,49 @@ vector<int> deckRevealedIncreasing(vector<int>& deck)
     vector<int> res(dResult.begin(), dResult.end());
     return res;
 }
+
+/**
+ * @brief   Leetcode 15: 3Sum
+ *
+ */
+static void twoSum(vector<int>& nums, int start, int end, int sum,
+           vector<vector<int>>& results)
+{
+    while(start < end) {
+        vector<int> ele;
+        ele.push_back(-1 * sum);
+        if(nums[start] + nums[end] < sum) {
+            start++;
+        } else if(nums[start] + nums[end] > sum) {
+            end--;
+        } else {
+            while(nums[start] == nums[start+1]) start++;
+            while(nums[end] == nums[end-1]) end--;
+            ele.push_back(nums[start]);
+            ele.push_back(nums[end]);
+            results.push_back(ele);
+            ele.clear();
+            start++;
+            end--;
+        }
+    }
+}
+vector<vector<int>> threeSum(vector<int>& nums)
+{
+    vector<vector<int>> results;
+    if(nums.empty() || nums.size() < 3) {
+        return results;
+    }
+
+    sort(nums.begin(), nums.end());
+    int index = 0;
+    while(index < nums.size()-2) {
+        twoSum(nums, index+1, nums.size()-1, -1*nums[index], results);
+        index += 1;
+        while((index+1 < nums.size()-2) && (nums[index] == nums[index+1])) {
+            index++;
+        }
+    }
+
+    return results;
+}
