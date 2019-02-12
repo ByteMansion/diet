@@ -11,10 +11,12 @@
 #include "array.hpp"
 
 #include <algorithm>
+#include <deque>
 
 using std::swap;
 using std::sort;
 using std::reverse;
+using std::deque;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -151,3 +153,30 @@ vector<vector<int>> permute(vector<int>& nums)
     return permuteUnique(nums);
 }
 
+/**
+ * @brief   Leetcode 950: Reveal Cards In Increasing Order
+ *  This method using less time, but more space.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+vector<int> deckRevealedIncreasing(vector<int>& deck)
+{
+    if(deck.empty() || deck.size() == 1) {
+        return deck;
+    }
+
+    // reverse order sort
+    sort(deck.rbegin(), deck.rend());
+
+    deque<int> dResult;
+    dResult.push_front(deck[0]);
+    for(int i = 1; i < deck.size(); ++i) {
+        dResult.push_front(dResult.back());
+        dResult.pop_back();
+        dResult.push_front(deck[i]);
+    }
+
+    vector<int> res(dResult.begin(), dResult.end());
+    return res;
+}
