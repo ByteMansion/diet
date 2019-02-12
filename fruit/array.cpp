@@ -196,12 +196,12 @@ static void twoSum(vector<int>& nums, int start, int end, int sum,
         } else if(nums[start] + nums[end] > sum) {
             end--;
         } else {
-            while(nums[start] == nums[start+1]) start++;
-            while(nums[end] == nums[end-1]) end--;
             ele.push_back(nums[start]);
             ele.push_back(nums[end]);
             results.push_back(ele);
             ele.clear();
+			while(start < end && nums[start] == nums[start+1]) start++;
+			while(start < end && nums[end] == nums[end-1]) end--;
             start++;
             end--;
         }
@@ -217,11 +217,12 @@ vector<vector<int>> threeSum(vector<int>& nums)
     sort(nums.begin(), nums.end());
     int index = 0;
     while(index < nums.size()-2) {
-        twoSum(nums, index+1, nums.size()-1, -1*nums[index], results);
-        index += 1;
+        twoSum(nums, index+1, int(nums.size()-1), -1*nums[index], results);
+		
         while((index+1 < nums.size()-2) && (nums[index] == nums[index+1])) {
             index++;
         }
+		index += 1;
     }
 
     return results;
