@@ -12,11 +12,13 @@
 
 #include <algorithm>
 #include <deque>
+#include <unordered_map>
 
 using std::swap;
 using std::sort;
 using std::reverse;
 using std::deque;
+using std::unordered_map;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -398,4 +400,64 @@ vector<vector<int>> fourSum2(vector<int>& nums, int target)
     }
 
     return results;
+}
+
+/**
+ * @brief   Leetcode 454: 4Sum II
+ *  This method is brute force algorithm, which can get correct result, but time limit
+ *  exceeded.
+ *
+ */
+int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D)
+{
+    if(A.empty()) return 0;
+
+    int result = 0;
+    size_t length = A.size();
+    for(int i = 0; i < length; ++i) {
+        for(int j = 0; j < length; ++j) {
+            for(int k = 0; k < length; ++k) {
+                for(int l = 0; l < length; ++l) {
+                    int sum = A[i] + B[j] + C[k] + D[l];
+                    if(sum == 0) {
+                        result += 1;
+                    }
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/**
+ * @brief   Leetcode 454: 4Sum II
+ *  In order to meet time limit, we should balance time complexity and space
+ *  complexity.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 40%
+ */
+int fourSumCount2(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D)
+{
+    int result = 0;
+    // sum --> count
+    unordered_map<int, int> mSum;
+    int length = A.size();
+    for(int i = 0; i < length; ++i) {
+        for(int j = 0; j < length; ++j) {
+            mSum[A[i] + B[j]] += 1;
+        }
+    }
+
+    for(int i = 0; i < length; ++i) {
+        for(int j = 0; j < length; ++j) {
+            int target = -1 * (C[i] + D[j]);
+            auto iter = mSum.find(target);
+            if(iter != mSum.end()) {
+                result += mSum[target];
+            }
+        }
+    }
+
+    return result;
 }

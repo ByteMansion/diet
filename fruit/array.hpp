@@ -42,6 +42,8 @@ int threeSumClosest(vector<int>& nums, int target);
 vector<vector<int>> fourSum(vector<int>& nums, int target);
 vector<vector<int>> fourSum2(vector<int>& nums, int target);
 
+// Leetcode 454: 4Sum II
+int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D);
 
 
 
