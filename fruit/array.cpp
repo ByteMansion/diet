@@ -254,7 +254,7 @@ vector<vector<int>> threeSum2(vector<int>& nums)
 
         int twoSum = -1 * nums[i];
         int nLeft = i + 1;
-        int nRight = nums.size() - 1;
+        size_t nRight = nums.size() - 1;
         while(nLeft < nRight) {
             if(nums[nLeft] + nums[nRight] == twoSum) {
                 res.push_back(vector<int>{nums[i], nums[nLeft], nums[nRight]});
@@ -282,15 +282,15 @@ vector<vector<int>> threeSum2(vector<int>& nums)
 int threeSumClosest(vector<int>& nums, int target)
 {
     int result;
-    int minGap = INT_MAX
+	int minGap = INT_MAX;
     sort(nums.begin(), nums.end());
 
     for(int i = 0; i < nums.size()-2; ++i) {
         int nLeft = i + 1;
-        int nRight = nums.size() - 1;
+        size_t nRight = nums.size() - 1;
         while(nLeft < nRight) {
             int gap = target - (nums[i] + nums[nLeft] + nums[nRight]);
-            if(std::abs(gap) < result) {
+            if(std::abs(gap) < minGap) {
                 minGap = std::abs(gap);
                 result = nums[i] + nums[nLeft] + nums[nRight];
             }
@@ -320,7 +320,7 @@ static void threeSumHelper(vector<int>& nums, int start, int sum,
         if(i > start && nums[i] == nums[i-1]) continue;
 
         int nLeft = i + 1;
-        int nRight = nums.size() - 1;
+        size_t nRight = nums.size() - 1;
         while(nLeft < nRight) {
             if(nums[i] + nums[nLeft] + nums[nRight] == sum) {
                 results.push_back(vector<int>{nums[start-1], nums[i], nums[nLeft], nums[nRight]});
@@ -381,7 +381,7 @@ vector<vector<int>> fourSum2(vector<int>& nums, int target)
 
             if(j > i+1 && nums[j] == nums[j-1]) continue;
             int nLeft = j+1;
-            int nRight = length - 1;
+            size_t nRight = length - 1;
             while(nLeft < nRight) {
                 int sum = nums[i] + nums[j] + nums[nLeft] + nums[nRight];
                 if(sum == target) {
@@ -442,7 +442,7 @@ int fourSumCount2(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D
     int result = 0;
     // sum --> count
     unordered_map<int, int> mSum;
-    int length = A.size();
+    size_t length = A.size();
     for(int i = 0; i < length; ++i) {
         for(int j = 0; j < length; ++j) {
             mSum[A[i] + B[j]] += 1;
