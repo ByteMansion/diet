@@ -38,6 +38,8 @@ vector<vector<int>> threeSum2(vector<int>& nums);
 // Leetcode 16: 3Sum Closest
 int threeSumClosest(vector<int>& nums, int target);
 
+// Leetcode 18: 4Sum
+vector<vector<int>> fourSum(vector<int>& nums, int target);
 
 
 

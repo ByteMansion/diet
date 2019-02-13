@@ -304,3 +304,50 @@ int threeSumClosest(vector<int>& nums, int target)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 18: 4Sum
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 73%
+ */
+static void threeSumHelper(vector<int>& nums, int start, int sum,
+                      vector<vector<int>>& results)
+{
+    for(int i = start; i < nums.size()-2; ++i) {
+        if(i > start && nums[i] == nums[i-1]) continue;
+
+        int nLeft = i + 1;
+        int nRight = nums.size() - 1;
+        while(nLeft < nRight) {
+            if(nums[i] + nums[nLeft] + nums[nRight] == sum) {
+                results.push_back(vector<int>{nums[start-1], nums[i], nums[nLeft], nums[nRight]});
+                while(nLeft < nRight && nums[nLeft] == nums[nLeft+1]) nLeft++;
+                while(nLeft < nRight && nums[nRight] == nums[nRight-1]) nRight--;
+                nLeft++;
+                nRight--;
+            } else if(nums[i] + nums[nLeft] + nums[nRight] < sum) {
+                nLeft++;
+            } else {
+                nRight--;
+            }
+        }
+    }
+}
+vector<vector<int>> fourSum(vector<int>& nums, int target)
+{
+    vector<vector<int>> results;
+    if(nums.empty() || nums.size() < 4) {
+        return results;
+    }
+
+    sort(nums.begin(), nums.end());
+    for(int i = 0; i < nums.size()-3; ++i) {
+        if(i > 0 && nums[i] == nums[i-1]) continue;
+
+        int sum = target - nums[i];
+        threeSumHelper(nums, i+1, sum, results);
+    }
+
+    return results;
+}
