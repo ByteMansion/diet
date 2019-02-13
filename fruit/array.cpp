@@ -351,3 +351,51 @@ vector<vector<int>> fourSum(vector<int>& nums, int target)
 
     return results;
 }
+
+/**
+ * @brief   Leetcode 18: 4Sum
+ *  This method integrates above two functions into one, and then adds some extra conditions to
+ *  decrease unnecessary search iterations.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+vector<vector<int>> fourSum2(vector<int>& nums, int target)
+{
+    vector<vector<int>> results;
+    if(nums.empty() || nums.size() < 4) {
+        return results;
+    }
+    sort(nums.begin(), nums.end());
+    size_t length = nums.size();
+    for(int i = 0 ; i < length-3; ++i) {
+        if(nums[i] + nums[i+1] + nums[i+2] + nums[i+3] > target) break;
+        if(nums[i] + nums[length-3] + nums[length-2] + nums[length-1] < target) continue;
+
+        if(i > 0 && nums[i] == nums[i-1]) continue;
+        for(int j = i+1; j < length-2; ++j) {
+            if(nums[i] + nums[j] + nums[j+1] + nums[j+2] > target) break;
+            if(nums[i] + nums[j] + nums[length-2] + nums[length-1] < target) continue;
+
+            if(j > i+1 && nums[j] == nums[j-1]) continue;
+            int nLeft = j+1;
+            int nRight = length - 1;
+            while(nLeft < nRight) {
+                int sum = nums[i] + nums[j] + nums[nLeft] + nums[nRight];
+                if(sum == target) {
+                    results.push_back(vector<int>{nums[i], nums[j], nums[nLeft], nums[nRight]});
+                    while(nLeft < nRight && nums[nLeft] == nums[nLeft+1]) nLeft++;
+                    while(nLeft < nRight && nums[nRight] == nums[nRight-1]) nRight--;
+                    nLeft++;
+                    nRight--;
+                } else if(sum < target) {
+                    nLeft++;
+                } else {
+                    nRight--;
+                }
+            }
+        }
+    }
+
+    return results;
+}
