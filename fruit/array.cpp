@@ -183,6 +183,7 @@ vector<int> deckRevealedIncreasing(vector<int>& deck)
 
 /**
  * @brief   Leetcode 15: 3Sum
+ *  This method costs too much time and space.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 11.7%
@@ -228,4 +229,44 @@ vector<vector<int>> threeSum(vector<int>& nums)
     }
 
     return results;
+}
+
+/**
+ * @brief   Leetcode 15: 3Sum
+ *  This method integrates above two functions into one. Actually, internal 
+ *  solution is as same, but costs less time and space.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 90.6%
+ */
+vector<vector<int>> threeSum2(vector<int>& nums)
+{
+    vector<vector<int>> res;
+    if(nums.empty() || nums.size() < 3) {
+        return res;
+    }
+
+    sort(nums.begin(), nums.end());
+    for(int i = 0; i < nums.size()-2; ++i) {
+        if(i > 0 && nums[i] == nums[i-1]) continue;
+
+        int twoSum = -1 * nums[i];
+        int nLeft = i + 1;
+        int nRight = nums.size() - 1;
+        while(nLeft < nRight) {
+            if(nums[nLeft] + nums[nRight] == twoSum) {
+                res.push_back(vector<int>{nums[i], nums[nLeft], nums[nRight]});
+                while(nLeft < nRight && nums[nLeft] == nums[nLeft+1]) nLeft++;
+                while(nLeft < nRight && nums[nRight] == nums[nRight-1]) nRight--;
+                nLeft++;
+                nRight--;
+            } else if(nums[nLeft] + nums[nRight] > twoSum) {
+                nRight--;
+            } else {
+                nLeft++;
+            }
+        }
+    }
+
+    return res;
 }
