@@ -270,3 +270,37 @@ vector<vector<int>> threeSum2(vector<int>& nums)
 
     return res;
 }
+
+/**
+ * @brief   Leetcode 16: 3Sum Closest
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 95.8%
+ */
+int threeSumClosest(vector<int>& nums, int target)
+{
+    int result;
+    int minGap = INT_MAX
+    sort(nums.begin(), nums.end());
+
+    for(int i = 0; i < nums.size()-2; ++i) {
+        int nLeft = i + 1;
+        int nRight = nums.size() - 1;
+        while(nLeft < nRight) {
+            int gap = target - (nums[i] + nums[nLeft] + nums[nRight]);
+            if(std::abs(gap) < result) {
+                minGap = std::abs(gap);
+                result = nums[i] + nums[nLeft] + nums[nRight];
+            }
+            if(gap > 0) {
+                nLeft++;
+            } else if(gap < 0){
+                nRight--;
+            } else {
+                return result;
+            }
+        }
+    }
+
+    return result;
+}

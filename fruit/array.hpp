@@ -35,6 +35,11 @@ vector<int> deckRevealedIncreasing(vector<int>& deck);
 vector<vector<int>> threeSum(vector<int>& nums);
 vector<vector<int>> threeSum2(vector<int>& nums);
 
+// Leetcode 16: 3Sum Closest
+int threeSumClosest(vector<int>& nums, int target);
+
+
+
 
 
 #endif /* array_hpp */
