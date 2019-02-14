@@ -514,3 +514,24 @@ vector<vector<int>> subsets2(vector<int>& nums)
 
     return results;
 }
+
+/**
+ * @brief   Leetcode 78: Subsets
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+// if nums=[1,2,3], then 
+// results={[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]}
+vector<vector<int>> subsets3(vector<int>& nums)
+{
+    vector<vector<int>> results{{}};
+    for(auto& num: nums) {
+        int len = results.size();
+        for(int i = 0; i < len; ++i) {
+            results.push_back(results[i]);
+            results.back().push_back(num);
+        }
+    }
+    return results;
+}

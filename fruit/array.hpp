@@ -48,6 +48,7 @@ int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D)
 // Leetcode 78: Subsets
 vector<vector<int>> subsets(vector<int>& nums);
 vector<vector<int>> subsets2(vector<int>& nums);
+vector<vector<int>> subsets3(vector<int>& nums);
 
 
 #endif /* array_hpp */
