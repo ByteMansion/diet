@@ -50,5 +50,9 @@ vector<vector<int>> subsets(vector<int>& nums);
 vector<vector<int>> subsets2(vector<int>& nums);
 vector<vector<int>> subsets3(vector<int>& nums);
 
+// Leetcode 90: Subsets II
+vector<vector<int>> subsetsWithDup(vector<int>& nums);
+
+
 
 #endif /* array_hpp */

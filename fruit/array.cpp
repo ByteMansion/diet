@@ -535,3 +535,32 @@ vector<vector<int>> subsets3(vector<int>& nums)
     }
     return results;
 }
+
+/**
+ * @brief   Leetcode 90: Subsets II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+static void subsetsWithDupHelper(vector<int>& nums, vector<vector<int>>& results,
+                                 vector<int>& subarray, int start)
+{
+    results.push_back(subarray);
+    for(int i = start; i < nums.size(); ++i) {
+        // leave out duplicates
+        if(i > start && nums[i] == nums[i-1]) continue;
+        subarray.push_back(nums[i]);
+        subsetsWithDupHelper(nums, results, subarray, i+1);
+        subarray.pop_back();
+    }
+}
+vector<vector<int>> subsetsWithDup(vector<int>& nums)
+{
+    vector<vector<int>> results;
+    sort(nums.begin(), nums.end());
+
+    vector<int> subarray;
+    subsetsWithDupHelper(nums, results, subarray, 0);
+
+    return results;
+}
