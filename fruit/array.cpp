@@ -358,10 +358,10 @@ vector<vector<int>> threeSum2(vector<int>& nums)
  */
 int threeSumClosest(vector<int>& nums, int target)
 {
-    int result;
 	int minGap = INT_MAX;
     sort(nums.begin(), nums.end());
 
+	int result = nums[0] + nums[1] + nums[2];
     for(int i = 0; i < nums.size()-2; ++i) {
         int nLeft = i + 1;
         size_t nRight = nums.size() - 1;
@@ -604,7 +604,7 @@ vector<vector<int>> subsets3(vector<int>& nums)
 {
     vector<vector<int>> results{{}};
     for(auto& num: nums) {
-        int len = results.size();
+        size_t len = results.size();
         for(int i = 0; i < len; ++i) {
             results.push_back(results[i]);
             results.back().push_back(num);
