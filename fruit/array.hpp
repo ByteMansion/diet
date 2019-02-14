@@ -30,6 +30,9 @@ vector<vector<int>> permuteUnique(vector<int>& nums);
 vector<vector<int>> permuteUnique2(vector<int>& nums);
 vector<vector<int>> permuteUnique3(vector<int>& nums);
 
+// Leetcode 77: Combinations
+vector<vector<int>> combine(int n, int k);
+
 // Leetcode 950: Reveal Cards In Increasing Order
 vector<int> deckRevealedIncreasing(vector<int>& deck);
 

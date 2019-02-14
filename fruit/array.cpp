@@ -233,6 +233,31 @@ vector<vector<int>> permuteUnique3(vector<int>& nums)
 }
 
 /**
+ * @brief	Leetcode 77: Combinations
+ *  Using backtracking algorithm
+ *
+ */
+static void combineHelper(int n, int k, vector<vector<int>>& results, vector<int>& array)
+{
+	for (int i = 1; i <= n; ++i) {
+		array.push_back(i);
+		if (array.size() == k) {
+			results.push_back(array);
+		}
+		array.pop_back();
+	}
+	
+}
+vector<vector<int>> combine(int n, int k)
+{
+	vector<vector<int>> results;
+	vector<int> array;
+	combineHelper(n, k, results, array);
+	
+	return results;
+}
+
+/**
  * @brief   Leetcode 950: Reveal Cards In Increasing Order
  *  This method using less time, but more space.
  *
