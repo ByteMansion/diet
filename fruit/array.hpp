@@ -45,6 +45,9 @@ vector<vector<int>> fourSum2(vector<int>& nums, int target);
 // Leetcode 454: 4Sum II
 int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D);
 
+// Leetcode 78: Subsets
+vector<vector<int>> subsets(vector<int>& nums);
+vector<vector<int>> subsets2(vector<int>& nums);
 
 
 #endif /* array_hpp */

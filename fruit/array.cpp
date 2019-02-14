@@ -435,7 +435,7 @@ int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D)
  *  complexity.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 40%
+ * Accepted Solutions Runtime Distribution 90%
  */
 int fourSumCount2(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D)
 {
@@ -460,4 +460,57 @@ int fourSumCount2(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D
     }
 
     return result;
+}
+
+/**
+ * @brief   Leetcode 78: Subsets
+ *  Backtrace question, using iterative methods.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+// if nums=[1,2,3], then
+// results={[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]}
+static void subsetsHelper(vector<int>& nums, vector<vector<int>>& results,
+                          vector<int>& subarray, int start)
+{
+    results.push_back(subarray);
+    for(int i = start; i < nums.size(); ++i) {
+        subarray.push_back(nums[i]);
+        subsetsHelper(nums, results, subarray, i+1);
+        subarray.pop_back();
+    }
+}
+vector<vector<int>> subsets(vector<int>& nums)
+{
+    vector<vector<int>> results;
+    vector<int> subarray;
+    subsetsHelper(nums, results, subarray, 0);
+
+    return results;
+}
+
+/**
+ * @brief   Leetcode 78: Subsets
+ *  This method can only use in distinct integer array. If same members exixt in
+ *  an array, this method is useless.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 53%
+ */
+vector<vector<int>> subsets2(vector<int>& nums)
+{
+    vector<vector<int>> results;
+    int count = (1 << nums.size());
+    for(int i = 0; i < count; ++i) {
+        vector<int> subarray;
+        for(int j = 0; j < nums.size(); j++) {
+            if((1 << j) & i) {
+                subarray.push_back(nums[j]);
+            }
+        }
+        results.push_back(subarray);
+    }
+
+    return results;
 }
