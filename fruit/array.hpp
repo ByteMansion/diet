@@ -28,6 +28,7 @@ vector<vector<int>> permute2(vector<int>& nums);
 // Leetcode 47: Permutation II
 vector<vector<int>> permuteUnique(vector<int>& nums);
 vector<vector<int>> permuteUnique2(vector<int>& nums);
+vector<vector<int>> permuteUnique3(vector<int>& nums);
 
 // Leetcode 950: Reveal Cards In Increasing Order
 vector<int> deckRevealedIncreasing(vector<int>& deck);

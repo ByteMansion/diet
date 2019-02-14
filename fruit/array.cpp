@@ -195,6 +195,42 @@ vector<vector<int>> permuteUnique2(vector<int>& nums)
 }
 
 /**
+ * @brief   Leetcode 47: Permutation II
+ *  Using Backtrace algorithm.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+static void permuteUniqueHelper(vector<int>& nums, vector<vector<int>>& results,
+                                vector<int>& array, vector<bool>& used)
+{
+    if(array.size() == nums.size()) {
+        results.push_back(array);
+    } else {
+        for(int i = 0; i < nums.size(); ++i) {
+            if(used[i] || (i > 0 && nums[i] == nums[i-1] && !used[i-1])) {
+                continue;
+            }
+            used[i] = true;
+            array.push_back(nums[i]);
+            permuteUniqueHelper(nums, results, array, used);
+            used[i] = false;
+            array.pop_back();
+        }
+    }
+}
+vector<vector<int>> permuteUnique3(vector<int>& nums)
+{
+    vector<vector<int>> results;
+    vector<int> array;
+    vector<bool> used(nums.size(), false);
+    sort(nums.begin(), nums.end());
+    permuteUniqueHelper(nums, results, array, used);
+
+    return results;
+}
+
+/**
  * @brief   Leetcode 950: Reveal Cards In Increasing Order
  *  This method using less time, but more space.
  *
