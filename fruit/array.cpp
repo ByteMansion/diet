@@ -542,6 +542,8 @@ vector<vector<int>> subsets3(vector<int>& nums)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
+// if nums=[1,2,2], then
+// results={[],[1],[1,2],[1,2,2],[2],[2,2]}
 static void subsetsWithDupHelper(vector<int>& nums, vector<vector<int>>& results,
                                  vector<int>& subarray, int start)
 {
@@ -561,6 +563,37 @@ vector<vector<int>> subsetsWithDup(vector<int>& nums)
 
     vector<int> subarray;
     subsetsWithDupHelper(nums, results, subarray, 0);
+
+    return results;
+}
+
+/**
+ * @brief   Leetcode 90: Subsets II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+// if nums=[1,2,2], then
+// results={[],[1],[2],[2,2],[1,2],[1,2,2]}
+vector<vector<int>> subsetsWithDup2(vector<int>& nums)
+{
+    vector<vector<int>> results{{}};
+    sort(nums.begin(), nums.end());
+    for(int j = 0; j < nums.size(); ) {
+        int memCount = 0;
+        while(memCount+j < nums.size() && nums[memCount+j] == nums[j]) {
+            memCount += 1;
+        }
+        size_t curSubsetsLength = results.size();
+        for(int i = 0; i < curSubsetsLength; ++i) {
+            vector<int> subarray = results[i];
+            for(int k = 0; k < memCount; ++k) {
+                subarray.push_back(nums[j]);
+                results.push_back(subarray);
+            }
+        }
+        j += memCount;
+    }
 
     return results;
 }
