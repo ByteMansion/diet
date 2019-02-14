@@ -108,7 +108,7 @@ vector<vector<int>> permute(vector<int>& nums)
 
 /**
  * @brief   Leetcode 46: Permutations
- *  Using Backtrace algorithm to solve this problem.
+ *  Using Backtracking algorithm to solve this problem.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
@@ -196,11 +196,13 @@ vector<vector<int>> permuteUnique2(vector<int>& nums)
 
 /**
  * @brief   Leetcode 47: Permutation II
- *  Using Backtrace algorithm.
+ *  Using Backtracking algorithm.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
+// if nums=[1,2,2,2], then
+// results={[1,2,2,2]l,[2,1,2,2],[2,2,1,2],[2,2,2,1]}
 static void permuteUniqueHelper(vector<int>& nums, vector<vector<int>>& results,
                                 vector<int>& array, vector<bool>& used)
 {
@@ -539,7 +541,7 @@ int fourSumCount2(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D
 
 /**
  * @brief   Leetcode 78: Subsets
- *  Backtrace question, using iterative methods.
+ *  Backtracking algorithm
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
