@@ -32,6 +32,8 @@ void nextPermutation(vector<int>& nums)
 		return;
 
     // find first number which is less than its post element.
+    // the found number is target one which should be replaced.
+    // e.g. nums=2365, target number=3
 	int backward = int(nums.size()) - 1;;
 	int foreward = backward - 1;
 	while (nums[foreward] >= nums[backward]) {
@@ -43,9 +45,10 @@ void nextPermutation(vector<int>& nums)
 			return;
 		}
 	}
-    // find last element, bigger than target number, which is to the right
-    // of target, and then swap the two elements, sort all elements to the right of
+    // find last element which is bigger than target number
+    // swap found number and the target number, sort all elements to the right of
     // target position in ascending order.
+    // e.g. nums=2365, result=2536
 	for (int j = int(nums.size()) - 1; j >= foreward; j--) {
 		if (nums[j] > nums[foreward]) {
 			swap(nums[j], nums[foreward]);
@@ -95,9 +98,54 @@ void nextPermutation3(vector<int>& nums)
 }
 
 /**
+ * @brief   Leetcode 46: Permutations
+ *
+ */
+vector<vector<int>> permute(vector<int>& nums)
+{
+    return permuteUnique(nums);
+}
+
+/**
+ * @brief   Leetcode 46: Permutations
+ *  Using Backtrace algorithm to solve this problem.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 100%
+ */
+static void permuteHelper(vector<int>& nums, vector<vector<int>>& results,
+                     vector<int>& permutation)
+{
+    if(permutation.size() == nums.size()) {
+        results.push_back(permutation);
+    } else {
+        for(int i = 0; i < nums.size(); ++i) {
+            if(find(permutation.begin(), permutation.end(), nums[i])
+               != permutation.end()) {
+                continue;
+            }
+            permutation.push_back(nums[i]);
+            permuteHelper(nums, results, permutation);
+            permutation.pop_back();
+        }
+    }
+}
+vector<vector<int>> permute2(vector<int>& nums)
+{
+    vector<vector<int>> results;
+    vector<int> permutation;
+    permuteHelper(nums, results, permutation);
+
+    return results;
+}
+
+
+/**
  * @brief	Leetcode 47: Permutation II
- *			Given a collection of numbers that might contain duplicates, return
- * 			all possible unique permutations.
+ *	Given a collection of numbers that might contain duplicates, return
+ * 	all possible unique permutations.
+ *  This method uses STL function.
+ *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 100%
  */
@@ -144,15 +192,6 @@ vector<vector<int>> permuteUnique2(vector<int>& nums)
 	}
 
 	return result;
-}
-
-/**
- * @brief   Leetcode 46: Permutations
- *
- */
-vector<vector<int>> permute(vector<int>& nums)
-{
-    return permuteUnique(nums);
 }
 
 /**
