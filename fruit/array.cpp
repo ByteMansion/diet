@@ -244,11 +244,12 @@ static void combineHelper(int n, int k,
                           vector<int>& array,
                           int start)
 {
+    if (array.size() == k) {
+        results.push_back(array);
+        return;
+    }
 	for (int i = start; i <= n; ++i) {
 		array.push_back(i);
-		if (array.size() == k) {
-			results.push_back(array);
-		}
         combineHelper(n, k, results, array, i+1);
 		array.pop_back();
 	}
@@ -261,6 +262,36 @@ vector<vector<int>> combine(int n, int k)
 	combineHelper(n, k, results, array, 1);
 
 	return results;
+}
+
+/**
+ * @brief   Leetcode 77: Combinations
+ *  This solution can be accepted, but time complexity is high.
+ *  In my point of view, this solution does too much trivial work.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 1.27%
+ */
+vector<vector<int>> combine2(int n, int k)
+{
+    vector<vector<int>> results;
+    if(k == 0) {
+        return results.push_back(vector<int>{});
+    }
+    int num = (1 << n);
+    for(int i = 1; i < num; ++i) {
+        vector<int> array;
+        for(int j = 0; j < n; ++j) {
+            if((1 << j) & i) {
+                array.push_back(j+1);
+            }
+        }
+        if(array.size() == k) {
+            results.push_back(array);
+        }
+    }
+
+    return results;
 }
 
 /**
