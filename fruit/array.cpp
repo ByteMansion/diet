@@ -269,6 +269,9 @@ vector<vector<int>> combine(int n, int k)
  *  This solution can be accepted, but time complexity is high.
  *  In my point of view, this solution does too much trivial work.
  *
+ *  If we choose k numbers in an array with n length and distinct members each other,
+ *  this method may be effective.
+ *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution 1.27%
  */
@@ -290,6 +293,70 @@ vector<vector<int>> combine2(int n, int k)
             results.push_back(array);
         }
     }
+
+    return results;
+}
+
+/**
+ * @brief   Leetcode 77: Combinations
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 86.7%
+ */
+vector<vector<int>> combine3(int n, int k)
+{
+    vector<vector<int>> results;
+    vector<int> array(k, 0);
+    int index = 0;
+    while(index >= 0) {
+        array[index]++;
+        if(array[index] > n) {
+            index--;
+        } else if(index+1 == k) {
+            results.push_back(array);
+        } else {
+            index++;
+            array[index] = array[index-1]; 
+        }
+    }
+    return results;
+}
+
+/**
+ * @brief   Leetcode 39: Combination Sum
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 75%
+ */
+static void combinationSumHelper(vector<int>& candidates,
+                                 int target,
+                                 vector<vector<int>>& results,
+                                 vector<int>& array,
+                                 int sum,
+                                 int start)
+{
+    if(sum == target) {
+        results.push_back(array);
+        return;
+    } else if(sum > target) {
+        return;
+    }
+    // start number determines whether we can same number repeatedly
+    for(int i = start; i < candidates.size(); ++i) {
+        array.push_back(candidates[i]);
+        sum += candidates[i];
+        combinationSumHelper(candidates, target, results, array, sum, i);
+        array.pop_back();
+        sum -= candidates[i];
+    }
+}
+vector<vector<int>> combinationSum(vector<int>& candidates, int target)
+{
+    vector<vector<int>> results;
+    sort(candidates.begin(), candidates.end());
+    vector<int> array;
+    int sum = 0;
+    combinationSumHelper(candidates, target, results, array, sum, 0);
 
     return results;
 }
@@ -736,3 +803,4 @@ vector<vector<int>> subsetsWithDup2(vector<int>& nums)
 
     return results;
 }
+
