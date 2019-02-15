@@ -236,24 +236,30 @@ vector<vector<int>> permuteUnique3(vector<int>& nums)
  * @brief	Leetcode 77: Combinations
  *  Using backtracking algorithm
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 78.5%
  */
-static void combineHelper(int n, int k, vector<vector<int>>& results, vector<int>& array)
+static void combineHelper(int n, int k,
+                          vector<vector<int>>& results,
+                          vector<int>& array,
+                          int start)
 {
-	for (int i = 1; i <= n; ++i) {
+	for (int i = start; i <= n; ++i) {
 		array.push_back(i);
 		if (array.size() == k) {
 			results.push_back(array);
 		}
+        combineHelper(n, k, results, array, i+1);
 		array.pop_back();
 	}
-	
+
 }
 vector<vector<int>> combine(int n, int k)
 {
 	vector<vector<int>> results;
 	vector<int> array;
-	combineHelper(n, k, results, array);
-	
+	combineHelper(n, k, results, array, 1);
+
 	return results;
 }
 
