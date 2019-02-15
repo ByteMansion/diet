@@ -248,6 +248,8 @@ static void combineHelper(int n, int k,
         results.push_back(array);
         return;
     }
+    // right border changes to (n+1-k+array.size()), more unnecessary
+    // combinations are jumped, and then execution is faster.
 	for (int i = start; i <= n; ++i) {
 		array.push_back(i);
         combineHelper(n, k, results, array, i+1);
@@ -332,22 +334,24 @@ static void combinationSumHelper(vector<int>& candidates,
                                  int target,
                                  vector<vector<int>>& results,
                                  vector<int>& array,
-                                 int sum,
                                  int start)
 {
-    if(sum == target) {
+    if(target == 0) {
         results.push_back(array);
         return;
-    } else if(sum > target) {
+    } else if(target < 0) {
         return;
     }
     // start number determines whether we can same number repeatedly
     for(int i = start; i < candidates.size(); ++i) {
+        if(candidates[i] > target) {
+            break;
+        }
         array.push_back(candidates[i]);
-        sum += candidates[i];
-        combinationSumHelper(candidates, target, results, array, sum, i);
+        target -= candidates[i];
+        combinationSumHelper(candidates, target, results, array, i);
         array.pop_back();
-        sum -= candidates[i];
+        target += candidates[i];
     }
 }
 vector<vector<int>> combinationSum(vector<int>& candidates, int target)
@@ -355,12 +359,49 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target)
     vector<vector<int>> results;
     sort(candidates.begin(), candidates.end());
     vector<int> array;
-    int sum = 0;
-    combinationSumHelper(candidates, target, results, array, sum, 0);
+    combinationSumHelper(candidates, target, results, array, 0);
 
     return results;
 }
 
+/**
+ * @brief   Leetcode 39: Combination Sum
+ *  Using Dynamic programming algorithm.
+ *
+ */
+vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
+{
+
+}
+#if 0
+/**
+ * @brief   Leetcode 39: Combination Sum
+ *  Failed method
+ */
+vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
+{
+    vector<vector<int>> results;
+    vector<int> array;
+    int index = 0;
+    int sum = 0;
+    while(index >= 0) {
+        sum += candidates[index];
+        array.push_back(candidates[index]);
+        if(index >= candidates.size()) {
+            index--;
+        } else if(sum == target) {
+            results.push_back(array);
+        } else if(sum > target) {
+            sum = 0;
+            array.clear();
+            index++;
+        } else {
+            array.push_back(array[index]);
+        }
+    }
+    return results;
+}
+#endif
 /**
  * @brief   Leetcode 950: Reveal Cards In Increasing Order
  *  This method using less time, but more space.

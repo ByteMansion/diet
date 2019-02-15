@@ -37,6 +37,7 @@ vector<vector<int>> combine3(int n, int k);
 
 // Leetcode 39: Combination Sum
 vector<vector<int>> combinationSum(vector<int>& candidates, int target);
+vector<vector<int>> combinationSum2(vector<int>& candidates, int target);
 
 // Leetcode 950: Reveal Cards In Increasing Order
 vector<int> deckRevealedIncreasing(vector<int>& deck);
