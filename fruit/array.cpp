@@ -368,40 +368,30 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target)
  * @brief   Leetcode 39: Combination Sum
  *  Using Dynamic programming algorithm.
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution 28.54%
  */
 vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
 {
+    sort(candidates.begin(), candidates.end());
 
-}
-#if 0
-/**
- * @brief   Leetcode 39: Combination Sum
- *  Failed method
- */
-vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
-{
-    vector<vector<int>> results;
-    vector<int> array;
-    int index = 0;
-    int sum = 0;
-    while(index >= 0) {
-        sum += candidates[index];
-        array.push_back(candidates[index]);
-        if(index >= candidates.size()) {
-            index--;
-        } else if(sum == target) {
-            results.push_back(array);
-        } else if(sum > target) {
-            sum = 0;
-            array.clear();
-            index++;
-        } else {
-            array.push_back(array[index]);
+    vector<vector<vector<int>>> dp(target+1, vector<vector<int>>{});
+    dp[0].push_back(vector<int>{});
+
+    for(auto& candidate: candidates) {
+        for(int sub_target = 0; sub_target + candidate <= target; ++sub_target) {
+            vector<vector<int>> new_combinations = dp[sub_target];
+            for(auto& combination: new_combinations) {
+                combination.push_back(candidate);
+            }
+            int target_yielded = sub_target + candidate;
+            dp[target_yielded].insert(dp[target_yielded].end(), new_combinations.begin(), new_combinations.end());
         }
     }
-    return results;
+
+    return dp[target];
 }
-#endif
+
 /**
  * @brief   Leetcode 950: Reveal Cards In Increasing Order
  *  This method using less time, but more space.
