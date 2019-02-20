@@ -24,7 +24,7 @@ using std::unordered_map;
  * @brief	Leetcode 31: Next Permutation
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 void nextPermutation(vector<int>& nums)
 {
@@ -90,7 +90,7 @@ void nextPermutation2(vector<int>& nums)
  * @brief	Leetcode 31: Next Permutation
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 99.36%
+ * Accepted Solutions Runtime Distribution beats 99.36%
  */
 void nextPermutation3(vector<int>& nums)
 {
@@ -111,7 +111,7 @@ vector<vector<int>> permute(vector<int>& nums)
  *  Using Backtracking algorithm to solve this problem.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 static void permuteHelper(vector<int>& nums, vector<vector<int>>& results,
                      vector<int>& permutation)
@@ -147,7 +147,7 @@ vector<vector<int>> permute2(vector<int>& nums)
  *  This method uses STL function.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<vector<int>> permuteUnique(vector<int>& nums)
 {
@@ -170,7 +170,7 @@ vector<vector<int>> permuteUnique(vector<int>& nums)
  * @brief	Leetcode 47: Permutation II
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<vector<int>> permuteUnique2(vector<int>& nums)
 {
@@ -199,7 +199,7 @@ vector<vector<int>> permuteUnique2(vector<int>& nums)
  *  Using Backtracking algorithm.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 // if nums=[1,2,2,2], then
 // results={[1,2,2,2]l,[2,1,2,2],[2,2,1,2],[2,2,2,1]}
@@ -237,7 +237,7 @@ vector<vector<int>> permuteUnique3(vector<int>& nums)
  *  Using backtracking algorithm
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 78.5%
+ * Accepted Solutions Runtime Distribution beats 78.5%
  */
 static void combineHelper(int n, int k,
                           vector<vector<int>>& results,
@@ -275,7 +275,7 @@ vector<vector<int>> combine(int n, int k)
  *  this method may be effective.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 1.27%
+ * Accepted Solutions Runtime Distribution beats 1.27%
  */
 vector<vector<int>> combine2(int n, int k)
 {
@@ -303,7 +303,7 @@ vector<vector<int>> combine2(int n, int k)
  * @brief   Leetcode 77: Combinations
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 86.7%
+ * Accepted Solutions Runtime Distribution beats 86.7%
  */
 vector<vector<int>> combine3(int n, int k)
 {
@@ -328,7 +328,7 @@ vector<vector<int>> combine3(int n, int k)
  * @brief   Leetcode 39: Combination Sum
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 75%
+ * Accepted Solutions Runtime Distribution beats 75%
  */
 static void combinationSumHelper(vector<int>& candidates,
                                  int target,
@@ -369,7 +369,7 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target)
  *  Using Dynamic programming algorithm.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 28.54%
+ * Accepted Solutions Runtime Distribution beats 28.54%
  */
 vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
 {
@@ -393,11 +393,48 @@ vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
 }
 
 /**
+ * @brief   Leetcode 40: Combination Sum II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.58%
+ */
+static void combinationsumIIHelper(vector<int>& candidates, int target,
+                                   vector<int>& array, vector<vector<int>>& results,
+                                   int start)
+{
+    if(target == 0) {
+        results.push_back(array);
+        return;
+    }
+    for(int i = start; i < candidates.size(); ++i) {
+        if(i > start && candidates[i] == candidates[i-1]) {
+            continue;
+        }
+        if(target - candidates[i] < 0) {
+            break;
+        }
+        array.push_back(candidates[i]);
+        combinationsumIIHelper(candidates, target-candidates[i], array, results, i+1);
+        array.pop_back();
+    }
+}
+vector<vector<int>> combinationSumII(vector<int>& candidates, int target)
+{
+    sort(candidates.begin(), candidates.end());
+
+    vector<vector<int>> results;
+    vector<int> array;
+    combinationsumIIHelper(candidates, target, array, results, 0);
+
+    return results;
+}
+
+/**
  * @brief   Leetcode 950: Reveal Cards In Increasing Order
  *  This method using less time, but more space.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<int> deckRevealedIncreasing(vector<int>& deck)
 {
@@ -425,7 +462,7 @@ vector<int> deckRevealedIncreasing(vector<int>& deck)
  *  This method costs too much time and space.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 11.7%
+ * Accepted Solutions Runtime Distribution beats 11.7%
  */
 static void twoSum(vector<int>& nums, int start, int end, int sum,
            vector<vector<int>>& results)
@@ -476,7 +513,7 @@ vector<vector<int>> threeSum(vector<int>& nums)
  *  solution is as same, but costs less time and space.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 90.6%
+ * Accepted Solutions Runtime Distribution beats 90.6%
  */
 vector<vector<int>> threeSum2(vector<int>& nums)
 {
@@ -514,7 +551,7 @@ vector<vector<int>> threeSum2(vector<int>& nums)
  * @brief   Leetcode 16: 3Sum Closest
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 95.8%
+ * Accepted Solutions Runtime Distribution beats 95.8%
  */
 int threeSumClosest(vector<int>& nums, int target)
 {
@@ -548,7 +585,7 @@ int threeSumClosest(vector<int>& nums, int target)
  * @brief   Leetcode 18: 4Sum
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 73%
+ * Accepted Solutions Runtime Distribution beats 73%
  */
 static void threeSumHelper(vector<int>& nums, int start, int sum,
                       vector<vector<int>>& results)
@@ -597,7 +634,7 @@ vector<vector<int>> fourSum(vector<int>& nums, int target)
  *  decrease unnecessary search iterations.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<vector<int>> fourSum2(vector<int>& nums, int target)
 {
@@ -672,7 +709,7 @@ int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D)
  *  complexity.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 90%
+ * Accepted Solutions Runtime Distribution beats 90%
  */
 int fourSumCount2(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D)
 {
@@ -704,7 +741,7 @@ int fourSumCount2(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D
  *  Backtracking algorithm
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 // if nums=[1,2,3], then
 // results={[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]}
@@ -733,7 +770,7 @@ vector<vector<int>> subsets(vector<int>& nums)
  *  an array, this method is useless.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 53%
+ * Accepted Solutions Runtime Distribution beats 53%
  */
 vector<vector<int>> subsets2(vector<int>& nums)
 {
@@ -756,7 +793,7 @@ vector<vector<int>> subsets2(vector<int>& nums)
  * @brief   Leetcode 78: Subsets
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 // if nums=[1,2,3], then 
 // results={[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]}
@@ -777,7 +814,7 @@ vector<vector<int>> subsets3(vector<int>& nums)
  * @brief   Leetcode 90: Subsets II
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 // if nums=[1,2,2], then
 // results={[],[1],[1,2],[1,2,2],[2],[2,2]}
@@ -808,7 +845,7 @@ vector<vector<int>> subsetsWithDup(vector<int>& nums)
  * @brief   Leetcode 90: Subsets II
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 // if nums=[1,2,2], then
 // results={[],[1],[2],[2,2],[1,2],[1,2,2]}

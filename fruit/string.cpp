@@ -14,7 +14,7 @@
  * @brief   Leetcode 60: Permutation Sequence
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 26%
+ * Accepted Solutions Runtime Distribution beats 26%
  */
 string getPermutation(int n, int k)
 {
@@ -33,7 +33,7 @@ string getPermutation(int n, int k)
  * @brief   Leetcode 60: Permutation Sequence
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 string getPermutation2(int n, int k)
 {

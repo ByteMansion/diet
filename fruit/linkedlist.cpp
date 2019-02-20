@@ -38,7 +38,7 @@ using std::bitset;
  * @brief   Leetcode 92: Reverse Linked List II
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 55%
+ * Accepted Solutions Runtime Distribution beats 55%
  */
 ListNode* reverseBetween(ListNode* head, int m, int n)
 {
@@ -75,7 +75,7 @@ ListNode* reverseBetween(ListNode* head, int m, int n)
  * @brief   Leetcode 92: Reverse Linked List II
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 55%
+ * Accepted Solutions Runtime Distribution beats 55%
  */
 ListNode* reverseBetween2(ListNode* head, int m, int n)
 {
@@ -166,7 +166,7 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2)
  * @brief	Leetcode 23: Merge k Sorted Lists
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 65%
+ * Accepted Solutions Runtime Distribution beats 65%
  */
 ListNode* mergeKLists(vector<ListNode*>& lists)
 {
@@ -210,7 +210,7 @@ ListNode* mergeKLists(vector<ListNode*>& lists)
  * @brief	Leetcode 23: Merge k Sorted Lists
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 65%
+ * Accepted Solutions Runtime Distribution beats 65%
  */
 static ListNode* divideAndConquerSortedLists(vector<ListNode*>& lists, int start, int end)
 {
@@ -290,7 +290,7 @@ ListNode* rotateRight(ListNode* head, int k)
  * @brief	Leetcode 725: Split Linked List in Parts
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 99%
+ * Accepted Solutions Runtime Distribution beats 99%
  */
 vector<ListNode*> splitListToParts(ListNode* root, int k)
 {
@@ -396,7 +396,7 @@ ListNode* oddEvenList(ListNode* head)
  * @brief   Leetcode 138: Copy List with Random Pointer
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 2.75%
+ * Accepted Solutions Runtime Distribution beats 2.75%
  * Space complexity is O(n), time complexity is O(n).
  */
 RandomListNode* copyRandomList(RandomListNode* head)
@@ -457,7 +457,7 @@ RandomListNode* copyRandomList(RandomListNode* head)
  * @brief   Leetcode 138: Copy List with Random Pointer
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 97%
+ * Accepted Solutions Runtime Distribution beats 97%
  */
 RandomListNode* copyRandomList2(RandomListNode* head)
 {
@@ -504,7 +504,7 @@ RandomListNode* copyRandomList2(RandomListNode* head)
  * Leetcode 82: Remove Duplicates from Sorted List II
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 
 ListNode* deleteDuplicates(ListNode* head)
@@ -547,7 +547,7 @@ ListNode* deleteDuplicates(ListNode* head)
  * @brief   Leetcode 86: Pertition List
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 ListNode* partition(ListNode* head, int x)
 {
@@ -597,7 +597,7 @@ ListNode* partition(ListNode* head, int x)
  *  O(n), time complexity is O(n).
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 65%
+ * Accepted Solutions Runtime Distribution beats 65%
  */
 void reorderList(ListNode* head)
 {
@@ -653,7 +653,7 @@ void reorderList(ListNode* head)
  *  This method traverses list two times and space complexity is
  *  O(1), time complexity is O(n).
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 static ListNode* reverseList(ListNode* head)
 {
@@ -716,7 +716,7 @@ void reorderList2(ListNode* head)
  * @brief   Leetcode 445: Add Two Numbers II
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 99%
+ * Accepted Solutions Runtime Distribution beats 99%
  */
 static size_t getLengthofList(ListNode* head)
 {
@@ -785,7 +785,7 @@ ListNode* addTwoNumbers(ListNode* index1, ListNode* index2)
  * Leetcode 148: Sort List
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 71%
+ * Accepted Solutions Runtime Distribution beats 71%
  */
 ListNode* sortList(ListNode* head)
 {
@@ -824,7 +824,7 @@ ListNode* sortList(ListNode* head)
  * @brief   Leetcode 148: Sort List
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 static ListNode* mergeList(ListNode* left, ListNode* right)
 {
@@ -892,14 +892,14 @@ ListNode* sortList2(ListNode* head)
  * @brief   Swap Nodes in Pairs
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 ListNode* swapPairs(ListNode* head)
 {
 	if (head == nullptr || head->next == nullptr) {
 		return head;
 	}
-	
+
 	ListNode dummy(INT_MIN);
 	ListNode* index = head;
 	ListNode* prev = &dummy;
@@ -909,11 +909,11 @@ ListNode* swapPairs(ListNode* head)
 		index->next = last;
 		post->next = index;
 		prev->next = post;
-		
+
 		prev = index;
 		index = last;
 	}
-	
+
 	return dummy.next;
 }
 
@@ -921,7 +921,7 @@ ListNode* swapPairs(ListNode* head)
  * @brief   Leetcode 25: Reverse Nodes in k-Group
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 static ListNode* getKthNode(ListNode* head, int k) {
 	if(head == nullptr) {
@@ -984,7 +984,7 @@ ListNode* reverseKGroup(ListNode* head, int k)
  *  This solution has high space complexity O(n).
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 0.82%
+ * Accepted Solutions Runtime beats Distribution beats 0.82%
  */
 bool hasCycle(ListNode* head)
 {
@@ -1010,7 +1010,7 @@ bool hasCycle(ListNode* head)
   *  slow pointer meet at certain node finally.
   *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime beats Distribution beats 100%
   */
 bool hasCycle2(ListNode* head)
 {
@@ -1039,7 +1039,7 @@ bool hasCycle2(ListNode* head)
  *  This method needs O(n) extra space.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 0.87%
+ * Accepted Solutions Runtime Distribution beats 0.87%
  */
 ListNode* detectCycle(ListNode* head)
 {
@@ -1065,7 +1065,7 @@ ListNode* detectCycle(ListNode* head)
  *	Floyd's cycle detection algorithm
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 ListNode* detectCycle2(ListNode* head)
 {
@@ -1091,7 +1091,7 @@ ListNode* detectCycle2(ListNode* head)
  * @brief   Leetcode 430: Flatten a Multilevel Doubly Linked List
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 97%
+ * Accepted Solutions Runtime Distribution beats 97%
  */
 Node* flatten(Node* head)
 {
@@ -1127,7 +1127,7 @@ Node* flatten(Node* head)
  * @brief   Leetcode 147: Insertion Sort List
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 72%
+ * Accepted Solutions Runtime Distribution beats 72%
  */
 ListNode* insertionSortList(ListNode* head)
 {
@@ -1168,7 +1168,7 @@ ListNode* insertionSortList(ListNode* head)
  *  This method is positive solution.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 31%
+ * Accepted Solutions Runtime Distribution beats 31%
  */
 int numComponents(ListNode* head, vector<int>& G)
 {
@@ -1204,7 +1204,7 @@ int numComponents(ListNode* head, vector<int>& G)
  * @brief   Leetcode 817: Linked List Components
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 92%
+ * Accepted Solutions Runtime Distribution beats 92%
  */
 int numComponents2(ListNode* head, vector<int>& G)
 {
@@ -1233,7 +1233,7 @@ int numComponents2(ListNode* head, vector<int>& G)
  * @brief	Leetcode 234: Palindrome Linked List
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 97%
+ * Accepted Solutions Runtime Distribution beats 97%
  */
 bool isPalindrome(ListNode* head)
 {

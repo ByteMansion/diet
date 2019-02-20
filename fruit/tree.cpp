@@ -27,7 +27,7 @@ using std::move;
  * @return  vector of tree member
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<int> postorderTraversal(TreeNode *root)
 {
@@ -91,7 +91,7 @@ vector<int> postorderTraversal2(TreeNode *root)
  *  root	root node of binary tree
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<int> inorderTraversal(TreeNode* root)
 {
@@ -149,7 +149,7 @@ vector<int> inorderTraversal2(TreeNode* root)
  * @brief	non-recursive preorder traversal
  *
  * --------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<int> preorderTraversal(TreeNode* root)
 {
@@ -214,7 +214,7 @@ vector<int> preorderTraversal2(TreeNode* root)
  * @return	pointer to a TreeNode node.
  *
  * --------------------------------------------
- * Accepted Solutions Runtime Distribution 100%
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 TreeNode* pruneTree(TreeNode* root)
 {
@@ -279,7 +279,7 @@ TreeNode* pruneTree(TreeNode* root)
  * @brief	Leetcode 814: Binary Tree Pruning
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution 33%
+ * Accepted Solutions Runtime Distribution beats 33%
  */
 TreeNode* pruneTree2(TreeNode* root)
 {
@@ -299,7 +299,7 @@ TreeNode* pruneTree2(TreeNode* root)
  *  this problem can be solved in BFS and DFS method.
  *  this solution is implementated by BFS.
  * --------------------------------------------------------
- * Accepted Solutions Runtime Distribution 99%
+ * Accepted Solutions Runtime Distribution beats 99%
  */
 vector<vector<int>> levelOrder(TreeNode* root)
 {
@@ -339,7 +339,7 @@ vector<vector<int>> levelOrder(TreeNode* root)
  * @brief	Leetcode 107: Binary Tree Level Order Traversal II
  *
  * -----------------------------------------------------------
- * Accepted Solutions Runtime Distribution 99%
+ * Accepted Solutions Runtime Distribution beats 99%
  */
 vector<vector<int>> levelOrderBottom(TreeNode* root)
 {
@@ -377,7 +377,7 @@ vector<vector<int>> levelOrderBottom(TreeNode* root)
  * this problem is related to BFS and graph.
  * the solution below is by graph theory.
  * --------------------------------------------
- * Accepted Solutions Runtime Distribution 83%
+ * Accepted Solutions Runtime Distribution beats 83%
  */
 vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges)
 {
@@ -427,7 +427,7 @@ vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges)
  * @brief	Leetcode 310: Minimum Height Trees
  *
  * --------------------------------------------
- * Accepted Solutions Runtime Distribution 83%
+ * Accepted Solutions Runtime Distribution beats 83%
  */
 vector<int> findMinHeightTrees2(int n, vector<pair<int, int>>& edges)
 {
