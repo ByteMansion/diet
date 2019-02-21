@@ -13,8 +13,10 @@
 
 #include <stdio.h>
 #include <string>
+#include <vector>
 
 using std::string;
+using std::vector;
 
 // Leetcode 60: Permutation Sequence
 string getPermutation(int n, int k);

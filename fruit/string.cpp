@@ -10,6 +10,8 @@
 
 #include "string.hpp"
 
+#include <functional>
+
 /**
  * @brief   Leetcode 60: Permutation Sequence
  *
@@ -89,8 +91,8 @@ static bool isPalindrome(const string& s, int left, int right)
     }
     return true;
 }
-static void partitionHelper(const string& s, vector<string>& results,
-                            string& substring, int start)
+static void partitionHelper(const string& s, vector<vector<string>>& results,
+                            vector<string>& subresult, int start)
 {
     if(start >= s.length()) {
         results.push_back(subresult);
@@ -111,7 +113,7 @@ vector<vector<string>> partition(string s)
         return results;
     }
     vector<string> subresult;
-    partitionHelper(s, results, substring, 0);
+    partitionHelper(s, results, subresult, 0);
 
     return results;
 }
@@ -136,7 +138,7 @@ vector<vector<string>> partition2(string s)
 
     // Helper lambda that cycles through all the palindromes starting at the passed index
     std::vector<std::vector<std::string>> ret;
-    std::function <void (std::vector<std::pair<int, int>>& progress, int idx)> helper;
+    std::function<void (std::vector<std::pair<int, int>>& progress, int idx)> helper;
     helper = [&ret, &pals, sz = s.size(), &helper] (std::vector<std::pair<int, int>>& progress, int idx) -> void {
         // Terminal case, add all the palindromes used to reach here to ret.
         if (idx == sz) {
@@ -151,7 +153,7 @@ vector<vector<string>> partition2(string s)
         auto& pals_at_idx = pals[idx];
         for (int i = 0; i < pals_at_idx.size(); ++i) {
           progress.emplace_back(std::make_pair(idx, i));
-          helper(progress, idx + pals_at_idx[i].size());
+          helper(progress, idx + (int)pals_at_idx[i].size());
           progress.pop_back();
         }
       };

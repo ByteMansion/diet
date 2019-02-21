@@ -280,9 +280,7 @@ vector<vector<int>> combine(int n, int k)
 vector<vector<int>> combine2(int n, int k)
 {
     vector<vector<int>> results;
-    if(k == 0) {
-        return results.push_back(vector<int>{});
-    }
+
     int num = (1 << n);
     for(int i = 1; i < num; ++i) {
         vector<int> array;

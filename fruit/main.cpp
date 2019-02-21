@@ -12,6 +12,7 @@
 #include "util.hpp"
 #include "array.hpp"
 #include "linkedlist.hpp"
+#include "string.hpp"
 
 #include <iostream>
 #include <vector>
