@@ -394,6 +394,7 @@ vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
 
 /**
  * @brief   Leetcode 40: Combination Sum II
+ *  Using Backtracking algorithm
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 99.58%

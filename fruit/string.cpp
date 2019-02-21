@@ -71,3 +71,43 @@ string getPermutation2(int n, int k)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 131: Palindrome Partitioning
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 46%
+ */
+static bool isPalindrome(const string s, int left, int right)
+{
+    while(left < right) {
+        if(s[left++] != s[right--]) {
+            return false;
+        }
+    }
+    return true;
+}
+static void partitionHelper(string& s, vector<string>& results,
+                            string& substring, int start)
+{
+    if(start >= s.length()) {
+        results.push_back(subresult);
+    } else {
+        for(int i = start; i < s.length(); ++i) {
+            subresult.push_back(s.substr(start, i-start+1));
+            partitionHelper(s, results, subresult, i+1);
+            subresult.pop_back();
+        }
+    }
+}
+vector<vector<string>> partition(string s)
+{
+    vector<vector<string>> results;
+    if(s.empty()) {
+        return results;
+    }
+    vector<string> subresult;
+    partitionHelper(s, results, substring, 0);
+
+    return results;
+}

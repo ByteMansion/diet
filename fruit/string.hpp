@@ -16,9 +16,12 @@
 
 using std::string;
 
+// Leetcode 60: Permutation Sequence
 string getPermutation(int n, int k);
 string getPermutation2(int n, int k);
 
+// Leetcode 131: Palindrome Partitioning
+vector<vector<string>> partition(string s);
 
 
 #endif
