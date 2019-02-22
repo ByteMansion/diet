@@ -26,5 +26,8 @@ string getPermutation2(int n, int k);
 vector<vector<string>> partition(string s);
 vector<vector<string>> partition2(string s);
 
+// Leetcode 132: Palindrome Partitioning II
+int minCut(string s);
+
 
 #endif

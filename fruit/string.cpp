@@ -12,6 +12,10 @@
 
 #include <functional>
 
+using std::pair;
+using std::function;
+using std::vector;
+
 /**
  * @brief   Leetcode 60: Permutation Sequence
  *
@@ -78,6 +82,8 @@ string getPermutation2(int n, int k)
  * @brief   Leetcode 131: Palindrome Partitioning
  * Using backtracking algorithm
  * Time complexity is O(n*2^n)
+ * If using all test cases in problem 132, time limit or memory limit 
+ * exceeded will happen.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 100%
@@ -121,6 +127,8 @@ vector<vector<string>> partition(string s)
 /**
  * @brief   Leetcode 131: Palindrome Partitioning
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<vector<string>> partition2(string s)
 {
@@ -137,28 +145,59 @@ vector<vector<string>> partition2(string s)
     }
 
     // Helper lambda that cycles through all the palindromes starting at the passed index
-    std::vector<std::vector<std::string>> ret;
-    std::function<void (std::vector<std::pair<int, int>>& progress, int idx)> helper;
-    helper = [&ret, &pals, sz = s.size(), &helper] (std::vector<std::pair<int, int>>& progress, int idx) -> void {
+    vector<vector<string>> ret;
+    function<void (vector<pair<int, int>>& progress, int idx)> helper;
+    helper = [&ret, &pals, sz = s.size(), &helper] (vector<pair<int, int>>& progress, int idx) -> void {
         // Terminal case, add all the palindromes used to reach here to ret.
         if (idx == sz) {
-          ret.emplace_back();
-          for (auto& pal : progress) {
-            ret.back().emplace_back(pals[pal.first][pal.second]);
-          }
-          return;
+        ret.emplace_back();
+            for (auto& pal : progress) {
+                ret.back().emplace_back(pals[pal.first][pal.second]);
+            }
+            return;
         }
 
         // Branch out for each palindrome starting at index idx
         auto& pals_at_idx = pals[idx];
         for (int i = 0; i < pals_at_idx.size(); ++i) {
-          progress.emplace_back(std::make_pair(idx, i));
-          helper(progress, idx + (int)pals_at_idx[i].size());
-          progress.pop_back();
+            progress.emplace_back(std::make_pair(idx, i));
+            helper(progress, idx + (int)pals_at_idx[i].size());
+            progress.pop_back();
         }
-      };
+    };
 
-    std::vector<std::pair<int, int>> progress;
+    vector<pair<int, int>> progress;
     helper(progress, 0);
     return ret;
+}
+
+/**
+ * @brief   Leetcode 132: Palindrome Partitioning II
+ *  This method can get right result, but time limit exceeded.
+ *
+ */
+static void minCutHelper(string& s, vector<string>& group, int& result, int start)
+{
+    if(start == s.length()) {
+        if(group.size()-1 < result) {
+            result = group.size() - 1;
+        }
+        return;
+    }
+    for(int i = start; i < s.length(); ++i) {
+        if(isPalindrome(s, start, i)) {
+            group.push_back(s.substr(start, i-start+1));
+            minCutHelper(s, group, result, i+1);
+            group.pop_back();
+        }
+    }
+
+}
+int minCut(string s)
+{
+    int result = INT_MIN;
+    vector<string> group;
+    minCutHelper(s, group, result, 0);
+
+    return result;
 }
