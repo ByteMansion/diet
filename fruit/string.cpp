@@ -185,6 +185,11 @@ static void minCutHelper(string& s, vector<string>& group, int& result, int star
         return;
     }
     for(int i = start; i < s.length(); ++i) {
+        // if number of palindromes exceeds current result before reaching the end of string,
+        // terminate this iteration and continue searching better result.
+        if(result != INT_MIN && group.size() > 0 && group.size()-1 > result) {
+            break;
+        }
         if(isPalindrome(s, start, i)) {
             group.push_back(s.substr(start, i-start+1));
             minCutHelper(s, group, result, i+1);
