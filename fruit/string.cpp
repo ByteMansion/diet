@@ -206,3 +206,35 @@ int minCut(string s)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 132: Palindrome Partitioning II
+ *  Using dynamic programming method.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 89%
+ */
+int minCut2(string s)
+{
+    const int N = s.length();
+    if(N < 1) {
+        return 0;
+    }
+
+    bool isPalin[N][N];
+    int dp[N+1];
+    std::fill_n(&isPalin[0][0], N*N, false);
+    for(int i = 0; i <= N; ++i) {
+        dp[i] = i - 1;
+    }
+
+    for(int j = 1; j < N; ++j) {
+        for(int i = j; i >= 0; --i) {
+            if(s[i] == s[j] && (j-i < 2 || isPalin[i+1][j-1])) {
+                isPalin[i][j] = true;
+                dp[j+1] = std::min(dp[j+1], dp[i]+1);
+            }
+        }
+    }
+    return dp[N];
+}
