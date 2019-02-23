@@ -217,7 +217,7 @@ int minCut(string s)
 int minCut2(string s)
 {
     const int N = s.length();
-    if(N < 1) {
+    if(N <= 1) {
         return 0;
     }
 
@@ -234,6 +234,37 @@ int minCut2(string s)
                 isPalin[i][j] = true;
                 dp[j+1] = std::min(dp[j+1], dp[i]+1);
             }
+        }
+    }
+    return dp[N];
+}
+
+/**
+ * @brief   Leetcode 132: Palindrome Partitioning
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 95%
+ */
+int minCut3(string s)
+{
+    const int N = s.length();
+    if(N <= 1) {
+        return 0;
+    }
+
+    int dp[N+1];
+    for(int i = 0; i <= N; ++i) {
+        dp[i] = i - 1;
+    }
+
+    for(int i = 1; i < N; ++i) {
+        // odd length substring
+        for(int j = 0; (i-j) >= 0 && (i+j) < N && s[i-j] == s[i+j]; ++j) {
+            dp[i+j+1] = std::min(dp[i-j] + 1, dp[i+j+1]);
+        }
+        // even length substring
+        for(int j = 0; (i-j) >= 0 && (i+j) < N && s[i-j-1] == s[i+j]; ++j) {
+            dp[i+j+1] = std::min(dp[i-j-1] + 1, dp[i+j+1]);
         }
     }
     return dp[N];

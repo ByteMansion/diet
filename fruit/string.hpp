@@ -28,6 +28,8 @@ vector<vector<string>> partition2(string s);
 
 // Leetcode 132: Palindrome Partitioning II
 int minCut(string s);
+int minCut2(string s);
+int minCut3(string s);
 
 
 #endif
