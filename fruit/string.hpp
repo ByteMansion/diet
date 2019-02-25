@@ -31,5 +31,13 @@ int minCut(string s);
 int minCut2(string s);
 int minCut3(string s);
 
+// Leetcode 6: ZigZag Conversion
+string convert(string s, int numRows);
+
+// Leetcode 8: String to Integer(atoi)
+int myAtoi(string str);
+
+
+
 
 #endif

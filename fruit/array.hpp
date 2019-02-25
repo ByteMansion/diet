@@ -68,11 +68,6 @@ vector<vector<int>> subsets3(vector<int>& nums);
 vector<vector<int>> subsetsWithDup(vector<int>& nums);
 vector<vector<int>> subsetsWithDup2(vector<int>& nums);
 
-// Leetcode 6: ZigZag Conversion
-string convert(string s, int numRows);
-
-// Leetcode 8: String to Integer(atoi)
-int myAtoi(string str);
 
 
 #endif /* array_hpp */

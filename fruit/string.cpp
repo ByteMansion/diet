@@ -180,7 +180,7 @@ static void minCutHelper(string& s, vector<string>& group, int& result, int star
 {
     if(start == s.length()) {
         if(group.size()-1 < result) {
-            result = group.size() - 1;
+            result = (int)group.size() - 1;
         }
         return;
     }
@@ -216,7 +216,7 @@ int minCut(string s)
  */
 int minCut2(string s)
 {
-    const int N = s.length();
+    const int N = (int)s.length();
     if(N <= 1) {
         return 0;
     }
@@ -247,7 +247,7 @@ int minCut2(string s)
  */
 int minCut3(string s)
 {
-    const int N = s.length();
+    const int N = (int)s.length();
     if(N <= 1) {
         return 0;
     }
@@ -268,4 +268,108 @@ int minCut3(string s)
         }
     }
     return dp[N];
+}
+
+/**
+ * @brief   Leetcode 6: ZigZag Conversion
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 87%
+ */
+string convert(string s, int numRows)
+{
+	if(numRows == 1) {
+		return s;
+	}
+	
+	int N = (int)s.length();
+	vector<string> resGroup(numRows, "");
+	
+	int index = 0;
+	int num = 0;
+	bool isPositive = true;
+	while(index < N) {
+		if(num == numRows - 1) {
+			isPositive = false;
+		} else if(num == 0) {
+			isPositive = true;
+		}
+		resGroup[num].push_back(s[index++]);
+		
+		if(isPositive) {
+			num += 1;
+		} else {
+			num -= 1;
+		}
+	}
+	for(int i = 1; i < numRows; ++i) {
+		resGroup[0].insert(resGroup[0].end(), resGroup[i].begin(), resGroup[i].end());
+	}
+	
+	return resGroup[0];
+}
+
+/**
+ * @brief   Leetcode 8: String to Integer(atoi)
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.5%
+ */
+static bool isInteger(char ch)
+{
+	if(ch >= '0' && ch <= '9') {
+		return true;
+	}
+	return false;
+}
+int myAtoi(string str)
+{
+	// judge if the string is valid
+	int N = (int)str.length();
+	int start = 0;
+	for(start = 0; start < N; ++start) {
+		if(str[start] != ' ') {
+			break;
+		}
+	}
+	if(start == N || ((str[start] > '9' || str[start] < '0') &&
+					  (str[start] != '+' && str[start] != '-'))) {
+		return 0;
+	}
+	
+	// judge if integer is positive
+	int startIndex = start;
+	bool isPositive = true;
+	if(str[start] == '-' && start+1 < N && isInteger(str[start+1])) {
+		isPositive = false;
+		startIndex = (str[start] == '-') ? (start+1) : start;
+	} else if((str[start] == '+' && start+1 < N && isInteger(str[start+1])) || isInteger(str[start])) {
+		isPositive = true;
+		startIndex = (str[start] == '+') ? (start+1) : start;
+	} else {
+		return 0;
+	}
+	
+	// get the end of valid string
+	int endIndex = startIndex;
+	while(endIndex+1 < N && isInteger(str[endIndex+1])) {
+		endIndex += 1;
+	}
+	
+	// convert from string to integer
+	int result = 0;
+	for(int i = startIndex; i <= endIndex; ++i) {
+		if(isPositive){
+			if(result > INT_MAX/10 || (result == INT_MAX/10 && INT_MAX%10 <= str[i] - '0')) {
+				return INT_MAX;
+			}
+		} else {
+			if(result >  INT_MAX/10 || (result == INT_MAX/10 && INT_MIN%10*(-1) <= str[i] - '0')){
+				return INT_MIN;
+			}
+		}
+		result = (str[i] - '0') + result * 10;
+	}
+	
+	return (isPositive ? result : (-1 * result));
 }
