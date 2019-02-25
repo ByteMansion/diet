@@ -871,3 +871,41 @@ vector<vector<int>> subsetsWithDup2(vector<int>& nums)
     return results;
 }
 
+/**
+ * @brief   Leetcode 6: ZigZag Conversion
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 87%
+ */
+string convert(string s, int numRows)
+{
+    if(numRows == 1) {
+        return s;
+    }
+
+    int N = s.length();
+    vector<string> resGroup(numRows, "");
+
+    int index = 0;
+    int num = 0;
+    bool isPositive = true;
+    while(index < N) {
+        if(num == numRows - 1) {
+            isPositive = false;
+        } else if(num == 0) {
+            isPositive = true;
+        }
+        resGroup[num].push_back(s[index++]);
+
+        if(isPositive) {
+            num += 1;
+        } else {
+            num -= 1;
+        }
+    }
+    for(int i = 1; i < numRows; ++i) {
+        resGroup[0].insert(resGroup[0].end(), resGroup[i].begin(), resGroup[i].end());
+    }
+
+    return resGroup[0];
+}
