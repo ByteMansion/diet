@@ -909,3 +909,68 @@ string convert(string s, int numRows)
 
     return resGroup[0];
 }
+
+/**
+ * @brief   Leetcode 8: String to Integer(atoi)
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.5%
+ */
+static bool isInteger(char ch)
+{
+    if(ch >= '0' && ch <= '9') {
+        return true;
+    }
+    return false;
+}
+int myAtoi(string str)
+{
+    // judge if the string is valid
+    int N = str.length();
+    int start = 0;
+    for(start = 0; start < N; ++start) {
+        if(str[start] != ' ') {
+            break;
+        }
+    }
+    if(start == N || ((str[start] > '9' || str[start] < '0') &&
+       (str[start] != '+' && str[start] != '-'))) {
+        return 0;
+    }
+
+    // judge if integer is positive
+    int startIndex = start;
+    bool isPositive = true;
+    if(str[start] == '-' && start+1 < N && isInteger(str[start+1])) {
+        isPositive = false;
+        startIndex = (str[start] == '-') ? (start+1) : start;
+    } else if((str[start] == '+' && start+1 < N && isInteger(str[start+1])) || isInteger(str[start])) {
+        isPositive = true;
+        startIndex = (str[start] == '+') ? (start+1) : start;
+    } else {
+        return 0;
+    }
+
+    // get the end of valid string
+    int endIndex = startIndex;
+    while(endIndex+1 < N && isInteger(str[endIndex+1])) {
+        endIndex += 1;
+    }
+
+    // convert from string to integer
+    int result = 0;
+    for(int i = startIndex; i <= endIndex; ++i) {
+        if(isPositive){
+            if(result > INT_MAX/10 || (result == INT_MAX/10 && INT_MAX%10 <= str[i] - '0')) {
+                return INT_MAX;
+            }
+        } else {
+            if(result >  INT_MAX/10 || (result == INT_MAX/10 && INT_MIN%10*(-1) <= str[i] - '0')){
+                return INT_MIN;
+            }
+       }
+       result = (str[i] - '0') + result * 10;
+    }
+
+    return (isPositive ? result : (-1 * result));
+}
