@@ -71,5 +71,9 @@ vector<vector<int>> subsetsWithDup2(vector<int>& nums);
 // Leetcode 33: Search in Rotated Sorted Array
 int search(vector<int>& nums, int target);
 
+// Leetcode 81: Search in Rotated Sorted Array II
+bool searchII(vector<int>& nums, int target);
+
+
 
 #endif /* array_hpp */

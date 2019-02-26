@@ -886,10 +886,11 @@ int search(vector<int>& nums, int target)
     int right = nums.size() - 1;
 
     while(left+1 < right) {
-        int middle = (left + right) / 2;
+        int middle = left + (right - left) / 2;
         if(target == nums[middle]) {
             return middle;
         }
+        // e.g. nums=[4,5,6,7,8,1,2], target=8
         if(nums[middle] >= nums[left]) {
             if(target > nums[middle]) {
                 left = middle;
@@ -898,7 +899,7 @@ int search(vector<int>& nums, int target)
             } else {
                 left = middle;
             }
-        } else {
+        } else {  // e.g. nums=[8,9,1,2,3,4,5], target=4
             if(target < nums[middle]) {
                 right = middle;
             } else if(target >= nums[left]){
@@ -912,4 +913,54 @@ int search(vector<int>& nums, int target)
     if(nums[right] == target) return right;
 
     return -1;
+}
+
+/**
+ * @brief   Leetcode 81: Search in Rotated Sorted Array II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+bool searchII(vector<int>& nums, int target)
+{
+    if(nums.empty()) {
+        return false;
+    }
+
+    int left = 0;
+    int right = nums.size() - 1;
+    while(left+1 < right) {
+        int middle = left + (right - left) / 2;
+        if(target == nums[middle]) {
+            return true;
+        }
+        while(left+1 < middle && nums[left] == nums[middle]) {
+            left++;
+        }
+        while(right+1 > middle && nums[right] == nums[middle]) {
+            right--;
+        }
+        if(nums[middle] >= nums[left]) {
+            if(target > nums[middle]) {
+                left = middle;
+            } else if(target >= nums[left]) {
+                right = middle;
+            } else {
+                left = middle;
+            }
+        } else {
+            if(target < nums[middle]) {
+                right = middle;
+            } else if(target >= nums[left]) {
+                right = middle;
+            } else {
+                left = middle;
+            }
+        }
+    }
+
+    if(nums[left] == target) return true;
+    if(nums[right] == target) return true;
+
+    return false;
 }
