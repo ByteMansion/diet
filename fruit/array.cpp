@@ -964,3 +964,49 @@ bool searchII(vector<int>& nums, int target)
 
     return false;
 }
+
+/**
+ * @brief   Leetcode 34: Find First and Last Position of Element in Sorted Array
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.47%
+ */
+vector<int> searchRange(vector<int>& nums, int target)
+{
+    if(nums.empty()) {
+        return vector<int>{-1, -1};
+    }
+
+    int left = 0;
+    int right = nums.size() - 1;
+    int startIndex = -1;
+    int endIndex   = -1;
+    while(left + 1 < right) {
+        int middle = left + (right - left) / 2;
+        if(nums[middle] == target) {
+            startIndex = middle;
+            endIndex = middle;
+            break;
+        } else if(nums[middle] > target) {
+            right = middle;
+        } else {
+            left = middle;
+        }
+    }
+    if(nums[left] == target) {
+        startIndex = left;
+        endIndex = left;
+    }
+    if(nums[right] == target) {
+        startIndex = right;
+        endIndex = right;
+    }
+    while(startIndex > 0 && nums[startIndex-1] == target) {
+        startIndex -= 1;
+    }
+    while(endIndex < nums.size()-1 && nums[endIndex+1] == target) {
+        endIndex += 1;
+    }
+
+    return vector<int>{startIndex, endIndex};
+}

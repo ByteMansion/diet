@@ -74,6 +74,9 @@ int search(vector<int>& nums, int target);
 // Leetcode 81: Search in Rotated Sorted Array II
 bool searchII(vector<int>& nums, int target);
 
+// Leetcode 34: Find First and Last Position of Element in Sorted Array
+vector<int> searchRange(vector<int>& nums, int target);
+
 
 
 #endif /* array_hpp */
