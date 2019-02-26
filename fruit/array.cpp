@@ -885,7 +885,7 @@ int search(vector<int>& nums, int target)
         return -1;
     }
     int left = 0;
-    int right = nums.size() - 1;
+    int right = (int)nums.size() - 1;
 
     while(left+1 < right) {
         int middle = left + (right - left) / 2;
@@ -930,7 +930,7 @@ bool searchII(vector<int>& nums, int target)
     }
 
     int left = 0;
-    int right = nums.size() - 1;
+    int right = (int)nums.size() - 1;
     while(left+1 < right) {
         int middle = left + (right - left) / 2;
         if(target == nums[middle]) {
@@ -980,7 +980,7 @@ vector<int> searchRange(vector<int>& nums, int target)
     }
 
     int left = 0;
-    int right = nums.size() - 1;
+    int right = (int)nums.size() - 1;
     int startIndex = -1;
     int endIndex   = -1;
     while(left + 1 < right) {
@@ -1026,17 +1026,17 @@ int maxArea(vector<int>& height)
         return 0;
     }
     int result = 0;
-    int length = height.size();
+    int length = (int)height.size();
     for(int dist = 1; dist < length; ++dist) {
         int maxHeight = 0;
         for(int i = 0; i < length && i + dist < length; ++i) {
-            int tmp = min(height[i], height[i + dist]);
+			int tmp = std::min(height[i], height[i + dist]);
             if(maxHeight < tmp) {
                 maxHeight = tmp;
             } else {
                 continue;
             }
-            result = max(result, tmp * dist);
+			result = std::max(result, tmp * dist);
         }
     }
 
@@ -1046,17 +1046,25 @@ int maxArea(vector<int>& height)
 /**
  * @brief   Leetcode 11: Container with Most Water
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.5%
  */
 int maxArea2(vector<int>& height)
 {
     if(height.size() < 2) {
         return 0;
     }
-    multimap<int, int, std::less<int>> mmap;
-    for(int i = 0; i < height.size(); ++i) {
-        mmap.insert(std::make_pair(height[i], i));
-    }
-
-    sort(height.begin(), height.end());
-    for(int i = 0; )
+	int i = 0;
+	int j = (int)height.size() - 1;
+	int area = 0;
+	while (i < j) {
+		area = std::max(area, std::min(height[i], height[j]) * (j - i));
+		if (height[i] < height[j]) {
+			i += 1;
+		} else {
+			j -= 1;
+		}
+	}
+	
+	return area;
 }
