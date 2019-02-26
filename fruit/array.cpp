@@ -871,3 +871,45 @@ vector<vector<int>> subsetsWithDup2(vector<int>& nums)
     return results;
 }
 
+/**
+ * @brief   Leetcode 33: Search in Rotated Sorted Array
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int search(vector<int>& nums, int target)
+{
+    if(nums.empty()) {
+        return -1;
+    }
+    int left = 0;
+    int right = nums.size() - 1;
+
+    while(left+1 < right) {
+        int middle = (left + right) / 2;
+        if(target == nums[middle]) {
+            return middle;
+        }
+        if(nums[middle] >= nums[left]) {
+            if(target > nums[middle]) {
+                left = middle;
+            } else if(target >= nums[left]){
+                right = middle;
+            } else {
+                left = middle;
+            }
+        } else {
+            if(target < nums[middle]) {
+                right = middle;
+            } else if(target >= nums[left]){
+                right = middle;
+            } else {
+                left = middle;
+            }
+        }
+    }
+    if(nums[left] == target) return left;
+    if(nums[right] == target) return right;
+
+    return -1;
+}

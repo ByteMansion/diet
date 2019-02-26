@@ -68,6 +68,8 @@ vector<vector<int>> subsets3(vector<int>& nums);
 vector<vector<int>> subsetsWithDup(vector<int>& nums);
 vector<vector<int>> subsetsWithDup2(vector<int>& nums);
 
+// Leetcode 33: Search in Rotated Sorted Array
+int search(vector<int>& nums, int target);
 
 
 #endif /* array_hpp */
