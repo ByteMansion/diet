@@ -1010,3 +1010,27 @@ vector<int> searchRange(vector<int>& nums, int target)
 
     return vector<int>{startIndex, endIndex};
 }
+/**
+ * @brief   Leetcode 11: Container With Most Water
+ *  This method can be accepted, but time complexity is high, which is
+ *  O(n^2).
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 10%
+ */
+int maxArea(vector<int>& height)
+{
+    if(height.size() < 2) {
+        return 0;
+    }
+    int result = 0;
+    int length = height.size();
+    for(int dist = 1; dist < length; ++dist) {
+        for(int i = 0; i < length && i + dist < length; ++i) {
+            int tmp = min(height[i], height[i + dist]);
+            result = max(result, tmp * dist);
+        }
+    }
+
+    return result;
+}
