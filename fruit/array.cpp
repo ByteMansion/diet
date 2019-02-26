@@ -13,12 +13,14 @@
 #include <algorithm>
 #include <deque>
 #include <unordered_map>
+#include <map>
 
 using std::swap;
 using std::sort;
 using std::reverse;
 using std::deque;
 using std::unordered_map;
+using std::multimap;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -1016,7 +1018,7 @@ vector<int> searchRange(vector<int>& nums, int target)
  *  O(n^2).
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution beats 10%
+ * Accepted Solutions Runtime Distribution beats 12%
  */
 int maxArea(vector<int>& height)
 {
@@ -1026,11 +1028,35 @@ int maxArea(vector<int>& height)
     int result = 0;
     int length = height.size();
     for(int dist = 1; dist < length; ++dist) {
+        int maxHeight = 0;
         for(int i = 0; i < length && i + dist < length; ++i) {
             int tmp = min(height[i], height[i + dist]);
+            if(maxHeight < tmp) {
+                maxHeight = tmp;
+            } else {
+                continue;
+            }
             result = max(result, tmp * dist);
         }
     }
 
     return result;
+}
+
+/**
+ * @brief   Leetcode 11: Container with Most Water
+ *
+ */
+int maxArea2(vector<int>& height)
+{
+    if(height.size() < 2) {
+        return 0;
+    }
+    multimap<int, int, std::less<int>> mmap;
+    for(int i = 0; i < height.size(); ++i) {
+        mmap.insert(std::make_pair(height[i], i));
+    }
+
+    sort(height.begin(), height.end());
+    for(int i = 0; )
 }

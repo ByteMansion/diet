@@ -79,5 +79,7 @@ vector<int> searchRange(vector<int>& nums, int target);
 
 // Leetcode 11: Container With Most Water
 int maxArea(vector<int>& height);
+int maxArea2(vector<int>& height);
+
 
 #endif /* array_hpp */
