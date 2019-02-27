@@ -1146,3 +1146,44 @@ int removeDuplicates3(vector<int>& nums)
 
     return (dupFlag == -1) ? nums.size() : dupFlag;
 }
+
+/**
+ * @brief   Leetcode 80: Remove Duplicates from Sorted Array II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int removeDuplicates(vector<int>& nums)
+{
+
+    if(nums.size() < 2) {
+        return (int)nums.size();
+    }
+
+    int dupFlag = -1;
+    int i = 1;
+    int count = 1;
+    while(i < nums.size()) {
+        // count number of duplicates
+        if(nums[i] == nums[i-1]) {
+            count += 1;
+        } else {
+            count = 1;
+        }
+        // label first twice more duplicates position
+        if(dupFlag == -1 && count > 2) {
+            dupFlag = i;
+        }
+        // exist twice more duplicates
+        if(dupFlag != -1) {
+            if(count <= 2)
+                nums[dupFlag++] = nums[i++];
+            else
+                i += 1;
+        } else { // no-exist twice more duplicates
+            i += 1;
+        }
+    }
+
+    return (dupFlag == -1) ? nums.size() : dupFlag;
+}

@@ -84,6 +84,10 @@ int maxArea2(vector<int>& height);
 // Leetcode 26: Remove Duplicates from Sorted Array
 int removeDuplicates(vector<int>& nums);
 int removeDuplicates2(vector<int>& nums);
+int removeDuplicates3(vector<int>& nums);
+
+// Leetcode 80: Remove Duplicates from Sorted Array II
+int removeDuplicates(vector<int>& nums);
 
 
 
