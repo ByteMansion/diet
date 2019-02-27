@@ -91,6 +91,7 @@ int removeDuplicates(vector<int>& nums);
 
 // Leetcode 48: Rotate Image
 void rotate(vector<vector<int>>& matrix);
+void rotate2(vector<vector<int>>& matrix);
 
 
 

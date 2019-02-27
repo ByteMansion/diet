@@ -1190,6 +1190,8 @@ int removeDuplicates(vector<int>& nums)
 
 /**
  * @brief   Leetcode 48: Rotate Image
+ *  Those elements form a circle, just swap adjacent two 
+ *  elements if rotete degree is 90.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 100%
@@ -1205,6 +1207,22 @@ void rotate(vector<vector<int>>& matrix)
             std::swap(tmp, matrix[N-1-i][N-1-j]);
             std::swap(tmp, matrix[N-1-j][i]);
             std::swap(tmp, matrix[i,j]);
+        }
+    }
+}
+
+/**
+ * @brief   Leetcode 48: Roteta Image
+ *  A general method when rotating image in clockwise way.
+ *
+ */
+void rotate2(vector<vector<int>>& matrix)
+{
+    std::reverse(matrix.begin(), matrix.end());
+    int N = matrix[0].size();
+    for(int i = 0; i < N; ++i) {
+        for(int j = i+1; j < N; ++j) {
+            std::swap(matrix[i][j], matrix[j][i]);
         }
     }
 }
