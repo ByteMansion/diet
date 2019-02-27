@@ -1065,6 +1065,84 @@ int maxArea2(vector<int>& height)
 			j -= 1;
 		}
 	}
-	
+
 	return area;
+}
+
+/**
+ * @brief   Leetcode 26: Remove Duplicates from Sorted Array
+
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 20%
+ */
+int removeDuplicates(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return (int)nums.size();
+    }
+
+    auto prev = nums.begin();
+    auto iter = prev + 1;
+    while(iter != nums.end()) {
+
+        if(*iter == *prev) {
+            iter = nums.erase(iter);
+        } else {
+            prev = iter;
+            iter += 1;
+        }
+    }
+
+    return (int)nums.size();
+}
+
+/**
+ * @brief   Leetcode 26: Remove Duplicates from Sorted Array
+ *  This solution is same as above one, but using index to iterate elements.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 20%
+ */
+int removeDuplicates2(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return (int)nums.size();
+    }
+
+    for(int i = 1; i < nums.size(); ++i) {
+        if(i < nums.size() && nums[i] == nums[i-1]) {
+            nums.erase(nums.begin() + i);
+            i -= 1;
+        }
+    }
+    return (int)nums.size();
+}
+
+/**
+ * @brief   Leetcode 26: Remove Duplicates from Sorted Array
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int removeDuplicates3(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return (int)nums.size();
+    }
+
+    int dupFlag = -1;
+    int i = 1;
+    while(i < nums.size()) {
+        if(dupFlag == -1 && nums[i] == nums[i-1]) {
+            dupFlag = i;
+        }
+        if(nums[i] == nums[i-1] || dupFlag == -1) {
+            i += 1;
+        } else {
+            nums[dupFlag++] = nums[i++];
+        }
+    }
+
+    return (dupFlag == -1) ? nums.size() : dupFlag;
 }
