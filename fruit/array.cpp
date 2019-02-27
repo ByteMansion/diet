@@ -1187,3 +1187,24 @@ int removeDuplicates(vector<int>& nums)
 
     return (dupFlag == -1) ? nums.size() : dupFlag;
 }
+
+/**
+ * @brief   Leetcode 48: Rotate Image
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+void rotate(vector<vector<int>>& matrix)
+{
+    size_t N = matrix[0].size();
+
+    for(int i = 0; i < N/2; ++i) {
+        for(int j = i; j < N-1-i; ++j) {
+            int tmp = matrix[i][j];
+            std::swap(tmp, matrix[j][N-1-i]);
+            std::swap(tmp, matrix[N-1-i][N-1-j]);
+            std::swap(tmp, matrix[N-1-j][i]);
+            std::swap(tmp, matrix[i,j]);
+        }
+    }
+}
