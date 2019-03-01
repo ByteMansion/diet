@@ -1226,3 +1226,44 @@ void rotate2(vector<vector<int>>& matrix)
         }
     }
 }
+/**
+ * @brief   Leetcode 54: Spiral Matrix
+ *
+ */
+vector<int> spiralOrder(vector<vector<int>>& matrix)
+{
+    if(matrix.empty()) {
+        return vector<int>{};
+    }
+    vector<int> result;
+    int R = matrix.size();  // line number
+    int C = matrix[0].size();  // column number
+
+    int row = 0, col = 0;
+    int COUNT = (R%2 ? (R/2+1) : R/2);
+    while(row < COUNT) {
+        // positive direction
+        // line
+        for(int j = col; j < C-col; ++j) {
+            result.push_back(matrix[row][j]);
+        }
+        // column
+        for(int i = row+1; i < R-row ; ++i) {
+            result.push_back(matrix[i][C-col-1]);
+        }
+        // negative direction
+        // line
+        for(int j = C-col-2; j >= col; --j) {
+            result.push_back(matrix[R-row-1][j]);
+        }
+        // column
+        for(int i = R-row-2; i > row; --i) {
+            result.push_back(matrix[i][col]);
+        }
+        // refresh initial value
+        row += 1;
+        col += 1;
+    }
+
+    return result;
+}

@@ -93,6 +93,8 @@ int removeDuplicates(vector<int>& nums);
 void rotate(vector<vector<int>>& matrix);
 void rotate2(vector<vector<int>>& matrix);
 
+// Leetcode 54: Spiral Matrix
+vector<int> spiralOrder(vector<vector<int>>& matrix);
 
 
 
