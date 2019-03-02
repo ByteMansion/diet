@@ -87,7 +87,7 @@ int removeDuplicates2(vector<int>& nums);
 int removeDuplicates3(vector<int>& nums);
 
 // Leetcode 80: Remove Duplicates from Sorted Array II
-int removeDuplicates(vector<int>& nums);
+int removeDuplicatesII(vector<int>& nums);
 
 // Leetcode 48: Rotate Image
 void rotate(vector<vector<int>>& matrix);

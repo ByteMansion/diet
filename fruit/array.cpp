@@ -1144,7 +1144,7 @@ int removeDuplicates3(vector<int>& nums)
         }
     }
 
-    return (dupFlag == -1) ? nums.size() : dupFlag;
+    return (dupFlag == -1) ? (int)nums.size() : dupFlag;
 }
 
 /**
@@ -1153,7 +1153,7 @@ int removeDuplicates3(vector<int>& nums)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 100%
  */
-int removeDuplicates(vector<int>& nums)
+int removeDuplicatesII(vector<int>& nums)
 {
 
     if(nums.size() < 2) {
@@ -1185,7 +1185,7 @@ int removeDuplicates(vector<int>& nums)
         }
     }
 
-    return (dupFlag == -1) ? nums.size() : dupFlag;
+    return (dupFlag == -1) ? (int)nums.size() : dupFlag;
 }
 
 /**
@@ -1206,7 +1206,7 @@ void rotate(vector<vector<int>>& matrix)
             std::swap(tmp, matrix[j][N-1-i]);
             std::swap(tmp, matrix[N-1-i][N-1-j]);
             std::swap(tmp, matrix[N-1-j][i]);
-            std::swap(tmp, matrix[i,j]);
+            std::swap(tmp, matrix[i][j]);
         }
     }
 }
@@ -1215,11 +1215,13 @@ void rotate(vector<vector<int>>& matrix)
  * @brief   Leetcode 48: Roteta Image
  *  A general method when rotating image in clockwise way.
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 void rotate2(vector<vector<int>>& matrix)
 {
     std::reverse(matrix.begin(), matrix.end());
-    int N = matrix[0].size();
+    int N = (int)matrix[0].size();
     for(int i = 0; i < N; ++i) {
         for(int j = i+1; j < N; ++j) {
             std::swap(matrix[i][j], matrix[j][i]);
@@ -1229,6 +1231,8 @@ void rotate2(vector<vector<int>>& matrix)
 /**
  * @brief   Leetcode 54: Spiral Matrix
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 vector<int> spiralOrder(vector<vector<int>>& matrix)
 {
@@ -1236,12 +1240,13 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
         return vector<int>{};
     }
     vector<int> result;
-    int R = matrix.size();  // line number
-    int C = matrix[0].size();  // column number
+    int R = (int)matrix.size();  // line number
+    int C = (int)matrix[0].size();  // column number
 
     int row = 0, col = 0;
-    int COUNT = (R%2 ? (R/2+1) : R/2);
-    while(row < COUNT) {
+    int COUNT1 = (R%2 ? (R/2+1) : R/2);
+	int COUNT2 = (C%2 ? (C/2+1) : C/2);
+    while(row < COUNT1 && col < COUNT2) {
         // positive direction
         // line
         for(int j = col; j < C-col; ++j) {
@@ -1253,11 +1258,11 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
         }
         // negative direction
         // line
-        for(int j = C-col-2; j >= col; --j) {
+        for(int j = C-col-2; j >= col && R-row-1 > row; --j) {
             result.push_back(matrix[R-row-1][j]);
         }
         // column
-        for(int i = R-row-2; i > row; --i) {
+        for(int i = R-row-2; i > row && col < C-col-1; --i) {
             result.push_back(matrix[i][col]);
         }
         // refresh initial value
