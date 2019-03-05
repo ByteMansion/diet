@@ -1282,10 +1282,10 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
 vector<int> spiralOrder2(vector<vector<int>>& matrix)
 {
     vector<int> results;
-    int R = matrix.size();
+    int R = (int)matrix.size();
     if(R == 0) return results;
 
-    int C = matrix[0].size();
+    int C = (int)matrix[0].size();
     if(C == 0) return results;
 
     // record target steps in each direction
@@ -1307,4 +1307,31 @@ vector<int> spiralOrder2(vector<vector<int>>& matrix)
     }
 
     return results;
+}
+
+/**
+ * @brief	Leetcode 55: Jump Game
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 97%
+ */
+bool canJump(vector<int>& nums)
+{
+	if (nums.size() < 2) {
+		return true;
+	}
+	
+	int N = (int)nums.size();
+	vector<int> dp(N, 0);
+	int border = 0;
+	for (int i = 0; i < N-1 && i <= border; ++i) {
+		
+		dp[i] = i + nums[i];
+		border = std::max(dp[i], border);
+		if(dp[i] >= N-1) {
+			return true;
+		}
+	}
+	
+	return false;
 }
