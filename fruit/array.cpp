@@ -1272,3 +1272,39 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 54: Spiral Matrix
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+vector<int> spiralOrder2(vector<vector<int>>& matrix)
+{
+    vector<int> results;
+    int R = matrix.size();
+    if(R == 0) return results;
+
+    int C = matrix[0].size();
+    if(C == 0) return results;
+
+    // record target steps in each direction
+    vector<int> nSteps{C, R-1};
+    // 4 directions to move pointer
+    vector<vector<int>> direction{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    int maker = 0; // index of direction
+    int row = 0;  // initial position
+    int col = -1;
+    while(nSteps[maker%2]) {
+        for(int i = 0; i < nSteps[maker%2]; ++i) {
+            row += direction[maker][0];
+            col += direction[maker][1];
+            results.push_back(matrix[row][col]);
+        }
+        nSteps[maker%2] -= 1;
+        maker = (maker + 1) % 4;
+    }
+
+    return results;
+}
