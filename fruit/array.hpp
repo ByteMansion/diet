@@ -103,6 +103,9 @@ bool canJump2(vector<int>& nums);
 
 // Leetcode 45: Jump Game II
 int jump(vector<int>& nums);
+int jump2(vector<int>& nums);
+int jump3(vector<int>& nums);
+int jump4(vector<int>& nums);
 
 
 

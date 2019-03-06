@@ -1367,7 +1367,7 @@ bool canJump2(vector<int>& nums)
  *  In the problem, we can assume that we can always reach the last index.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution beats 13%
+ * Accepted Solutions Runtime Distribution beats 15%
  */
 int jump(vector<int>& nums)
 {
@@ -1380,6 +1380,9 @@ int jump(vector<int>& nums)
     vector<int> dp(N, 0);
     vector<int> steps(N, 0);
     for(int i = 0; i < N-1; ++i) {
+        if(steps[i] >= result) {
+            continue;
+        }
         dp[i] = i + nums[i];
         for(int j = i+1; j <= dp[i] && j < N; ++j) {
             steps[j] = steps[j] > 0 ? std::min(steps[i]+1, steps[j]) : steps[i] + 1;
@@ -1390,4 +1393,93 @@ int jump(vector<int>& nums)
     }
 
     return result;
+}
+
+/**
+ * @brief   Leetcode 45: Jump Games II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.58%
+ */
+int jump2(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return 0;
+    }
+    int end = 0;
+    int steps = 0;
+    int maxPos = 0;
+
+    for(int i = 0; i < nums.size() - 1; ++i) {
+        maxPos = std::max(maxPos, i + nums[i]);
+        if(maxPos == nums.size() - 1) {
+            return ++steps;
+        }
+        // each time we reach the right border determined by element
+        // value, result will increase by 1.
+        if(i == end) {
+            end = maxPos;
+            steps++;
+        }
+    }
+
+    return steps;
+}
+
+/**
+ * @brief   Leetcode 45: Jump Games II
+ *  BFS method
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.58%
+ */
+int jump3(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return 0;
+    }
+
+    int curMax = 0;
+    int nextMax = 0;
+    int level = 0;
+    int i = 0;
+    while(i  <= curMax) {
+        level++;
+        for(; i <= curMax; ++i) {
+            nextMax = std::max(i + nums[i], nextMax);
+            if(nextMax >= nums.size()-1) {
+                return level;
+            }
+        }
+        curMax = nextMax;
+    }
+
+    return 0;
+}
+
+/**
+ * @brief   Leetcode 45: Jump Games II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 34.9%
+ */
+int jump4(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return 0;
+    }
+    int N = nums.size();
+    int position = N - 1;
+    int steps = 0;
+    while(position != 0) {
+        for(int i = 0; i < position; ++i) {
+            if(nums[i] >= position - i) {
+                position = i;
+                steps += 1;
+                break;
+            }
+        }
+    }
+
+    return steps;
 }
