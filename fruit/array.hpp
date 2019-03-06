@@ -101,6 +101,8 @@ vector<int> spiralOrder2(vector<vector<int>>& matrix);
 bool canJump(vector<int>& nums);
 bool canJump2(vector<int>& nums);
 
+// Leetcode 45: Jump Game II
+int jump(vector<int>& nums);
 
 
 

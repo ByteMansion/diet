@@ -1361,3 +1361,33 @@ bool canJump2(vector<int>& nums)
 
     return true;
 }
+
+/**
+ * @brief   Leetcode 45: Jump Games II
+ *  In the problem, we can assume that we can always reach the last index.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 13%
+ */
+int jump(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return 0;
+    }
+    int result = INT_MAX;
+
+    int N = (int)nums.size();
+    vector<int> dp(N, 0);
+    vector<int> steps(N, 0);
+    for(int i = 0; i < N-1; ++i) {
+        dp[i] = i + nums[i];
+        for(int j = i+1; j <= dp[i] && j < N; ++j) {
+            steps[j] = steps[j] > 0 ? std::min(steps[i]+1, steps[j]) : steps[i] + 1;
+        }
+        if(dp[i] >= N-1) {
+            result = std::min(steps[i] + 1, result);
+        }
+    }
+
+    return result;
+}
