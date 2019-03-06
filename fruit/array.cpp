@@ -1320,18 +1320,44 @@ bool canJump(vector<int>& nums)
 	if (nums.size() < 2) {
 		return true;
 	}
-	
+
 	int N = (int)nums.size();
 	vector<int> dp(N, 0);
 	int border = 0;
 	for (int i = 0; i < N-1 && i <= border; ++i) {
-		
 		dp[i] = i + nums[i];
 		border = std::max(dp[i], border);
 		if(dp[i] >= N-1) {
 			return true;
 		}
 	}
-	
+
 	return false;
+}
+
+/**
+ * @brief	Leetcode 55: Jump Game
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 97%
+ */
+bool canJump2(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return true;
+    }
+
+    int N = (int)nums.size();
+    int steps = nums[0];
+    for(int i = 1; i < N; ++i) {
+        steps--;
+        if(steps < 0) {
+            return false;
+        }
+        if(nums[i] > steps) {
+            steps = nums[i];
+        }
+    }
+
+    return true;
 }
