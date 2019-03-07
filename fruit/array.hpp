@@ -16,6 +16,13 @@
 
 using std::vector;
 
+struct Interval {
+	int start;
+	int end;
+	Interval() : start(0), end(0) {}
+	Interval(int s, int e) : start(s), end(e) {}
+};
+
 // Leetcode 31: Next Permutation
 void nextPermutation(vector<int>& nums);
 void nextPermutation2(vector<int>& nums);
@@ -107,6 +114,8 @@ int jump2(vector<int>& nums);
 int jump3(vector<int>& nums);
 int jump4(vector<int>& nums);
 
+// Leetcode 56: Merge Intervals
+vector<Interval> merge(vector<Interval>& intervals);
 
 
 

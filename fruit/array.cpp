@@ -1468,7 +1468,7 @@ int jump4(vector<int>& nums)
     if(nums.size() < 2) {
         return 0;
     }
-    int N = nums.size();
+    int N = (int)nums.size();
     int position = N - 1;
     int steps = 0;
     while(position != 0) {
@@ -1482,4 +1482,36 @@ int jump4(vector<int>& nums)
     }
 
     return steps;
+}
+
+/**
+ * @brief	Leetcode 56: Merge Intervals
+ *
+ */
+vector<Interval> merge(vector<Interval>& intervals)
+{
+	if (intervals.size() < 2) {
+		return intervals;
+	}
+	std::sort(intervals.begin(), intervals.end(),
+			  [](Interval m, Interval n){return m.start <= n.start;});
+//	vector<Interval> results;
+	int count = 0;
+	for (int i = 0; i < intervals.size(); ++i) {
+		Interval tmp(intervals[i].start, intervals[i].end);
+		int j = i + 1;
+		while (j < intervals.size() && tmp.end >= intervals[j].start) {
+			tmp.start = std::min(tmp.start, intervals[j].start);
+			tmp.end = std::max(tmp.end, intervals[j].end);
+			j += 1;
+		}
+		
+		intervals[count].start = tmp.start;
+		intervals[count].end = tmp.end;
+		i = j - 1;
+		count += 1;
+	}
+	
+	intervals.resize(count + 1);
+	return intervals;
 }
