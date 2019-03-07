@@ -1,4 +1,3 @@
-# solutions of Leetcode problems
+# Leetcode problem heck
 
-This project is just for fun.
 
