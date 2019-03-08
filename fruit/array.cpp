@@ -1487,18 +1487,20 @@ int jump4(vector<int>& nums)
 
 /**
  * @brief	Leetcode 56: Merge Intervals
- *  This method can NOT be accepted for std::sort() function leads to
- *  heap overflow error.
+ *  This method can NOT be accepted if we use pass-by-value in lambda statement in std::sort()
+ *  function, which leads to heap overflow error.
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.7%
  */
 vector<Interval> merge(vector<Interval>& intervals)
 {
 	if (intervals.size() < 2) {
 		return intervals;
 	}
+    // pass-by-reference is necessary.
 	std::sort(intervals.begin(), intervals.end(),
-			  [](Interval m, Interval n){return m.start <= n.start;});
-//	vector<Interval> results;
+			  [](Interval& m, Interval& n){ return m.start <= n.start; } );
 	int count = 0;
 	for (int i = 0; i < intervals.size(); ++i) {
 		Interval tmp(intervals[i].start, intervals[i].end);
