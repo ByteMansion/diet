@@ -118,6 +118,8 @@ int jump4(vector<int>& nums);
 vector<Interval> merge(vector<Interval>& intervals);
 vector<Interval> merge2(vector<Interval>& intervals);
 
+// Leetcode 57: Insert Interval
+vector<Interval> insert(vector<Interval>& intervals, Interval newInterval);
 
 
 #endif /* array_hpp */

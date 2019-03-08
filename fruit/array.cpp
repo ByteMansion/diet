@@ -1566,3 +1566,50 @@ vector<Interval> merge2(vector<Interval>& intervals)
 
     return results;
 }
+
+/**
+ * @brief   Leetcode 57: Insert Intervals
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.7%
+ */
+vector<Interval> insert(vector<Interval>& intervals, Interval newInterval)
+{
+
+    if(intervals.empty()) {
+        return vector<Interval>{newInterval};
+    }
+
+    int sIndex = 0;
+    int N = intervals.size();
+    int i = 0;
+    while(i < N) {
+        if(newInterval.start <= intervals[i].start) {
+            sIndex = (i == 0 ? 0 : i - 1);
+            intervals.insert(intervals.begin() + i, newInterval);
+            break;
+        }
+        i += 1;
+    }
+    if(i == N) {
+        intervals.insert(intervals.end(), newInterval);
+        sIndex = N - 1;
+    }
+
+    int count = sIndex;
+    for (int i = sIndex; i < intervals.size(); ++i) {
+        Interval tmp(intervals[i].start, intervals[i].end);
+        int j = i + 1;
+        while (j < intervals.size() && tmp.end >= intervals[j].start) {
+            tmp.end = std::max(tmp.end, intervals[j].end);
+            j += 1;
+        }
+        intervals[count].start = tmp.start;
+        intervals[count].end = tmp.end;
+        i = j - 1;
+        count += 1;
+    }
+
+    intervals.resize(count);
+    return intervals;
+}
