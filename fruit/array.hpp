@@ -116,6 +116,7 @@ int jump4(vector<int>& nums);
 
 // Leetcode 56: Merge Intervals
 vector<Interval> merge(vector<Interval>& intervals);
+vector<Interval> merge2(vector<Interval>& intervals);
 
 
 

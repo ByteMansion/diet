@@ -21,6 +21,7 @@ using std::reverse;
 using std::deque;
 using std::unordered_map;
 using std::multimap;
+using std::map;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -1486,6 +1487,8 @@ int jump4(vector<int>& nums)
 
 /**
  * @brief	Leetcode 56: Merge Intervals
+ *  This method can NOT be accepted for std::sort() function leads to
+ *  heap overflow error.
  *
  */
 vector<Interval> merge(vector<Interval>& intervals)
@@ -1505,13 +1508,59 @@ vector<Interval> merge(vector<Interval>& intervals)
 			tmp.end = std::max(tmp.end, intervals[j].end);
 			j += 1;
 		}
-		
+
 		intervals[count].start = tmp.start;
 		intervals[count].end = tmp.end;
 		i = j - 1;
 		count += 1;
 	}
-	
+
 	intervals.resize(count + 1);
 	return intervals;
+}
+
+/**
+ * @brief	Leetcode 56: Merge Intervals
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 83.2%
+ */
+vector<Interval> merge2(vector<Interval>& intervals)
+{
+    if(intervals.size() < 2) {
+        return intervals;
+    }
+    vector<Interval> results;
+    unordered_map<int, int> mStartToInterval;
+    int minStart = INT_MAX;
+    int maxStart = INT_MIN;
+    for(int i = 0; i < intervals.size(); ++i) {
+        minStart = std::min(intervals[i].start, minStart);
+        maxStart = std::max(intervals[i].start, maxStart);
+        if(mStartToInterval.find(intervals[i].start) != mStartToInterval.end()) {
+            mStartToInterval[intervals[i].start] = std::max(mStartToInterval[intervals[i].start],
+                                                            intervals[i].end - intervals[i].start + 1);
+        } else {
+            mStartToInterval[intervals[i].start] = intervals[i].end - intervals[i].start + 1;
+        }
+    }
+
+    while(minStart <= maxStart) {
+        if(mStartToInterval.find(minStart) == mStartToInterval.end()) {
+            minStart += 1;
+            continue;
+        }
+        int curMax = mStartToInterval[minStart] + minStart - 1;
+        int index = minStart + 1;
+        while(index <= maxStart && index <= curMax) {
+            if(mStartToInterval.find(index) != mStartToInterval.end()) {
+                curMax = std::max(curMax, mStartToInterval[index] + index - 1);
+            }
+            index += 1;
+        }
+        results.push_back(Interval(minStart, curMax));
+        minStart = curMax + 1;
+    }
+
+    return results;
 }
