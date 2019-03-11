@@ -12,10 +12,12 @@
 #include "array.hpp"
 
 #include <functional>
+#include <unordered_set>
 
 using std::pair;
 using std::function;
 using std::vector;
+using std::unordered_set;
 
 /**
  * @brief   Leetcode 60: Permutation Sequence
@@ -404,6 +406,40 @@ vector<int> partitionLabels(string S)
     vector<int> results;
     for(int i = 0; i < intervals.size(); ++i) {
         results.push_back(intervals[i].end - intervals[i].start + 1);
+    }
+
+    return results;
+}
+
+/**
+ * @brief   Leetcode 763: Partition Labels
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 16%
+ */
+vector<int> partitionLabels(string S)
+{
+    if(S.empty()) {
+        return vector<int>{};
+    }
+    if(S.length() < 2) {
+        return vector<int>{1};
+    }
+
+    vector<int> results;
+    int maxPos = 0;
+    int minPos = 0;
+    for(int i = 0; i < S.length() && i <= maxPos; ++i) {
+        minPos = std::min(minPos, i);
+        maxPos = std::max(maxPos, (int)S.find_last_of(S[i]));
+        if(i == maxPos) {
+            results.push_back(maxPos - minPos + 1);
+            if(maxPos == S.length() - 1) {
+                return results;
+            }
+            minPos = maxPos + 1;
+            maxPos = maxPos + 1;
+        }
     }
 
     return results;

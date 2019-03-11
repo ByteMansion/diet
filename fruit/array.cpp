@@ -1517,7 +1517,7 @@ vector<Interval> merge(vector<Interval>& intervals)
 		count += 1;
 	}
 
-	intervals.resize(count + 1);
+	intervals.resize(count);
 	return intervals;
 }
 

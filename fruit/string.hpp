@@ -39,6 +39,7 @@ int myAtoi(string str);
 
 // Leetcode 763: Partition Labels
 vector<int> partitionLabels(string S);
+vector<int> partitionLabels2(string S);
 
 
 
