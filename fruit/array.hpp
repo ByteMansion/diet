@@ -125,5 +125,10 @@ vector<Interval> merge2(vector<Interval>& intervals);
 // Leetcode 57: Insert Interval
 vector<Interval> insert(vector<Interval>& intervals, Interval newInterval);
 
+// Leetcode 62: Unique Paths
+int uniquePaths(int m, int n);
+
+
+
 
 #endif /* array_hpp */

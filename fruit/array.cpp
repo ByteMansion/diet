@@ -1691,3 +1691,30 @@ vector<Interval> insert(vector<Interval>& intervals, Interval newInterval)
     intervals.resize(count);
     return intervals;
 }
+
+/**
+ * @brief   Leetcode 62: Unique Paths
+ *
+ */
+static void uniquePathsHelper(const int m, const int n, int& result,
+                         int row, int col, unordered_set<int>& sIndex)
+{
+    int index = row * n + col;
+    if(index + 1 == m * n) {
+        return;
+    }
+    if(row+1 < m && col+1 < n && sIndex.find(index) == sIndex.end()) {
+        result += 2;
+        sIndex.insert(index);
+    }
+    uniquePathsHelper(m, n, result, row+1, col);
+    uniquePathsHelper(m, n, result, row, col+1);
+}
+int uniquePaths(int m, int n)
+{
+    int result = 0;
+    unordered_set<int> sIndex;
+    uniquePathsHelper(m, n, result, 0, 0, sIndex);
+
+    return result;
+}
