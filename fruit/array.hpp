@@ -106,6 +106,7 @@ vector<int> spiralOrder2(vector<vector<int>>& matrix);
 
 // Leetcode 59: Spiral Matrix II
 vector<vector<int>> generateMatrix(int n);
+vector<vector<int>> generateMatrix2(int n);
 
 // Leetcode 55: Jump Game
 bool canJump(vector<int>& nums);

@@ -1352,6 +1352,43 @@ vector<vector<int>> generateMatrix(int n)
 }
 
 /**
+ * @brief   Leetcode 59: Spiral Matrix II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+vector<vector<int>> generateMatrix2(int n)
+{
+    if(n == 1) {
+        return vector<vector<int>>{vector<int>{1}};
+    }
+    vector<vector<int>> directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    vector<vector<int>> results(n, vector<int>(n, 0));
+    int SUM = 1;
+    int row = 0;
+    int col = 0;
+    int DIR = 0;
+    int iterCnt = 0;
+    while(SUM <= n*n) {
+        results[row][col] = SUM++;
+        row = row + directions[DIR][0];
+        col = col + directions[DIR][1];
+        if((row == iterCnt && col == n-1-iterCnt) || (row == n-iterCnt-1 && col == n-iterCnt-1) ||
+           (row == n-iterCnt-1 && col == iterCnt) || (row == iterCnt && col == iterCnt)) {
+            DIR = (DIR + 1) % 4;
+            if(DIR == 0) {
+                iterCnt += 1;
+                row = iterCnt;
+                col = iterCnt;
+            }
+
+        }
+    }
+
+    return results;
+}
+
+/**
  * @brief	Leetcode 55: Jump Game
  *
  * -------------------------------------------
