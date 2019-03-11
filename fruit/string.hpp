@@ -37,6 +37,9 @@ string convert(string s, int numRows);
 // Leetcode 8: String to Integer(atoi)
 int myAtoi(string str);
 
+// Leetcode 763: Partition Labels
+vector<int> partitionLabels(string S);
+
 
 
 

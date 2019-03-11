@@ -1581,7 +1581,7 @@ vector<Interval> insert(vector<Interval>& intervals, Interval newInterval)
     }
 
     int sIndex = 0;
-    int N = intervals.size();
+    int N = (int)intervals.size();
     int i = 0;
     while(i < N) {
         if(newInterval.start <= intervals[i].start) {

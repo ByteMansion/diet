@@ -9,6 +9,7 @@
  */
 
 #include "string.hpp"
+#include "array.hpp"
 
 #include <functional>
 
@@ -336,7 +337,7 @@ int myAtoi(string str)
 					  (str[start] != '+' && str[start] != '-'))) {
 		return 0;
 	}
-	
+
 	// judge if integer is positive
 	int startIndex = start;
 	bool isPositive = true;
@@ -349,13 +350,13 @@ int myAtoi(string str)
 	} else {
 		return 0;
 	}
-	
+
 	// get the end of valid string
 	int endIndex = startIndex;
 	while(endIndex+1 < N && isInteger(str[endIndex+1])) {
 		endIndex += 1;
 	}
-	
+
 	// convert from string to integer
 	int result = 0;
 	for(int i = startIndex; i <= endIndex; ++i) {
@@ -370,6 +371,40 @@ int myAtoi(string str)
 		}
 		result = (str[i] - '0') + result * 10;
 	}
-	
+
 	return (isPositive ? result : (-1 * result));
+}
+
+/**
+ * @brief   Leetcode 763: Partition Labels
+ *  Transform this problem to a vector related one, so we can solve this problem
+ *  in another way.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+vector<int> partitionLabels(string S)
+{
+    if(S.empty()) {
+        return vector<int>{};
+    }
+    if(S.length() < 2) {
+        return vector<int>{1};
+    }
+    vector<Interval> intervals;
+    for(char ele = 'a'; ele <= 'z'; ++ele) {
+        int firstPos = S.find_first_of(ele);
+        int lastPos  = S.find_last_of(ele);
+        if(firstPos != std::string::npos && lastPos != std::string::npos) {
+            intervals.push_back(Interval(firstPos, lastPos));
+        }
+    }
+    merge(intervals);
+
+    vector<int> results;
+    for(int i = 0; i < intervals.size(); ++i) {
+        results.push_back(intervals[i].end - intervals[i].start + 1);
+    }
+
+    return results;
 }
