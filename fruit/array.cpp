@@ -1311,6 +1311,47 @@ vector<int> spiralOrder2(vector<vector<int>>& matrix)
 }
 
 /**
+ * @brief   Leetcode 59: Spiral Matrix II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+vector<vector<int>> generateMatrix(int n)
+{
+    if(n == 1) {
+        return vector<vector<int>>{vector<int>{1}};
+    }
+
+    int acc = 1;
+    int row = 0;
+    int col = 0;
+    int iter = ((n % 2) ? (n / 2 + 1) : n/2);
+    vector<vector<int>> results(n, vector<int>(n, 0));
+    while(acc <= n*n && row < iter && col < iter) {
+        // from left to right in a row
+        for(int i = col; i < n - col; ++i) {
+            results[row][i] = acc++;
+        }
+        // from up to down in a column
+        for(int j = row+1; j < n - row; ++j) {
+            results[j][n - col - 1] = acc++;
+        }
+        // from right to left in a row
+        for(int i = n - col - 2; i >= col && (n-row-1 > row); --i) {
+            results[n - row - 1][i] = acc++;
+        }
+        // from down to up in a column
+        for(int j = n - row - 2; j > row && (col < n-col-1); --j) {
+            results[j][col] = acc++;
+        }
+        row++;
+        col++;
+    }
+
+    return results;
+}
+
+/**
  * @brief	Leetcode 55: Jump Game
  *
  * -------------------------------------------
