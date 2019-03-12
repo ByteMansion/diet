@@ -131,6 +131,10 @@ int uniquePaths2(int m, int n);
 int uniquePaths3(int m, int n);
 int uniquePaths4(int m, int n);
 
+// Leetcode 63: Unique Paths II
+int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid);
+
+
 
 
 

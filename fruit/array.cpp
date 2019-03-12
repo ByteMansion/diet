@@ -1783,3 +1783,24 @@ int uniquePaths4(int m, int n)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 63: Unique Paths II
+ *
+ */
+int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
+{
+    int row = obstacleGrid.size();
+    int col = obstacleGrid[0].size();
+
+    vector<vector<int>> dp(row, vector<int>(col, 1));
+    for(int i = 1; i < row; ++i) {
+        for(int j = 1; j < col; ++j) {
+                if(obstacleGrid[i-1][j] && obstacleGrid[i][j-1]) {
+                    continue;
+                } else {
+                    dp[i][j] = (obstacleGrid[i-1][j] ? dp[i][j-1] : dp)
+                }
+        }
+    }
+}
