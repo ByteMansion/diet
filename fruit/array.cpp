@@ -14,6 +14,7 @@
 #include <deque>
 #include <unordered_map>
 #include <map>
+#include <unordered_set>
 
 using std::swap;
 using std::sort;
@@ -22,6 +23,7 @@ using std::deque;
 using std::unordered_map;
 using std::multimap;
 using std::map;
+using std::unordered_set;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -1707,8 +1709,8 @@ static void uniquePathsHelper(const int m, const int n, int& result,
         result += 2;
         sIndex.insert(index);
     }
-    uniquePathsHelper(m, n, result, row+1, col);
-    uniquePathsHelper(m, n, result, row, col+1);
+    uniquePathsHelper(m, n, result, row+1, col, sIndex);
+    uniquePathsHelper(m, n, result, row, col+1, sIndex);
 }
 int uniquePaths(int m, int n)
 {

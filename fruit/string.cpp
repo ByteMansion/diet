@@ -417,7 +417,7 @@ vector<int> partitionLabels(string S)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 16%
  */
-vector<int> partitionLabels(string S)
+vector<int> partitionLabels2(string S)
 {
     if(S.empty()) {
         return vector<int>{};
