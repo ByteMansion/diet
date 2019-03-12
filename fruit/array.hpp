@@ -127,6 +127,8 @@ vector<Interval> insert(vector<Interval>& intervals, Interval newInterval);
 
 // Leetcode 62: Unique Paths
 int uniquePaths(int m, int n);
+int uniquePaths2(int m, int n);
+int uniquePaths3(int m, int n);
 
 
 

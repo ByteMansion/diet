@@ -1696,27 +1696,60 @@ vector<Interval> insert(vector<Interval>& intervals, Interval newInterval)
 
 /**
  * @brief   Leetcode 62: Unique Paths
+ *  dp[i][j] means all unique paths to arrive at the point (i, j)
+ *  time complexity is O(m*n), space complexity is O(m*n)
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
  */
-static void uniquePathsHelper(const int m, const int n, int& result,
-                         int row, int col, unordered_set<int>& sIndex)
-{
-    int index = row * n + col;
-    if(index + 1 == m * n) {
-        return;
-    }
-    if(row+1 < m && col+1 < n && sIndex.find(index) == sIndex.end()) {
-        result += 2;
-        sIndex.insert(index);
-    }
-    uniquePathsHelper(m, n, result, row+1, col, sIndex);
-    uniquePathsHelper(m, n, result, row, col+1, sIndex);
-}
 int uniquePaths(int m, int n)
 {
-    int result = 0;
-    unordered_set<int> sIndex;
-    uniquePathsHelper(m, n, result, 0, 0, sIndex);
+    vector<vector<int>> dp(m, vector<int>(n, 1));
+    for(int i = 1; i < m; ++i) {
+        for(int j = 1; j < n; ++j) {
+            dp[i][j] = dp[i-1][j] + dp[i][j-1];
+        }
+    }
 
-    return result;
+    return dp[m-1][n-1];
+}
+
+/**
+ * @brief   Leetcode 62: Unique Paths
+ *  space complexity is O(n)
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int uniquePaths2(int m, int n)
+{
+    vector<int> pre(n, 1), cur(n, 1);
+    for(int i = 1; i < m; ++i) {
+        for(int j = 1; j < n; ++j) {
+            cur[j] = pre[j] + cur[j-1];
+        }
+        std::swap(pre, cur);
+    }
+
+    return pre[n-1];
+}
+
+/**
+ * @brief   Leetcode 62: Unique Paths
+ *  space complexity is O(n)
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int uniquePaths3(int m, int n)
+{
+    vector<int> cur(n, 1);
+
+    for(int i= 1; i < m; ++i) {
+        for(int j = 1; j < n; ++j) {
+            cur[j] += cur[j-1];
+        }
+    }
+
+    return cur[n-1];
 }
