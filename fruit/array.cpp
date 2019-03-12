@@ -1753,3 +1753,33 @@ int uniquePaths3(int m, int n)
 
     return cur[n-1];
 }
+
+/**
+ * @brief   Leetcode 62: Unique Paths
+ *  Mathematical solution
+ *  Move m-1 steps down and n-1 steps right, so this problem is nothing but a 
+ *  permutation problem.
+ *  result = (m + n)! / (m! * n!)
+ *  time complexity is O(1).
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int uniquePaths4(int m, int n)
+{
+    if(m == 1 || n == 1) {
+        return 1;
+    }
+    if(m < n) {
+        std::swap(m, n);
+    }
+    m--; n--;
+    int j = 1;
+    long int result = 1;
+    for(int i = m + 1; i <= m + n; ++i, ++j) {
+        result *= i;
+        result /= j;
+    }
+
+    return result;
+}
