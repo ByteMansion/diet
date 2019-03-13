@@ -1794,22 +1794,28 @@ int uniquePaths4(int m, int n)
  */
 int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
 {
+    if(obstacleGrid[0][0])
+        return 0;
+
     int row = obstacleGrid.size();
     int col = obstacleGrid[0].size();
 
+    // initialize first row and first column elements in 1 before first obstacle
+    // other elements in 0
     vector<vector<long int>> dp(row, vector<long int>(col, 0));
     for(int i = 0; i < row; ++i) {
         if(obstacleGrid[i][0] == 0)
-            dp[i][0] =1;
+            dp[i][0] = 1;
         else
             break;
     }
-    for(int j = 0; j < col; ++j) {
+    for(int j = 1; j < col; ++j) {
         if(obstacleGrid[0][j] == 0)
             dp[0][j] = 1;
         else
             break;
     }
+    // calculate all paths with obstacles in grid
     for(int i = 1; i < row; ++i) {
         for(int j = 1; j < col; ++j) {
             if(obstacleGrid[i][j] || (obstacleGrid[i-1][j] && obstacleGrid[i][j-1])) {
@@ -1825,4 +1831,44 @@ int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
     }
 
     return dp[row-1][col-1];
+}
+
+/**
+ * @brief   Leetcode 63: Unique Paths II
+ *  Use same method with above solution, but not create extra arrays to save paths instead
+ *  of using existent grid.
+ *  time complexity is O(M*N), space complexity is O(1).
+ *  This solution can NOT be accepted because path number can be greater than integer up-limit.
+ *
+ */
+int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid)
+{
+    // initialize
+    if(obstacleGrid[0][0]) {
+        return 0;
+    } else {
+        obstacleGrid[0][0] = 1;
+    }
+    int row = obstacleGrid.size();
+    int col = obstacleGrid[0].size();
+
+    for(int i = 1; i < row; ++i) {
+        obstacleGrid[i][0] = ((obstacleGrid[i][0] == 0 && obstacleGrid[i-1][0] == 1) ? 1 : 0);
+    }
+    for(int j = 1; j < col; ++j) {
+        obstacleGrid[0][j] = ((obstacleGrid[0][j] == 0 && obstacleGrid[0][j-1] == 1) ? 1 : 0);
+    }
+
+    // get all paths
+    for(int i = 1; i < row; ++i) {
+        for(int j = 1; j < col; ++j) {
+            if(obstacleGrid[i][j] == 0) {
+                obstacleGrid[i][j] = obstacleGrid[i-1][j] + obstacleGrid[i][j-1];
+            } else {
+                obstacleGrid[i][j] = 0;
+            }
+        }
+    }
+
+    return obstacleGrid[row-1][col-1];
 }
