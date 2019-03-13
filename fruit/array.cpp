@@ -1786,21 +1786,43 @@ int uniquePaths4(int m, int n)
 
 /**
  * @brief   Leetcode 63: Unique Paths II
+ *  The key of the problem is how to return correct result(0) when
+ *  all obstacles block each possible paths.
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
 {
     int row = obstacleGrid.size();
     int col = obstacleGrid[0].size();
 
-    vector<vector<int>> dp(row, vector<int>(col, 1));
+    vector<vector<long int>> dp(row, vector<long int>(col, 0));
+    for(int i = 0; i < row; ++i) {
+        if(obstacleGrid[i][0] == 0)
+            dp[i][0] =1;
+        else
+            break;
+    }
+    for(int j = 0; j < col; ++j) {
+        if(obstacleGrid[0][j] == 0)
+            dp[0][j] = 1;
+        else
+            break;
+    }
     for(int i = 1; i < row; ++i) {
         for(int j = 1; j < col; ++j) {
-                if(obstacleGrid[i-1][j] && obstacleGrid[i][j-1]) {
-                    continue;
-                } else {
-                    dp[i][j] = (obstacleGrid[i-1][j] ? dp[i][j-1] : dp)
-                }
+            if(obstacleGrid[i][j] || (obstacleGrid[i-1][j] && obstacleGrid[i][j-1])) {
+                continue;
+            } else if(obstacleGrid[i-1][j]){
+                dp[i][j] = dp[i][j-1];
+            } else if(obstacleGrid[i][j-1]) {
+                dp[i][j] = dp[i-1][j];
+            } else {
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            }
         }
     }
+
+    return dp[row-1][col-1];
 }
