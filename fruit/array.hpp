@@ -140,6 +140,7 @@ int minPathSum(vector<vector<int>>& grid);
 
 // Leetcode 73: Set Matrix Zeroes
 void setZeroes(vectork<vector<int>>& matrix);
+void setZeroes2(vectork<vector<int>>& matrix);
 
 
 

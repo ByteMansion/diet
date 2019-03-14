@@ -1903,7 +1903,7 @@ int minPathSum(vector<vector<int>>& grid)
 
 /**
  * @brief   Leetcode 73: Set Matrix Zeroes
- *  Create extra space O(m*n) to save falg in the position with zero value
+ *  Create extra space O(m*n) to save falgs in the positions with zero values
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 99%
@@ -1933,6 +1933,47 @@ void setZeroes(vectork<vector<int>>& matrix)
         std::fill(matrix[R].begin(), matrix[R].end(), 0);  // set whole row values as zeroes 
         for(int j = 0; j < row; ++j) {  // set whole column values as zeroes
             matrix[j][C] = 0;
+        }
+    }
+}
+
+/**
+ * @brief   Leetcode 73: Set Matrix Zeroes
+ *  Time complexity is O(m*n), space complexity is O(m+n)
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.4%
+ */
+void setZeroes2(vector<vector<int>>& matrix)
+{
+    if(matrix.empty()) {
+        return;
+    }
+    int row = matrix.size();
+    int col = matrix[0].size();
+    unordered_set<int> rIndex;
+    unordered_set<int> cIndex;
+
+    for(int i = 0; i < row; ++i) {
+        for(int j = 0; j < col; ++j) {
+            if(matrix[i][j] == 0) {
+                if(rIndex.find(i) == rIndex.end()) {
+                    rIndex.insert(i);
+                }
+                if(cIndex.find(j) == cIndex.end()) {
+                    cIndex.insert(j);
+                }
+            }
+        }
+    }
+
+    for(auto& i: rIndex) {
+        std::fill(matrix[i].begin(), matrix[i].end(), 0);
+    }
+
+    for(auto& j: cIndex) {
+        for(int i = 0; i < row; ++i) {
+            matrix[i][j] = 0;
         }
     }
 }
