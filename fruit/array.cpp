@@ -1900,3 +1900,40 @@ int minPathSum(vector<vector<int>>& grid)
 
     return grid[row-1][col-1];
 }
+
+/**
+ * @brief   Leetcode 73: Set Matrix Zeroes
+ *  Create extra space O(m*n) to save falg in the position with zero value
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99%
+ */
+void setZeroes(vectork<vector<int>>& matrix)
+{
+    if(matrix.empty()) {
+        return;
+    }
+
+    // search zero value and then set flag in an single array
+    int row = matrix.size();
+    int col = matrix[0].size();
+    vector<int> markFalg(row * col, 0);
+    for(int i = 0; i < row; ++i) {
+        for(int j = 0; j < col; ++j) {
+            if(matrix[i][j] == 0) {
+                markFalg[i * col + j] = 1;
+            }
+        }
+    }
+    // traverse flag array and set zeroes at corresponding rows and columns
+    for(int i = 0; i < markFalg.size(); ++i) {
+        if(markFalg[i] == 1) {
+            int R = i / col;
+            int C = i - R * col;
+            std::fill(matrix[R].begin(), matrix[R].end(), 0);  // set while row as zeroes 
+            for(int j = 0; j < row; ++j) {  // set whole column as zeroes
+                matrix[j][C] = 0;
+            }
+        }
+    }
+}
