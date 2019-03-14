@@ -135,6 +135,8 @@ int uniquePaths4(int m, int n);
 int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid);
 int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid);
 
+// Leetcode 64: Minimum Path Sum
+int minPathSum(vector<vector<int>>& grid);
 
 
 
