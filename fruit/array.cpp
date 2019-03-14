@@ -1775,7 +1775,7 @@ int uniquePaths4(int m, int n)
     }
     m--; n--;
     int j = 1;
-    long int result = 1;
+    int result = 1;
     for(int i = m + 1; i <= m + n; ++i, ++j) {
         result *= i;
         result /= j;
@@ -1797,8 +1797,8 @@ int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
     if(obstacleGrid[0][0])
         return 0;
 
-    int row = obstacleGrid.size();
-    int col = obstacleGrid[0].size();
+    int row = (int)obstacleGrid.size();
+    int col = (int)obstacleGrid[0].size();
 
     // initialize first row and first column elements in 1 before first obstacle
     // other elements in 0
@@ -1849,8 +1849,8 @@ int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid)
     } else {
         obstacleGrid[0][0] = 1;
     }
-    int row = obstacleGrid.size();
-    int col = obstacleGrid[0].size();
+    int row = (int)obstacleGrid.size();
+    int col = (int)obstacleGrid[0].size();
 
     for(int i = 1; i < row; ++i) {
         obstacleGrid[i][0] = ((obstacleGrid[i][0] == 0 && obstacleGrid[i-1][0] == 1) ? 1 : 0);
@@ -1884,13 +1884,13 @@ int minPathSum(vector<vector<int>>& grid)
     if(grid.empty()) {
         return 0;
     }
-    int row = grid.size();
-    int col = grid[0].size();
+    int row = (int)grid.size();
+    int col = (int)grid[0].size();
     for(int i = 1; i < row; ++i) {
         grid[i][0] += grid[i-1][0];
     }
     for(int j = 1; j < col; ++j) {
-        grid[0][j] += grid[0][i-1];
+        grid[0][j] += grid[0][j-1];
     }
     for(int i = 1; i < row; ++i) {
         for(int j = 1; j < col; ++j) {
@@ -1908,7 +1908,7 @@ int minPathSum(vector<vector<int>>& grid)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 99%
  */
-void setZeroes(vectork<vector<int>>& matrix)
+void setZeroes(vector<vector<int>>& matrix)
 {
 
     if(matrix.empty()) {
@@ -1916,8 +1916,8 @@ void setZeroes(vectork<vector<int>>& matrix)
     }
 
     // search zero element and then save index in an array
-    int row = matrix.size();
-    int col = matrix[0].size();
+    int row = (int)matrix.size();
+    int col = (int)matrix[0].size();
     vector<int> mark;
     for(int i = 0; i < row; ++i) {
         for(int j = 0; j < col; ++j) {
@@ -1949,8 +1949,8 @@ void setZeroes2(vector<vector<int>>& matrix)
     if(matrix.empty()) {
         return;
     }
-    int row = matrix.size();
-    int col = matrix[0].size();
+    int row = (int)matrix.size();
+    int col = (int)matrix[0].size();
     unordered_set<int> rIndex;
     unordered_set<int> cIndex;
 

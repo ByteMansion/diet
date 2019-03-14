@@ -395,8 +395,8 @@ vector<int> partitionLabels(string S)
     }
     vector<Interval> intervals;
     for(char ele = 'a'; ele <= 'z'; ++ele) {
-        int firstPos = S.find_first_of(ele);
-        int lastPos  = S.find_last_of(ele);
+        int firstPos = (int)S.find_first_of(ele);
+        int lastPos  = (int)S.find_last_of(ele);
         if(firstPos != std::string::npos && lastPos != std::string::npos) {
             intervals.push_back(Interval(firstPos, lastPos));
         }

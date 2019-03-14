@@ -139,8 +139,8 @@ int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid);
 int minPathSum(vector<vector<int>>& grid);
 
 // Leetcode 73: Set Matrix Zeroes
-void setZeroes(vectork<vector<int>>& matrix);
-void setZeroes2(vectork<vector<int>>& matrix);
+void setZeroes(vector<vector<int>>& matrix);
+void setZeroes2(vector<vector<int>>& matrix);
 
 
 
