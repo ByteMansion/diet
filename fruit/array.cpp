@@ -1910,30 +1910,29 @@ int minPathSum(vector<vector<int>>& grid)
  */
 void setZeroes(vectork<vector<int>>& matrix)
 {
+
     if(matrix.empty()) {
         return;
     }
 
-    // search zero value and then set flag in an single array
+    // search zero element and then save index in an array
     int row = matrix.size();
     int col = matrix[0].size();
-    vector<int> markFalg(row * col, 0);
+    vector<int> mark;
     for(int i = 0; i < row; ++i) {
         for(int j = 0; j < col; ++j) {
             if(matrix[i][j] == 0) {
-                markFalg[i * col + j] = 1;
+                mark.push_back(i * col + j);
             }
         }
     }
-    // traverse flag array and set zeroes at corresponding rows and columns
-    for(int i = 0; i < markFalg.size(); ++i) {
-        if(markFalg[i] == 1) {
-            int R = i / col;
-            int C = i - R * col;
-            std::fill(matrix[R].begin(), matrix[R].end(), 0);  // set while row as zeroes 
-            for(int j = 0; j < row; ++j) {  // set whole column as zeroes
-                matrix[j][C] = 0;
-            }
+    // traverse zero falg array and set zero at corresponding rows and columns
+    for(int i = 0; i < mark.size(); ++i) {
+        int R = mark[i] / col;
+        int C = mark[i] - R*col;
+        std::fill(matrix[R].begin(), matrix[R].end(), 0);  // set whole row values as zeroes 
+        for(int j = 0; j < row; ++j) {  // set whole column values as zeroes
+            matrix[j][C] = 0;
         }
     }
 }
