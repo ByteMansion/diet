@@ -1977,3 +1977,50 @@ void setZeroes2(vector<vector<int>>& matrix)
         }
     }
 }
+
+/**
+ * @brief   Leetcode 74: Search a 2D Matrix
+ *  This solution uses two divisions algorithm twice - one
+ *  for determining target row number, another for target.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.6%
+ */
+bool searchMatrix(vector<vector<int>>& matrix, int target)
+{
+    if(matrix.empty() || matrix[0].empty()) {
+        return false;
+    }
+    // first two divisions: get target row number
+    size_t R = matrix.size()-1;
+    int up = 0, down = R;
+    while(up+1 < down) {
+        int mid = up + (down - up) / 2;
+        if(matrix[mid][0] <= target) {
+            up = mid;
+        } else {
+            down = mid;
+        }
+    }
+    if(matrix[up][0] <= target) R = up;
+    if(matrix[down][0] <= target) R = down;
+
+    // second two divisions: get target index number
+    int left = 0;
+    int right = matrix[R].size() - 1;
+    while(left + 1 < right) {
+        int mid = left + (right - left) / 2;
+        if(matrix[R][mid] == target) {
+            return true;
+        }
+        if(matrix[R][mid] <= target) {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+    if(matrix[R][left] == target || matrix[R][right] == target) { return true; }
+
+    return false;
+}
+
