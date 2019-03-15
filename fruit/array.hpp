@@ -145,6 +145,9 @@ void setZeroes2(vector<vector<int>>& matrix);
 // Leetcode 74: Search a 2D Matrix
 bool searchMatrix(vector<vector<int>>& matrix, int target);
 
+// Leetcode 240: Search a 2D Matrix II
+bool searchMatrixII(vector<vector<int>>& matrix, int target);
+
 
 
 #endif /* array_hpp */

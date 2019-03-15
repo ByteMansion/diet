@@ -2024,3 +2024,46 @@ bool searchMatrix(vector<vector<int>>& matrix, int target)
     return false;
 }
 
+/**
+ * @brief   Leetcode 240: Search a 2D Matrix II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 25%
+ */
+bool searchMatrixII(vector<vector<int>>& matrix, int target)
+{
+    if(matrix.empty() || matrix[0].empty()) {
+        return false;
+    }
+
+    int R = matrix.size() - 1;
+    int C = matrix[0].size() - 1;
+    int uLevel = 0, bLevel = R;
+    while(uLevel < bLevel) {
+        if(matrix[uLevel][C] < target) uLevel++;
+        else break;
+    }
+    while(bLevel > uLevel) {
+        if(matrix[bLevel][0] > target) bLevel--;
+        else break;
+    }
+
+    for(R = uLevel; R <= bLevel; ++R) {
+        int left = 0;
+        int right = C;
+        while(left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if(matrix[R][mid] == target) {
+                return true;
+            }
+            if(matrix[R][mid] > target) {
+                right = mid;
+            } else {
+                left = mid;
+            }
+        }
+        if(matrix[R][left] == target || matrix[R][right] == target) { return true; }
+    }
+
+    return false;
+}
