@@ -52,5 +52,7 @@ vector<vector<int>> levelOrderBottom(TreeNode* root);
 vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges);
 vector<int> findMinHeightTrees2(int n, vector<pair<int, int>>& edges);
 
+// Leetcode 105: Construct Binary Tree from Preorder and Inorder Traversal
+TreeNode* buildTree(vector<int>& preorder, vectorf<int>& inorder);
 
 #endif /* tree_hpp */

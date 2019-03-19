@@ -470,3 +470,39 @@ vector<int> findMinHeightTrees2(int n, vector<pair<int, int>>& edges)
 
 	return res;
 }
+
+/**
+ * @brief   Leetcode 105: Construct Binary Tree from Preorder and Inorder Traversal
+ *  If we use an unordered_map to store element-to-index map of inorder array, we can
+ *  replace for loop statements and improve beat rate up to 98.69%.
+ *
+ * --------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 80.37%
+ */
+static TreeNode* buildTreeHelper(vector<int>& preorder,
+                                 int pStart,
+                                 vector<int>& inorder,
+                                 int iStart, int iEnd)
+{
+    if(pStart > preorder.size()-1 || iStart > iEnd) {
+        return nullptr;
+    }
+    int value = preorder[pStart];
+    int eIndex = 0;
+    for(int i = 0; i < inorder.size(); ++i) {
+        if(value == inorder[i]) {
+            eIndex = i;
+            break;
+        }
+    }
+
+    TreeNode* head = new TreeNode(value);
+    head->left = buildTreeHelper(preorder, pStart+1, inorder, iStart, eIndex-1);
+    head->right = buildTreeHelper(preorder, pStart+eIndex-iStart+1, inorder, eIndex+1, iEnd);
+
+    return head;
+}
+
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    return buildTreeHelper(preorder, 0, inorder, 0, inorder.size()-1);
+}
