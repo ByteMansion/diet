@@ -55,4 +55,7 @@ vector<int> findMinHeightTrees2(int n, vector<pair<int, int>>& edges);
 // Leetcode 105: Construct Binary Tree from Preorder and Inorder Traversal
 TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder);
 
+// Leetcode 106: Construct Binary Tree from Inorder and Postorder Traversal
+TreeNode* buildTreeII(vector<int>& preorder, vector<int>& inorder);
+
 #endif /* tree_hpp */

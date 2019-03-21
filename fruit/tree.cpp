@@ -488,21 +488,54 @@ static TreeNode* buildTreeHelper(vector<int>& preorder,
         return nullptr;
     }
     int value = preorder[pStart];
-    int eIndex = 0;
-    for(int i = 0; i < inorder.size(); ++i) {
+    int iHead = 0;
+    for(int i = iStart; i <= iEnd; ++i) {
         if(value == inorder[i]) {
-            eIndex = i;
+            iHead = i;
             break;
         }
     }
 
     TreeNode* head = new TreeNode(value);
-    head->left = buildTreeHelper(preorder, pStart+1, inorder, iStart, eIndex-1);
-    head->right = buildTreeHelper(preorder, pStart+eIndex-iStart+1, inorder, eIndex+1, iEnd);
+    head->left = buildTreeHelper(preorder, pStart+1, inorder, iStart, iHead-1);
+    head->right = buildTreeHelper(preorder, pStart+iHead-iStart+1, inorder, iHead+1, iEnd);
 
     return head;
 }
 
 TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
     return buildTreeHelper(preorder, 0, inorder, 0, inorder.size()-1);
+}
+
+/**
+ * @brief	Leetcode 106: Construct Binary Tree from Inorder and Postorder Traversal
+ *
+ * --------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 28%
+ */
+static TreeNode* buildTreeIIHelper(vector<int>& inorder,
+								 int iStart, int iEnd,
+								 vector<int>& postorder,
+								 int pEnd)
+{
+	if(pEnd < 0 || iStart > iEnd) {
+		return nullptr;
+	}
+	int value = postorder[pEnd];
+	int iRoot = 0;
+	for(int i = iStart; i <= iEnd; ++i) {
+		if(value == inorder[i]) {
+			iRoot = i;
+			break;
+		}
+	}
+	TreeNode* root = new TreeNode(value);
+	root->left = buildTreeIIHelper(inorder, iStart, iRoot-1, postorder, pEnd-iEnd+iRoot-1);
+	root->right = buildTreeIIHelper(inorder, iRoot+1, iEnd, postorder, pEnd-1);
+	
+	return root;
+}
+
+TreeNode* buildTreeII(vector<int>& inorder, vector<int>& postorder) {
+	return buildTreeIIHelper(inorder, 0, inorder.size()-1, postorder, postorder.size()-1);
 }
