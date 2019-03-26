@@ -2068,3 +2068,61 @@ bool searchMatrixII(vector<vector<int>>& matrix, int target)
     return false;
 }
 
+/**
+ * @brief   Leetcode 75: Sort Colors
+ *  This solution can solve the problem, but not perfect bacause in some cases, assign
+ *  a value in certain position directly is not a good choice or meeting our demands.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+void sortColors(vector<int>& nums)
+{
+    if(nums.empty() || nums.size() < 2) {
+        return;
+    }
+
+    vector<int> count(3, 0);
+    for(int i = 0; i < nums.size(); ++i) {
+        count[nums[i]] += 1;
+    }
+
+    int k = 0;
+    for(int i = 0; i < 3; ++i) {
+        for(int j = 1; j <= count[i]; ++j) {
+            nums[k++] = i;
+        }
+    }
+}
+
+/**
+ * @brief   Leetcode 75: Sort Colors
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+void sortColors2(vector<int>& nums)
+{
+    if(nums.empty() || nums.size() < 2) {
+        return;
+    }
+    int pre = 0;
+    for(int i = 0;  i < nums.size(); ++i) {
+        if(nums[i] == 0) {
+            std::swap(nums[pre], nums[i]);
+            pre++;
+        }
+    }
+    for(int i = pre; i < nums.size(); ++i) {
+        if(nums[i] == 1) {
+            std::swap(nums[pre], nums[i]);
+            pre++;
+        }
+    }
+    for(int i = pre; i < nums.size(); ++i) {
+        if(nums[i] == 2) {
+            std::swap(nums[pre], nums[i]);
+            pre++;
+        }
+    }
+}

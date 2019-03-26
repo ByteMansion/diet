@@ -148,6 +148,10 @@ bool searchMatrix(vector<vector<int>>& matrix, int target);
 // Leetcode 240: Search a 2D Matrix II
 bool searchMatrixII(vector<vector<int>>& matrix, int target);
 
+// Leetcode 75: Sort Colors
+void sortColors(vector<int>& nums);
+void sortColors2(vector<int>& nums);
+
 
 
 #endif /* array_hpp */
