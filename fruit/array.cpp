@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include <map>
 #include <unordered_set>
+#include <string>
 
 using std::swap;
 using std::sort;
@@ -24,6 +25,7 @@ using std::unordered_map;
 using std::multimap;
 using std::map;
 using std::unordered_set;
+using std::string;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -2125,4 +2127,35 @@ void sortColors2(vector<int>& nums)
             pre++;
         }
     }
+}
+
+/**
+ * @brief   Leetcode 79: Word Search
+ *
+ */
+static bool existHelper(const vector<vector<char>>& board, const string& word,
+                        vector<int>& index, int bStart, int wStart)
+{
+}
+bool exist(vector<vector<char>>& board, string word)
+{
+    if(board.empty() || (board[0].empty() && !word.empty())) {
+        return false;
+    }
+    if(board[0].empty() && word.empty()) {
+        return true;
+    }
+
+    const int R = board.size();
+    const int C = board[0].size();
+    if(R*C < word.size()) {
+        return false;
+    }
+
+    unordered_set<int> index;
+    for(int i = 0; i < R*C; ++i) {
+        int col = i % R;
+        int row = 
+    }
+
 }

@@ -152,6 +152,8 @@ bool searchMatrixII(vector<vector<int>>& matrix, int target);
 void sortColors(vector<int>& nums);
 void sortColors2(vector<int>& nums);
 
+// Leetcode 79: Word Search
+bool exist(vector<vector<char>>& board, string word);
 
 
 #endif /* array_hpp */
