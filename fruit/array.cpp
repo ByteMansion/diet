@@ -2133,9 +2133,43 @@ void sortColors2(vector<int>& nums)
  * @brief   Leetcode 79: Word Search
  *
  */
-static bool existHelper(const vector<vector<char>>& board, const string& word,
-                        vector<int>& index, int bStart, int wStart)
+static bool existHelper(const vector<vector<char>>& board,
+                        const string& word,
+                        int& bIndex, int& wIndex,
+                        vector<int>& alt)
 {
+    const int R = borad.size();
+    const int C = board[0].size();
+    int col = bIndex % C;
+    int row = (bIndex - col) / C;
+
+    if(col+1 < R && board[row][col+1] == word[wIndex]) {
+        bIndex = row * C + col + 1;
+        if(index.find(bIndex) == index.end()) {
+            alt.push_back(bIndex);
+        }
+    }
+    if(col-1 >= 0 && board[row][col-1] == word[wIndex]) {
+        bIndex = row * C + col - 1;
+        if(index.find(bIndex) == index.end()) {
+            alt.push_back(bIndex);
+        }
+    }
+    if(row+1 < R && board[row+1][col] == word[wIndex]) {
+        bIndex = (row + 1) * C + col;
+        if(index.find(bIndex) == index.end()) {
+            alt.push_back(bIndex);
+        }
+    }
+    if(row-1 >= 0 && board[row-1][col] == word[wIndex]) {
+        bIndex = (row - 1) * C + col;
+        if(index.find(bIndex) == index.end()) {
+            alt.push_back(bIndex);
+        }
+    }
+    if(alt.size() != 0) return true;
+
+    return false;
 }
 bool exist(vector<vector<char>>& board, string word)
 {
@@ -2152,10 +2186,26 @@ bool exist(vector<vector<char>>& board, string word)
         return false;
     }
 
-    unordered_set<int> index;
     for(int i = 0; i < R*C; ++i) {
-        int col = i % R;
-        int row = 
-    }
+        int col = i % C;
+        int row = (i - col) / C;
+        unordered_set<int> index;
+        if(board[row][col] != word[0]) {
+            continue;
+        }
+        index.insert(i);
 
+        for(int j = 1; j < word.size(); ++j) {
+            if(existHelper(board, word, i, j, index)) {
+                return true;;
+            }
+        }
+        if(j == word.size()) {
+            return true;
+        }
+    }
+    return false;
 }
+
+
+
