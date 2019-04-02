@@ -15,7 +15,6 @@
 #include <unordered_map>
 #include <map>
 #include <unordered_set>
-#include <string>
 
 using std::swap;
 using std::sort;
@@ -25,7 +24,6 @@ using std::unordered_map;
 using std::multimap;
 using std::map;
 using std::unordered_set;
-using std::string;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -2132,79 +2130,58 @@ void sortColors2(vector<int>& nums)
 /**
  * @brief   Leetcode 79: Word Search
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.98%
  */
-static bool existHelper(const vector<vector<char>>& board,
-                        const string& word,
-                        int& bIndex, int& wIndex,
-                        vector<int>& alt)
+static bool existDFS(vector<vector<char>>& board,
+					 int row, int col,
+					 const string& word,
+					 int index,
+					 const size_t R, const size_t C)
 {
-    const int R = borad.size();
-    const int C = board[0].size();
-    int col = bIndex % C;
-    int row = (bIndex - col) / C;
-
-    if(col+1 < R && board[row][col+1] == word[wIndex]) {
-        bIndex = row * C + col + 1;
-        if(index.find(bIndex) == index.end()) {
-            alt.push_back(bIndex);
-        }
-    }
-    if(col-1 >= 0 && board[row][col-1] == word[wIndex]) {
-        bIndex = row * C + col - 1;
-        if(index.find(bIndex) == index.end()) {
-            alt.push_back(bIndex);
-        }
-    }
-    if(row+1 < R && board[row+1][col] == word[wIndex]) {
-        bIndex = (row + 1) * C + col;
-        if(index.find(bIndex) == index.end()) {
-            alt.push_back(bIndex);
-        }
-    }
-    if(row-1 >= 0 && board[row-1][col] == word[wIndex]) {
-        bIndex = (row - 1) * C + col;
-        if(index.find(bIndex) == index.end()) {
-            alt.push_back(bIndex);
-        }
-    }
-    if(alt.size() != 0) return true;
-
-    return false;
+	if (board[row][col] != word[index]) {
+		return false;
+	}
+	if (index == word.size()-1) {
+		return true;
+	}
+	bool res = false;
+	char temp = board[row][col];
+	board[row][col] = '*';
+	if (row-1 >= 0) {
+		res = existDFS(board, row-1, col, word, index+1, R, C);
+	}
+	if (!res && row+1 < R) {
+		res = existDFS(board, row+1, col, word, index+1, R, C);
+	}
+	if (!res && col-1 >= 0) {
+		res = existDFS(board, row, col-1, word, index+1, R, C);
+	}
+	if (!res && col+1 < C) {
+		res = existDFS(board, row, col+1, word, index+1, R, C);
+	}
+	board[row][col] = temp;
+	
+	return res;
 }
 bool exist(vector<vector<char>>& board, string word)
 {
-    if(board.empty() || (board[0].empty() && !word.empty())) {
-        return false;
-    }
-    if(board[0].empty() && word.empty()) {
-        return true;
-    }
-
-    const int R = board.size();
-    const int C = board[0].size();
-    if(R*C < word.size()) {
-        return false;
-    }
-
-    for(int i = 0; i < R*C; ++i) {
-        int col = i % C;
-        int row = (i - col) / C;
-        unordered_set<int> index;
-        if(board[row][col] != word[0]) {
-            continue;
-        }
-        index.insert(i);
-
-        for(int j = 1; j < word.size(); ++j) {
-            if(existHelper(board, word, i, j, index)) {
-                return true;;
-            }
-        }
-        if(j == word.size()) {
-            return true;
-        }
-    }
-    return false;
+	if(board.empty() || board[0].empty()){
+		if(word.empty()) return true;
+		else return false;
+	}
+	
+	const size_t R = board.size();
+	const size_t C = board[0].size();
+	for (int i = 0; i < R; ++i) {
+		for (int j = 0; j < C; ++j) {
+			if (existDFS(board, i, j, word, 0, R, C)) {
+				return true;
+			}
+		}
+	}
+	
+	return false;
 }
 
 
