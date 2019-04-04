@@ -2145,9 +2145,11 @@ static bool existDFS(vector<vector<char>>& board,
 	if (index == word.size()-1) {
 		return true;
 	}
-	bool res = false;
+    // change the content, to avoid duplicated search
 	char temp = board[row][col];
 	board[row][col] = '*';
+
+	bool res = false;
 	if (row-1 >= 0) {
 		res = existDFS(board, row-1, col, word, index+1, R, C);
 	}
@@ -2160,8 +2162,8 @@ static bool existDFS(vector<vector<char>>& board,
 	if (!res && col+1 < C) {
 		res = existDFS(board, row, col+1, word, index+1, R, C);
 	}
-	board[row][col] = temp;
-	
+	board[row][col] = temp;  // change content back!
+
 	return res;
 }
 bool exist(vector<vector<char>>& board, string word)
@@ -2170,7 +2172,7 @@ bool exist(vector<vector<char>>& board, string word)
 		if(word.empty()) return true;
 		else return false;
 	}
-	
+
 	const size_t R = board.size();
 	const size_t C = board[0].size();
 	for (int i = 0; i < R; ++i) {
@@ -2180,9 +2182,33 @@ bool exist(vector<vector<char>>& board, string word)
 			}
 		}
 	}
-	
+
 	return false;
 }
 
+/**
+ * @brief   Leetcode 212: word Search II
+ *  Reusing solution to the problem 79, this one can be accepted, but efficiency is
+ *  low.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 18.5%
+ */
+vector<string> findWord(vector<vector<char>>& board, vector<string>& words)
+{
+    vector<string> results;
 
+    if(board.empty() || board[0].empty()) {
+        if(words.empty()) {
+            return vector<string>{};
+        }
+    }
 
+    for(auto& word : words) {
+        if(exist(board, word)) {
+            results.push_back(word);
+        }
+    }
+
+    return results;
+}

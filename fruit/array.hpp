@@ -157,5 +157,8 @@ void sortColors2(vector<int>& nums);
 // Leetcode 79: Word Search
 bool exist(vector<vector<char>>& board, string word);
 
+// Leetcode 212: word Search II
+vector<string> findWord(vector<vector<char>>& board, vector<string>& words);
+
 
 #endif /* array_hpp */
