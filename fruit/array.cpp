@@ -2216,64 +2216,62 @@ vector<string> findWord(vector<vector<char>>& board, vector<string>& words)
 /**
  * @brief   Leetcode 212: Word Search II
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 19%
  */
-
 static bool findWordHelper(vector<vector<char>>& board,
-                           int row, int col,
-                           const string& word, int index,
-                           const int R, const int C)
+						   int row, int col,
+						   const string& word, int index,
+						   const int R, const int C)
 {
-    if(board[row][col] != word[index]) {
-        return false;
-    }
-    if(index == word.size() - 1) {
-        return true;
-    }
-    bool res = false;
-    char temp = board[row][col];
-    board[row][col] = '*';
-
-    if(row-1 >= 0)         res = findWordHelper(board, row-1, col, word, index+1, R, C);
-    if(!res && row+1 < R)  res = findWordHelper(board, row+1, col, word, index+1, R, C);
-    if(!res && col-1 >= 0) res = findWordHelper(board, row, col-1, word, index+1, R, C);
-    if(!res && col+1 < C)  res = findWordHelper(board, row, col+1, word, index+1, R, C);
-
-    board[row][col] = temp;
-
-    return res;
+	if(board[row][col] != word[index]) {
+		return false;
+	}
+	if(index == word.size() - 1) {
+		return true;
+	}
+	bool res = false;
+	char temp = board[row][col];
+	board[row][col] = '*';
+	
+	if(row-1 >= 0)         res = findWordHelper(board, row-1, col, word, index+1, R, C);
+	if(!res && row+1 < R)  res = findWordHelper(board, row+1, col, word, index+1, R, C);
+	if(!res && col-1 >= 0) res = findWordHelper(board, row, col-1, word, index+1, R, C);
+	if(!res && col+1 < C)  res = findWordHelper(board, row, col+1, word, index+1, R, C);
+	
+	board[row][col] = temp;
+	
+	return res;
 }
-vector<string> findWords(vector<vector<char>>& board, vector<string>& words)
+vector<string> findWord2(vector<vector<char>>& board, vector<string>& words)
 {
-    vector<string> results;
-
-    // std::sort(words.begin(), words.end(),
-    //           [](string& str1, string& str2) { return str1[0] < str2[0]; });
-    std::sort(words.begin(), words.end());
-    unordered_map<char, int> charToIndex;
-    int index = 0;
-    for(auto& word: words) {
-        if(charToIndex.find(word[0]) == charToIndex.end())
-            charToIndex[word[0]] = index;
-        index++;
-    }
-
-    const int R = board.size();
-    const int C = board[0].size();
-    int count = 0;
-    for(int i = 0; i < R; ++i) {
-        for(int j = 0; j < C; ++j) {
-            if(charToIndex.find(board[i][j]) != charToIndex.end()) {
-                index = charToIndex[board[i][j]];
-                while(count < words.size() && index < words.size() && words[index][0] == board[i][j]) {
-                    if(findWordHelper(board, i, j, words[index], 0, R, C)) {
-                        results.push_back(words[index]);
-                        count++;
-                    }
-                    index++;
-                }
-            }
-        }
-    }
-
-    return results;
+	vector<string> results;
+	std::sort(words.begin(), words.end());
+	unordered_map<char, int> charToIndex;
+	int index = 0;
+	for(auto& word: words) {
+		if(charToIndex.find(word[0]) == charToIndex.end())
+			charToIndex[word[0]] = index;
+		
+		index += 1;
+	}
+	
+	const int R = board.size();
+	const int C = board[0].size();
+	for(int i = 0; i < R; ++i) {
+		for(int j = 0; j < C; ++j) {
+			if(charToIndex.find(board[i][j]) != charToIndex.end()) {
+				index = charToIndex[board[i][j]];
+				while(index < words.size() && words[index][0] == board[i][j]) {
+					if(findWordHelper(board, i, j, words[index], 0, R, C)) {
+						if(std::find(results.begin(), results.end(), words[index]) == results.end())
+							results.push_back(words[index]);
+					}
+					index += 1;
+				}
+			}
+		}
+	}
+	
+	return results;
 }
