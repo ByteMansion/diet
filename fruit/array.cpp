@@ -2194,7 +2194,7 @@ bool exist(vector<vector<char>>& board, string word)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 18.5%
  */
-vector<string> findWord(vector<vector<char>>& board, vector<string>& words)
+vector<string> findWords(vector<vector<char>>& board, vector<string>& words)
 {
     vector<string> results;
 
@@ -2219,7 +2219,7 @@ vector<string> findWord(vector<vector<char>>& board, vector<string>& words)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 19%
  */
-static bool findWordHelper(vector<vector<char>>& board,
+static bool findWordsHelper(vector<vector<char>>& board,
 						   int row, int col,
 						   const string& word, int index,
 						   const int R, const int C)
@@ -2234,16 +2234,16 @@ static bool findWordHelper(vector<vector<char>>& board,
 	char temp = board[row][col];
 	board[row][col] = '*';
 	
-	if(row-1 >= 0)         res = findWordHelper(board, row-1, col, word, index+1, R, C);
-	if(!res && row+1 < R)  res = findWordHelper(board, row+1, col, word, index+1, R, C);
-	if(!res && col-1 >= 0) res = findWordHelper(board, row, col-1, word, index+1, R, C);
-	if(!res && col+1 < C)  res = findWordHelper(board, row, col+1, word, index+1, R, C);
+	if(row-1 >= 0)         res = findWordsHelper(board, row-1, col, word, index+1, R, C);
+	if(!res && row+1 < R)  res = findWordsHelper(board, row+1, col, word, index+1, R, C);
+	if(!res && col-1 >= 0) res = findWordsHelper(board, row, col-1, word, index+1, R, C);
+	if(!res && col+1 < C)  res = findWordsHelper(board, row, col+1, word, index+1, R, C);
 	
 	board[row][col] = temp;
 	
 	return res;
 }
-vector<string> findWord2(vector<vector<char>>& board, vector<string>& words)
+vector<string> findWords2(vector<vector<char>>& board, vector<string>& words)
 {
 	vector<string> results;
 	std::sort(words.begin(), words.end());
@@ -2263,7 +2263,7 @@ vector<string> findWord2(vector<vector<char>>& board, vector<string>& words)
 			if(charToIndex.find(board[i][j]) != charToIndex.end()) {
 				index = charToIndex[board[i][j]];
 				while(index < words.size() && words[index][0] == board[i][j]) {
-					if(findWordHelper(board, i, j, words[index], 0, R, C)) {
+					if(findWordsHelper(board, i, j, words[index], 0, R, C)) {
 						if(std::find(results.begin(), results.end(), words[index]) == results.end())
 							results.push_back(words[index]);
 					}
@@ -2274,4 +2274,40 @@ vector<string> findWord2(vector<vector<char>>& board, vector<string>& words)
 	}
 	
 	return results;
+}
+
+/**
+ * @brief   Leetcode 212: Word Search II
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 18.85%
+ */
+vector<string> findWords3(vector<vector<char>& board, vector<string>& words)
+{
+    const int R = board.size();
+    const int C = board[0].size();
+    vector<vector<std::pair<int, int>>> charToPos(26, vector<std::pair<int, int>>{}); 
+    for(int i = 0; i < R; ++i) {
+        for(int j = 0; j < C; ++j) {
+            charToPos[board[i][j] - 'a'].push_back(std::make_pair(i, j));
+        }
+    }
+
+    std::sort(words.begin(), words.end());
+    vector<string> results;
+    for(auto& word: words) {
+        if(charToPos[word[0]-'a'].empty()) {
+            continue;
+        }
+        for(int k = 0; k < charToPos[word[0]-'a'].size(); ++k) {
+            int i = charToPos[word[0]-'a'][k].first;
+            int j = charToPos[word[0]-'a'][k].second;
+            if(findWordsHelper(board, i, j, word, 0, R, C)) {
+                results.push_back(word);
+                break;
+            }
+        }
+    }
+
+    return results;
 }
