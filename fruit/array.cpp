@@ -2282,7 +2282,7 @@ vector<string> findWords2(vector<vector<char>>& board, vector<string>& words)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 18.85%
  */
-vector<string> findWords3(vector<vector<char>& board, vector<string>& words)
+vector<string> findWords3(vector<vector<char>>& board, vector<string>& words)
 {
     const int R = board.size();
     const int C = board[0].size();
@@ -2311,3 +2311,8 @@ vector<string> findWords3(vector<vector<char>& board, vector<string>& words)
 
     return results;
 }
+
+/**
+ * @brief   Leetcode 212: Word Search II
+ *
+ */
