@@ -25,6 +25,12 @@ struct Interval {
 	Interval(int s, int e) : start(s), end(e) {}
 };
 
+struct TrieNode {
+    string word;
+    vector<TrieNode*> child;
+    TrieNode(): word(""), child(vector<TrieNode*>(26, nullptr)) {}
+};
+
 // Leetcode 31: Next Permutation
 void nextPermutation(vector<int>& nums);
 void nextPermutation2(vector<int>& nums);
@@ -161,6 +167,7 @@ bool exist(vector<vector<char>>& board, string word);
 vector<string> findWords(vector<vector<char>>& board, vector<string>& words);
 vector<string> findWords2(vector<vector<char>>& board, vector<string>& words);
 vector<string> findWords3(vector<vector<char>>& board, vector<string>& words);
+vector<string> findWords4(vector<vector<char>>& board, vector<string>& words);
 
 
 #endif /* array_hpp */

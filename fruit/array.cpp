@@ -2314,5 +2314,62 @@ vector<string> findWords3(vector<vector<char>>& board, vector<string>& words)
 
 /**
  * @brief   Leetcode 212: Word Search II
+ *  This is a typical Trie problem. We can using trie data structure to solve this problem
+ *  in a more efficient way but higher space complexity.
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 89.65%
  */
+static TrieNode* buildTrie(vector<string>& words)
+{
+    TrieNode* root = new TrieNode();
+
+    for(int i = 0; i < words.size(); ++i) {
+        TrieNode* node = root;
+        for(int j = 0; j < words[i].size(); ++j) {
+            int index = words[i][j] - 'a';
+            if(node->child[index] == nullptr) {
+                node->child[index] = new TrieNode();
+            }
+            node = node->child[index];
+        }
+        node->word = words[i];
+    }
+
+    return root;
+}
+static void findWordsHelper(vector<vector<char>>& board, int row, int col,
+                            TrieNode* node, const int R, const int C,
+                            vector<string>& results)
+{
+    char temp = board[row][col];
+    if(temp == '*' || node->child[temp-'a'] == nullptr) {
+        return;
+    }
+    if(node->child[temp-'a']->word != "") {
+        results.push_back(node->child[temp-'a']->word);
+        node->child[temp-'a']->word = "";  // avoid duplicates
+        // NOT return because longer strings should also be traversed
+    }
+    board[row][col] = '*';
+    if(row-1 >= 0) findWordsHelper(board, row-1, col, node->child[temp-'a'], R, C, results);
+    if(row+1 < R)  findWordsHelper(board, row+1, col, node->child[temp-'a'], R, C, results);
+    if(col-1 >= 0) findWordsHelper(board, row, col-1, node->child[temp-'a'], R, C, results);
+    if(col+1 < C)  findWordsHelper(board, row, col+1, node->child[temp-'a'], R, C, results);
+    board[row][col] = temp;
+}
+vector<string> findWords(vector<vector<char>>& board, vector<string>& words)
+{
+    TrieNode* root = buildTrie(words);
+
+    vector<string> results;
+    const size_t R = board.size();
+    const size_t C = board[0].size();
+    for(int i = 0; i < R; ++i) {
+        for(int j = 0; j < C; ++j) {
+            findWordsHelper(board, i, j, root, R, C, results);
+        }
+    }
+
+    return results;
+}
