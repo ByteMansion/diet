@@ -1874,6 +1874,15 @@ int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid)
 }
 
 /**
+ * @brief   Leetcode 980: Unique Paths III
+ *
+ */
+int uniquePathsIII(vector<vector<int>>& grid)
+{
+    
+}
+
+/**
  * @brief   Minimum Path Sum
  *
  * -------------------------------------------

@@ -143,6 +143,9 @@ int uniquePaths4(int m, int n);
 int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid);
 int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid);
 
+// Leetcode 980: Unique Paths III
+int uniquePathsIII(vector<vector<int>>& grid);
+
 // Leetcode 64: Minimum Path Sum
 int minPathSum(vector<vector<int>>& grid);
 
@@ -163,7 +166,7 @@ void sortColors2(vector<int>& nums);
 // Leetcode 79: Word Search
 bool exist(vector<vector<char>>& board, string word);
 
-// Leetcode 212: word Search II
+// Leetcode 212: Word Search II
 vector<string> findWords(vector<vector<char>>& board, vector<string>& words);
 vector<string> findWords2(vector<vector<char>>& board, vector<string>& words);
 vector<string> findWords3(vector<vector<char>>& board, vector<string>& words);
