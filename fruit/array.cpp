@@ -2367,7 +2367,7 @@ static void findWordsHelper(vector<vector<char>>& board, int row, int col,
     if(col+1 < C)  findWordsHelper(board, row, col+1, node->child[temp-'a'], R, C, results);
     board[row][col] = temp;
 }
-vector<string> findWords(vector<vector<char>>& board, vector<string>& words)
+vector<string> findWords4(vector<vector<char>>& board, vector<string>& words)
 {
     TrieNode* root = buildTrie(words);
 
