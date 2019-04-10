@@ -164,7 +164,7 @@ vector<vector<string>> partition2(string s)
         auto& pals_at_idx = pals[idx];
         for (int i = 0; i < pals_at_idx.size(); ++i) {
             progress.emplace_back(std::make_pair(idx, i));
-            helper(progress, idx + (int)pals_at_idx[i].size());
+            helper(progress, idx + pals_at_idx[i].size());
             progress.pop_back();
         }
     };
@@ -183,7 +183,7 @@ static void minCutHelper(string& s, vector<string>& group, int& result, int star
 {
     if(start == s.length()) {
         if(group.size()-1 < result) {
-            result = (int)group.size() - 1;
+            result = group.size() - 1;
         }
         return;
     }
@@ -219,7 +219,7 @@ int minCut(string s)
  */
 int minCut2(string s)
 {
-    const int N = (int)s.length();
+    const size_t N = s.length();
     if(N <= 1) {
         return 0;
     }
@@ -250,7 +250,7 @@ int minCut2(string s)
  */
 int minCut3(string s)
 {
-    const int N = (int)s.length();
+    const size_t N = s.length();
     if(N <= 1) {
         return 0;
     }
@@ -285,7 +285,7 @@ string convert(string s, int numRows)
 		return s;
 	}
 	
-	int N = (int)s.length();
+	const size_t N = s.length();
 	vector<string> resGroup(numRows, "");
 	
 	int index = 0;
@@ -328,7 +328,7 @@ static bool isInteger(char ch)
 int myAtoi(string str)
 {
 	// judge if the string is valid
-	int N = (int)str.length();
+	size_t N = str.length();
 	int start = 0;
 	for(start = 0; start < N; ++start) {
 		if(str[start] != ' ') {
@@ -395,8 +395,8 @@ vector<int> partitionLabels(string S)
     }
     vector<Interval> intervals;
     for(char ele = 'a'; ele <= 'z'; ++ele) {
-        int firstPos = (int)S.find_first_of(ele);
-        int lastPos  = (int)S.find_last_of(ele);
+        int firstPos = S.find_first_of(ele);
+        int lastPos  = S.find_last_of(ele);
         if(firstPos != std::string::npos && lastPos != std::string::npos) {
             intervals.push_back(Interval(firstPos, lastPos));
         }
@@ -431,7 +431,7 @@ vector<int> partitionLabels2(string S)
     int minPos = 0;
     for(int i = 0; i < S.length() && i <= maxPos; ++i) {
         minPos = std::min(minPos, i);
-        maxPos = std::max(maxPos, (int)S.find_last_of(S[i]));
+        maxPos = std::max(maxPos, S.find_last_of(S[i]));
         if(i == maxPos) {
             results.push_back(maxPos - minPos + 1);
             if(maxPos == S.length() - 1) {
