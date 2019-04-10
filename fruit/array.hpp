@@ -172,5 +172,22 @@ vector<string> findWords2(vector<vector<char>>& board, vector<string>& words);
 vector<string> findWords3(vector<vector<char>>& board, vector<string>& words);
 vector<string> findWords4(vector<vector<char>>& board, vector<string>& words);
 
+// Leetcode 37: Sudoku Solver
+void solveSudoku(vector<vector<char>>& board);
+
+// Leetcode 120: Triangle
+int minimumTotal(vector<vector>>& triangle);
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* array_hpp */

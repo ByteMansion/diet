@@ -2438,3 +2438,44 @@ vector<string> findWords4(vector<vector<char>>& board, vector<string>& words)
 
     return results;
 }
+
+/**
+ * @brief   Leetcode 37: Sudoku Solver
+ *  ToDo: 10/4/2019
+ */
+void solveSudoku(vector<vector<char>>& board)
+{
+
+}
+
+/**
+ * @brief   Leetcode 120: Triangle
+ *  This code can pass simple cases, but if the triangle is too large,
+ *  execution will exceed time limit.
+ *
+ */
+static void minimumTotalHelper(vector<vector<int>>& triangle,
+                               size_t row, size_t col, const size_t R,
+                               int& minSum, int sum)
+{
+    if(row == R-1) {
+        minSum = std::min(minSum, sum + triangle[row][col]);
+        return;
+    }
+    sum += triangle[row][col];
+
+    minimumTotalHelper(triangle, row+1, col, R, minSum, sum);
+    minimumTotalHelper(triangle, row+1, col+1, R, minSum, sum);
+}
+int minimumTotal(vector<vector<int>>& triangle)
+{
+    if(triangle.empty() || triangle[0].empty()) {
+        return 0;
+    }
+    const size_t R = triangle.size();
+    int minSum = INT_MAX;
+
+    minimumTotalHelper(triangle, 0, 0, R, minSum, 0);
+
+    return minSum;
+}
