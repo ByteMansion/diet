@@ -888,7 +888,7 @@ int search(vector<int>& nums, int target)
         return -1;
     }
     int left = 0;
-    int right = (int)nums.size() - 1;
+    int right = nums.size() - 1;
 
     while(left+1 < right) {
         int middle = left + (right - left) / 2;
@@ -933,7 +933,7 @@ bool searchII(vector<int>& nums, int target)
     }
 
     int left = 0;
-    int right = (int)nums.size() - 1;
+    int right = nums.size() - 1;
     while(left+1 < right) {
         int middle = left + (right - left) / 2;
         if(target == nums[middle]) {
@@ -983,7 +983,7 @@ vector<int> searchRange(vector<int>& nums, int target)
     }
 
     int left = 0;
-    int right = (int)nums.size() - 1;
+    int right = nums.size() - 1;
     int startIndex = -1;
     int endIndex   = -1;
     while(left + 1 < right) {
@@ -1029,7 +1029,7 @@ int maxArea(vector<int>& height)
         return 0;
     }
     int result = 0;
-    int length = (int)height.size();
+    int length = height.size();
     for(int dist = 1; dist < length; ++dist) {
         int maxHeight = 0;
         for(int i = 0; i < length && i + dist < length; ++i) {
@@ -1058,7 +1058,7 @@ int maxArea2(vector<int>& height)
         return 0;
     }
 	int i = 0;
-	int j = (int)height.size() - 1;
+	int j = height.size() - 1;
 	int area = 0;
 	while (i < j) {
 		area = std::max(area, std::min(height[i], height[j]) * (j - i));
@@ -1082,7 +1082,7 @@ int maxArea2(vector<int>& height)
 int removeDuplicates(vector<int>& nums)
 {
     if(nums.size() < 2) {
-        return (int)nums.size();
+        return nums.size();
     }
 
     auto prev = nums.begin();
@@ -1097,7 +1097,7 @@ int removeDuplicates(vector<int>& nums)
         }
     }
 
-    return (int)nums.size();
+    return nums.size();
 }
 
 /**
@@ -1110,7 +1110,7 @@ int removeDuplicates(vector<int>& nums)
 int removeDuplicates2(vector<int>& nums)
 {
     if(nums.size() < 2) {
-        return (int)nums.size();
+        return nums.size();
     }
 
     for(int i = 1; i < nums.size(); ++i) {
@@ -1119,7 +1119,7 @@ int removeDuplicates2(vector<int>& nums)
             i -= 1;
         }
     }
-    return (int)nums.size();
+    return nums.size();
 }
 
 /**
@@ -1131,7 +1131,7 @@ int removeDuplicates2(vector<int>& nums)
 int removeDuplicates3(vector<int>& nums)
 {
     if(nums.size() < 2) {
-        return (int)nums.size();
+        return nums.size();
     }
 
     int dupFlag = -1;
@@ -1147,7 +1147,7 @@ int removeDuplicates3(vector<int>& nums)
         }
     }
 
-    return (dupFlag == -1) ? (int)nums.size() : dupFlag;
+    return (dupFlag == -1) ? nums.size() : dupFlag;
 }
 
 /**
@@ -1160,7 +1160,7 @@ int removeDuplicatesII(vector<int>& nums)
 {
 
     if(nums.size() < 2) {
-        return (int)nums.size();
+        return nums.size();
     }
 
     int dupFlag = -1;
@@ -1188,7 +1188,7 @@ int removeDuplicatesII(vector<int>& nums)
         }
     }
 
-    return (dupFlag == -1) ? (int)nums.size() : dupFlag;
+    return (dupFlag == -1) ? nums.size() : dupFlag;
 }
 
 /**
@@ -1224,7 +1224,7 @@ void rotate(vector<vector<int>>& matrix)
 void rotate2(vector<vector<int>>& matrix)
 {
     std::reverse(matrix.begin(), matrix.end());
-    int N = (int)matrix[0].size();
+    const size_t N = matrix[0].size();
     for(int i = 0; i < N; ++i) {
         for(int j = i+1; j < N; ++j) {
             std::swap(matrix[i][j], matrix[j][i]);
@@ -1243,8 +1243,8 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
         return vector<int>{};
     }
     vector<int> result;
-    int R = (int)matrix.size();  // line number
-    int C = (int)matrix[0].size();  // column number
+    const size_t R = matrix.size();  // line number
+    const size_t C = matrix[0].size();  // column number
 
     int row = 0, col = 0;
     int COUNT1 = (R%2 ? (R/2+1) : R/2);
@@ -1285,10 +1285,10 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
 vector<int> spiralOrder2(vector<vector<int>>& matrix)
 {
     vector<int> results;
-    int R = (int)matrix.size();
+    const size_t R = matrix.size();
     if(R == 0) return results;
 
-    int C = (int)matrix[0].size();
+    size_t C = matrix[0].size();
     if(C == 0) return results;
 
     // record target steps in each direction
@@ -1402,7 +1402,7 @@ bool canJump(vector<int>& nums)
 		return true;
 	}
 
-	int N = (int)nums.size();
+	const size_t N = nums.size();
 	vector<int> dp(N, 0);
 	int border = 0;
 	for (int i = 0; i < N-1 && i <= border; ++i) {
@@ -1428,7 +1428,7 @@ bool canJump2(vector<int>& nums)
         return true;
     }
 
-    int N = (int)nums.size();
+    const size_t N = nums.size();
     int steps = nums[0];
     for(int i = 1; i < N; ++i) {
         steps--;
@@ -1457,7 +1457,7 @@ int jump(vector<int>& nums)
     }
     int result = INT_MAX;
 
-    int N = (int)nums.size();
+    const size_t N = nums.size();
     vector<int> dp(N, 0);
     vector<int> steps(N, 0);
     for(int i = 0; i < N-1; ++i) {
@@ -1549,7 +1549,7 @@ int jump4(vector<int>& nums)
     if(nums.size() < 2) {
         return 0;
     }
-    int N = (int)nums.size();
+    const size_t N = nums.size();
     int position = N - 1;
     int steps = 0;
     while(position != 0) {
@@ -1661,7 +1661,7 @@ vector<Interval> insert(vector<Interval>& intervals, Interval newInterval)
     }
 
     int sIndex = 0;
-    int N = (int)intervals.size();
+    const size_t N = intervals.size();
     int i = 0;
     while(i < N) {
         if(newInterval.start <= intervals[i].start) {
@@ -1797,8 +1797,8 @@ int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
     if(obstacleGrid[0][0])
         return 0;
 
-    int row = (int)obstacleGrid.size();
-    int col = (int)obstacleGrid[0].size();
+    const size_t row = obstacleGrid.size();
+    const size_t col = obstacleGrid[0].size();
 
     // initialize first row and first column elements in 1 before first obstacle
     // other elements in 0
@@ -1849,19 +1849,19 @@ int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid)
     } else {
         obstacleGrid[0][0] = 1;
     }
-    int row = (int)obstacleGrid.size();
-    int col = (int)obstacleGrid[0].size();
+    const size_t row = obstacleGrid.size();
+    const size_t col = obstacleGrid[0].size();
 
-    for(int i = 1; i < row; ++i) {
+    for(size_t i = 1; i < row; ++i) {
         obstacleGrid[i][0] = ((obstacleGrid[i][0] == 0 && obstacleGrid[i-1][0] == 1) ? 1 : 0);
     }
-    for(int j = 1; j < col; ++j) {
+    for(size_t j = 1; j < col; ++j) {
         obstacleGrid[0][j] = ((obstacleGrid[0][j] == 0 && obstacleGrid[0][j-1] == 1) ? 1 : 0);
     }
 
     // get all paths
-    for(int i = 1; i < row; ++i) {
-        for(int j = 1; j < col; ++j) {
+    for(size_t i = 1; i < row; ++i) {
+        for(size_t j = 1; j < col; ++j) {
             if(obstacleGrid[i][j] == 0) {
                 obstacleGrid[i][j] = obstacleGrid[i-1][j] + obstacleGrid[i][j-1];
             } else {
@@ -1877,9 +1877,63 @@ int uniquePathsWithObstacles2(vector<vector<int>>& obstacleGrid)
  * @brief   Leetcode 980: Unique Paths III
  *
  */
+static void uniquePathsIIIHelperUtil(vector<vector<int>>& grid,
+                                     int row, int col,
+                                     vector<int>& end,
+                                     const size_t R, const size_t C,
+                                     int countOfzeroes, int& results,
+                                     int sum, int zero)
+{
+    int temp = grid[row][col];
+    if(temp == 0) { zero += 1; }
+    // stop search process when reaching the endpoint or the square has been traversed
+    if(row == end[0] && col == end[1] || temp == INT_MAX) {
+        if(zero == countOfzeroes && (temp != INT_MAX && sum+temp == 3)) {
+            results += 1;
+        }
+        return;
+    }
+    sum += temp;
+    grid[row][col] = INT_MAX;
+
+    if(row-1 >= 0) uniquePathsIIIHelperUtil(grid, row-1, col, end, R, C, countOfzeroes, results, sum, zero);
+    if(row+1 < R)  uniquePathsIIIHelperUtil(grid, row+1, col, end, R, C, countOfzeroes, results, sum, zero);
+    if(col-1 >= 0) uniquePathsIIIHelperUtil(grid, row, col-1, end, R, C, countOfzeroes, results, sum, zero);
+    if(col+1 < C)  uniquePathsIIIHelperUtil(grid, row, col+1, end, R, C, countOfzeroes, results, sum, zero);
+
+    grid[row][col] = temp;
+}
+static void uniquePathsIIIHelper(vector<vector<int>>& grid,
+                            vector<int>& start, vector<int>& end,
+                            const size_t R, const size_t C,
+                            int countOfzeroes,
+                            int& results)
+{
+    int sum = 0;
+    int zero = 0;
+    int row = start[0], col = start[1];
+    uniquePathsIIIHelperUtil(grid, row, col, end, R, C, countOfzeroes, results, sum, zero);
+}
 int uniquePathsIII(vector<vector<int>>& grid)
 {
-    
+    // initialization
+    const size_t R = grid.size();
+    const size_t C = grid[0].size();
+    size_t countOfzeroes = 0;
+    vector<int> start(2,-1), end(2, -1);
+    // get index of startpoint and endpoint, and the number of ZEROes
+    for(size_t i = 0; i < R; ++i) {
+        for(size_t j = 0; j < C; ++j) {
+            if(grid[i][j] == 1) { start[0] = i; start[1] = j; }
+            if(grid[i][j] == 2) { end[0] = i; end[1] = j; }
+            if(grid[i][j] == 0) { countOfzeroes += 1; }
+        }
+    }
+
+    int results = 0;
+    uniquePathsIIIHelper(grid, start, end, R, C, countOfzeroes, results);
+
+    return results;
 }
 
 /**
@@ -1893,8 +1947,8 @@ int minPathSum(vector<vector<int>>& grid)
     if(grid.empty()) {
         return 0;
     }
-    int row = (int)grid.size();
-    int col = (int)grid[0].size();
+    const size_t row = grid.size();
+    const size_t col = grid[0].size();
     for(int i = 1; i < row; ++i) {
         grid[i][0] += grid[i-1][0];
     }
@@ -1925,8 +1979,8 @@ void setZeroes(vector<vector<int>>& matrix)
     }
 
     // search zero element and then save index in an array
-    int row = (int)matrix.size();
-    int col = (int)matrix[0].size();
+    const size_t row = matrix.size();
+    const size_t col = matrix[0].size();
     vector<int> mark;
     for(int i = 0; i < row; ++i) {
         for(int j = 0; j < col; ++j) {
@@ -1958,8 +2012,8 @@ void setZeroes2(vector<vector<int>>& matrix)
     if(matrix.empty()) {
         return;
     }
-    int row = (int)matrix.size();
-    int col = (int)matrix[0].size();
+    const size_t row = matrix.size();
+    const size_t col = matrix[0].size();
     unordered_set<int> rIndex;
     unordered_set<int> cIndex;
 
