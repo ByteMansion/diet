@@ -431,7 +431,7 @@ vector<int> partitionLabels2(string S)
     int minPos = 0;
     for(int i = 0; i < S.length() && i <= maxPos; ++i) {
         minPos = std::min(minPos, i);
-        maxPos = std::max(maxPos, S.find_last_of(S[i]));
+        maxPos = std::max(maxPos, (int)S.find_last_of(S[i]));
         if(i == maxPos) {
             results.push_back(maxPos - minPos + 1);
             if(maxPos == S.length() - 1) {

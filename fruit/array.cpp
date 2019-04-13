@@ -1285,10 +1285,10 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
 vector<int> spiralOrder2(vector<vector<int>>& matrix)
 {
     vector<int> results;
-    const size_t R = matrix.size();
+    int R = matrix.size();
     if(R == 0) return results;
 
-    size_t C = matrix[0].size();
+    int C = matrix[0].size();
     if(C == 0) return results;
 
     // record target steps in each direction
@@ -2478,4 +2478,28 @@ int minimumTotal(vector<vector<int>>& triangle)
     minimumTotalHelper(triangle, 0, 0, R, minSum, 0);
 
     return minSum;
+}
+
+/**
+ * @brief	Leetcode 120: Triangle
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.53%
+ */
+int minimumTotal2(vector<vector<int>>& triangle)
+{
+	if(triangle.empty() || triangle[0].empty()) {
+		return 0;
+	}
+	
+	const size_t R = triangle.size();
+	for (int i = R-1; i > 0; --i) {
+		size_t C = triangle[i].size();
+		for (int j = 0; j < C-1; ++j) {
+			triangle[i-1][j] = std::min(triangle[i][j] + triangle[i-1][j],
+										triangle[i][j+1] + triangle[i-1][j]);
+		}
+	}
+	
+	return triangle[0][0];
 }

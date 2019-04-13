@@ -176,8 +176,8 @@ vector<string> findWords4(vector<vector<char>>& board, vector<string>& words);
 void solveSudoku(vector<vector<char>>& board);
 
 // Leetcode 120: Triangle
-int minimumTotal(vector<vector>>& triangle);
-
+int minimumTotal(vector<vector<int>>& triangle);
+int minimumTotal2(vector<vector<int>>& triangle);
 
 
 
