@@ -2503,3 +2503,25 @@ int minimumTotal2(vector<vector<int>>& triangle)
 	
 	return triangle[0][0];
 }
+
+/*
+ * @brief	Leetcode 152: Maximum Product Subarray
+ *	This is a brute force solution, which can be accepted, but
+ *  a low efficiency.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 5%
+ */
+int maxProduct(vector<int>& nums)
+{
+	int result = INT_MIN;
+	const size_t SIZE = nums.size();
+	for (int i = SIZE - 1; i >= 0; --i) {
+		int sum = 1;
+		for (int j = i; j >= 0; --j) {
+			sum *= nums[j];
+			result = std::max(result, sum);
+		}
+	}
+	return result;
+}
