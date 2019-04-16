@@ -2552,3 +2552,36 @@ int maxProduct2(vector<int>& nums)
 
     return product;
 }
+
+/**
+ * @brief   Leetcode 713: Subarray Product Less Than K
+ *  In this array, all elements are positive integers.
+ *  Notice: if duplicate elements exist, subarray can be duplicate.
+ *  This solution can get correct result, but time limit exceeded.
+ *
+ */
+static void numSubarrayProductLessThanKHelper(vector<int>& nums, int start,
+                                       const int k, int product,
+                                       int& count)
+{
+    if(product >= k) {
+        return;
+    } else {
+        count++;
+    }
+    for(int i = start+1; i < nums.size(); ++i) {
+        product *= nums[i];
+        if(product < k) count++;
+        else break;
+    }
+}
+int numSubarrayProductLessThanK(vector<int>& nums, int k)
+{
+    int count = 0;
+    for(int i = 0; i < nums.size(); ++i){
+        int product = nums[i];
+        numSubarrayProductLessThanKHelper(nums, i, k, product, count);
+    }
+
+    return count;
+}

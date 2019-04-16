@@ -183,6 +183,9 @@ int minimumTotal2(vector<vector<int>>& triangle);
 int maxProduct(vector<int>& nums);
 int maxProduct2(vector<int>& nums);
 
+// Leetcode 713: subarray Product Less Than K
+int numSubarrayProductLessThanK(vector<int>& nums, int k);
+
 
 
 
