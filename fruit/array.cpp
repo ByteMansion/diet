@@ -2525,3 +2525,30 @@ int maxProduct(vector<int>& nums)
 	}
 	return result;
 }
+
+/**
+ * @brief   Leetcode 152: Maximum Product Subarray
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int maxProduct2(vector<int>& nums)
+{
+    int product = nums[0];
+
+    int imax = product;
+    int imin = product;
+    for(int i = 1; i < nums.size(); ++i) {
+        // if muliplied by a negative number, the maximum and the minimum
+        // will exchange
+        if(nums[i] < 0) {
+            std::swap(imax, imin);
+        }
+        imax = std::max(nums[i], imax * nums[i]);
+        imin = std::min(nums[i], imin * nums[i]);
+
+        product = std::max(product, imax);
+    }
+
+    return product;
+}

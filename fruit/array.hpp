@@ -181,6 +181,7 @@ int minimumTotal2(vector<vector<int>>& triangle);
 
 // Leetcode 152: Maximum Product Subarray
 int maxProduct(vector<int>& nums);
+int maxProduct2(vector<int>& nums);
 
 
 
