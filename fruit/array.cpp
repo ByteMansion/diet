@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include <map>
 #include <unordered_set>
+#include <cmath>
 
 using std::swap;
 using std::sort;
@@ -24,6 +25,7 @@ using std::unordered_map;
 using std::multimap;
 using std::map;
 using std::unordered_set;
+using std::log;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -2534,12 +2536,12 @@ int maxProduct(vector<int>& nums)
  */
 int maxProduct2(vector<int>& nums)
 {
-    int product = nums[0];
+    int result = nums[0];
 
     int imax = product;
     int imin = product;
     for(int i = 1; i < nums.size(); ++i) {
-        // if muliplied by a negative number, the maximum and the minimum
+        // if multiplied by a negative number, the maximum and the minimum
         // will exchange
         if(nums[i] < 0) {
             std::swap(imax, imin);
@@ -2547,10 +2549,10 @@ int maxProduct2(vector<int>& nums)
         imax = std::max(nums[i], imax * nums[i]);
         imin = std::min(nums[i], imin * nums[i]);
 
-        product = std::max(product, imax);
+        result = std::max(result, imax);
     }
 
-    return product;
+    return result;
 }
 
 /**
@@ -2584,4 +2586,40 @@ int numSubarrayProductLessThanK(vector<int>& nums, int k)
     }
 
     return count;
+}
+
+/**
+ * @brief   Leetcode 713: Subarray Product Less Than K
+ *  This method can be accepted, but not efficient. This solution transforms
+ *  the problem into a 2-divisions question from a product because the product
+ *  may be too large and exceed int scope.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 5.73%
+ */
+int numSubarrayProductLessThanK2(vector<int>& nums, int k)
+{
+    int result = 0;
+    double logk = log(k);
+    // get log values of all elements in number array
+    vector<double> logNums(nums.size()+1, 0);
+    for(int i = 0; i < nums.size(); ++i) {
+        logNums[i+1] = logNums[i] + log(nums[i]);
+    }
+
+    for(int i = 0; i < nums.size(); ++i) {
+        int left = i + 1;
+        int right = logNums.size();  // if right = logNums.size()-1, the last element will not be included
+        while(left < right) {
+            int mid = left + (right - left) / 2;
+            if(logNums[mid] - logNums[i] < logk - 0.000001) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        result += left - i - 1;
+    }
+
+    return result;
 }

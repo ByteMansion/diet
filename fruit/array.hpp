@@ -185,6 +185,7 @@ int maxProduct2(vector<int>& nums);
 
 // Leetcode 713: subarray Product Less Than K
 int numSubarrayProductLessThanK(vector<int>& nums, int k);
+int numSubarrayProductLessThanK2(vector<int>& nums, int k);
 
 
 
