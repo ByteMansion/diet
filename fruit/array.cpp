@@ -1891,7 +1891,7 @@ static void uniquePathsIIIHelperUtil(vector<vector<int>>& grid,
     int temp = grid[row][col];
     if(temp == 0) { zero += 1; }
     // stop search process when reaching the endpoint or the square has been traversed
-    if(row == end[0] && col == end[1] || temp == INT_MAX) {
+    if((row == end[0] && col == end[1]) || temp == INT_MAX) {
         if(zero == countOfzeroes && (temp != INT_MAX && sum+temp == 3)) {
             results += 1;
         }
@@ -2538,8 +2538,8 @@ int maxProduct2(vector<int>& nums)
 {
     int result = nums[0];
 
-    int imax = product;
-    int imin = product;
+    int imax = result;
+    int imin = result;
     for(int i = 1; i < nums.size(); ++i) {
         // if multiplied by a negative number, the maximum and the minimum
         // will exchange
@@ -2662,7 +2662,7 @@ int numSubarrayProductLessThanK3(vector<int>& nums, int k)
 int subarraySum(vector<int>& nums, int k)
 {
     int result = 0;
-    int left = 0;
+
     for(int i = 0; i < nums.size(); ++i) {
         int sum = 0;
         for(int j = i; j < nums.size(); ++j) {
@@ -2672,4 +2672,33 @@ int subarraySum(vector<int>& nums, int k)
     }
 
     return result;
+}
+
+/**
+ * @brief	Leetcode 560: Subarray Sum Equals K
+ *
+ */
+int subarraySum2(vector<int>& nums, int k)
+{
+	int result = 0;
+	unordered_map<int, int> sumToCount;
+	sumToCount[nums[0]] = 1;
+	for (int i = 1; i < nums.size(); ++i) {
+		nums[i] += nums[i-1];
+		if(sumToCount.find(nums[i]) != sumToCount.end()) {
+			sumToCount[nums[i]] += 1;
+		} else {
+			sumToCount[nums[i]] = 1;
+		}
+	}
+	if (sumToCount.find(k) != sumToCount.end()) {
+		result += sumToCount[k];
+	}
+	for (int i = 0; i < nums.size(); ++i) {
+		if (sumToCount.find(nums[i]+k) != sumToCount.end()) {
+			result += sumToCount[nums[i] + k];
+		}
+	}
+	
+	return result;
 }

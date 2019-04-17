@@ -190,7 +190,7 @@ int numSubarrayProductLessThanK3(vector<int>& nums, int k);
 
 // Leetcode 560: subarray Sum Equals K
 int subarraySum(vector<int>& nums, int k);
-
+int subarraySum2(vector<int>& nums, int k);
 
 
 
