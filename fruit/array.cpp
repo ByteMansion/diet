@@ -2623,3 +2623,27 @@ int numSubarrayProductLessThanK2(vector<int>& nums, int k)
 
     return result;
 }
+
+/**
+ * @brief Leetcode 713: Subarray Product Less Than K
+ *  This method is called slide window.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 78.23%
+ */
+int numSubarrayProductLessThanK3(vector<int>& nums, int k)
+{
+    int result = 0;
+    int left = 0;
+    int prod = 1;
+    for(int i = 0; i < nums.size(); ++i) {
+        prod *= nums[i];
+        while(left <= i && prod >= k) {
+            prod /= nums[left];
+            left++;
+        }
+        result += i - left + 1;
+    }
+
+    return result;
+}
