@@ -2627,6 +2627,9 @@ int numSubarrayProductLessThanK2(vector<int>& nums, int k)
 /**
  * @brief Leetcode 713: Subarray Product Less Than K
  *  This method is called slide window.
+ *  Maintain a max-product-window less than K. If a new introduced element
+ *  makes product window greater than K, move left border forward until product
+ *  window less than K.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 78.23%
@@ -2643,6 +2646,29 @@ int numSubarrayProductLessThanK3(vector<int>& nums, int k)
             left++;
         }
         result += i - left + 1;
+    }
+
+    return result;
+}
+
+/**
+ * @brief   Leetcode 560: Subarray Sum Equals K
+ *  Notice: The numbers are not all positive.
+ *  Brute force solutionr. Can be accepted, but not efficient.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 26%
+ */
+int subarraySum(vector<int>& nums, int k)
+{
+    int result = 0;
+    int left = 0;
+    for(int i = 0; i < nums.size(); ++i) {
+        int sum = 0;
+        for(int j = i; j < nums.size(); ++j) {
+            sum += nums[j];
+            if(sum == k) { result += 1; }
+        }
     }
 
     return result;
