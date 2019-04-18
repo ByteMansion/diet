@@ -2750,27 +2750,26 @@ int subarraySum3(vector<int>& nums, int k)
 /**
  * @brief   Leetcode 238: Product of Array Except Self
  *  Notice: Should solve it without division and in O(n)
+ *  This method can solve this problem in O(n) time and O(n) space.
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution beats 5%
+ * Accepted Solutions Runtime Distribution beats 78%
  */
 vector<int> productExceptSelf(vector<int>& nums)
 {
-    vector<int> result;
-    int product = 1;
-    map<int, int> indexToProduct;
-    for(int i = 0; i < nums.size(); ++i) {
-        product *= nums[i];
-        indexToProduct[i] = product;
-    }
+    vector<int> result(nums.size(), 1);
 
-    int res = 1;
-    for(int i = nums.size()-1; i > 0; --i) {
-        result.push_back(indexToProduct[i-1] * res);
-        res *= nums[i];
+    vector<int> productToIndex(nums.size(), 1);
+    productToIndex[0] = nums[0];
+    for(int i = 1; i < nums.size(); ++i) {
+        productToIndex[i] = productToIndex[i-1] * nums[i];
     }
-    result.push_back(res);
-    std::reverse(result.begin(), result.end());
+    int factor = 1;
+    for(int i = nums.size()-1; i > 0; --i) {
+        result[i] = productToIndex[i-1] * factor;
+        factor *= nums[i];
+    }
+    result[0] = factor;
 
     return result;
 }
