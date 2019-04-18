@@ -2687,7 +2687,9 @@ int subarraySum2(vector<int>& nums, int k)
     int result = 0;
 
     // sumOfNumbers[i]: sum of all elements from 0 to i
-    // sumToCount[i]:   count of value i in sumOfNumbers
+    // if it is allowed to change the value of nums, we needn't
+    // create extra sum vector.
+    // sumToCount[i]:   count of values that in sumOfNumbers
     vector<int> sumOfNumbers(nums.size(), 0);
     unordered_map<int, int> sumToCount;
     sumToCount[nums[0]] = 1;
@@ -2705,14 +2707,41 @@ int subarraySum2(vector<int>& nums, int k)
     if(sumToCount.find(k) != sumToCount.end()) {
         result += sumToCount[k];
     }
-    // the sum of all elements starting from index (i+1) is k
+    // the sum of elements starting from index (i+1) is k
     for(int i = 0; i < nums.size(); ++i) {
         // if the sum at index i is not used, decrease sumToCount by 1
-        // because we only calculate the sum off all elements starting from index i+1
+        // because we only calculate the sum of elements starting from index i+1
         sumToCount[sumOfNumbers[i]] -= 1;
         if(sumToCount.find(sumOfNumbers[i]+k) != sumToCount.end()) {
             result += sumToCount[sumOfNumbers[i]+k];
         }
+    }
+
+    return result;
+}
+
+/**
+ * @brief Leetcode 560: Subarray Sum Equals K
+ *  This solution use above method inversely, which can simplify the procedure
+ *  to a great extent.
+ *  Brilliant and elegant!
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99%
+ */
+int subarraySum3(vector<int>& nums, int k)
+{
+    int result = 0;
+
+    unordered_map<int, int> mSumToCount;
+    int curSum = 0;
+
+    mSumToCount[0] = 1;
+    for(int i = 0; i < nums.size(); ++i) {
+        curSum += nums[i];
+        if(mSumToCount.find(curSum - k) != mSumToCount.end()) {
+            result += mSumToCount[curSum - k];
+        }
+        mSumToCount[curSum] += 1;
     }
 
     return result;
