@@ -2773,3 +2773,29 @@ vector<int> productExceptSelf(vector<int>& nums)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 238: Product of Array Except Self
+ *  Use same method as above solution, but create constant
+ *  extra space.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99%
+ */
+vector<int> productExceptSelf2(vector<int>& nums)
+{
+    vector<int> result(nums.size(), 1);
+    result[0] = nums[0];
+    for(int i = 1; i < nums.size(); ++i) {
+        result[i] = result[i-1] * nums[i];
+    }
+
+    int factor = 1;
+    for(int i = nums.size()-1; i > 0; --i) {
+        result[i] = result[i-1] * factor;
+        factor *= nums[i];
+    }
+    result[0] = factor;
+
+    return result;
+}

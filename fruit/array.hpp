@@ -195,6 +195,7 @@ int subarraySum3(vector<int>& nums, int k);
 
 // Leetcode 238: Product of Array Except Self
 vector<int> productExceptSelf(vector<int>& nums);
+vector<int> productExceptSelf2(vector<int>& nums);
 
 
 
