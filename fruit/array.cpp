@@ -2863,6 +2863,7 @@ int findMinII(vector<int>& nums)
 
 /**
  * @brief   Leetcode 162: Find Peak Element
+ *  This method scans this array and return the first peak.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 99%
@@ -2879,4 +2880,29 @@ int findPeakElement(vector<int>& nums)
     }
 
     return nums.size()-1;
+}
+
+/**
+ * @brief   Leetcode 162: Find Peak Element
+ *  Below method is a modification of Binary Search.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99%
+ */
+int findPeakElement2(vector<int>& nums)
+{
+    if(nums.size() < 2 || nums[1] < nums[0]) {
+        return 0;
+    }
+    int left = 0;
+    int right = nums.size() - 1;
+    while(left + 1 < right) {
+        int mid = left + (right - left) / 2;
+        if(nums[mid] < nums[mid+1]) {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+    return right;
 }

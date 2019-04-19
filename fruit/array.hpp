@@ -205,6 +205,7 @@ int findMinII(vector<int>& nums);
 
 // Leetcode 162: Find Peak Element
 int findPeakElement(vector<int>& nums);
+int findPeakElement2(vector<int>& nums);
 
 
 
