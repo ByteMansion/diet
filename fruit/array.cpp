@@ -2799,3 +2799,28 @@ vector<int> productExceptSelf2(vector<int>& nums)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 153: Find Minimum in Rotated Array
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int findMin(vector<int>& nums)
+{
+    int left = 0;
+    int right = nums.size() - 1;
+
+    if(nums[left] < nums[right]) {
+        return nums[left];
+    }
+    while(left < right) {
+        int mid = left + (right - left) / 2;
+        if(nums[mid] < nums[right]) {
+            right = mid;
+        } else {
+            left = mid;
+        }
+    }
+    return (nums[left] > nums[right]) ? nums[right] : nums[left];
+}
