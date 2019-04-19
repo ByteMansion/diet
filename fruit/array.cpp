@@ -2860,3 +2860,23 @@ int findMinII(vector<int>& nums)
     }
     return (nums[left] >= nums[right]) ? nums[right] : nums[left];
 }
+
+/**
+ * @brief   Leetcode 162: Find Peak Element
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99%
+ */
+int findPeakElement(vector<int>& nums)
+{
+    if(nums.size() < 2 || nums[0] > nums[1]) {
+        return 0;
+    }
+    for(int i = 1; i < nums.size()-1; ++i) {
+        if(nums[i] > nums[i-1] && nums[i] > nums[i+1]) {
+            return i;
+        }
+    }
+
+    return nums.size()-1;
+}

@@ -203,6 +203,9 @@ int findMin(vector<int>& nums);
 // Leetcode 154: Find Minimum in Rotated Sorted Array II
 int findMinII(vector<int>& nums);
 
+// Leetcode 162: Find Peak Element
+int findPeakElement(vector<int>& nums);
+
 
 
 
