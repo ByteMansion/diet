@@ -200,6 +200,8 @@ vector<int> productExceptSelf2(vector<int>& nums);
 // Leetcode 153: Find Minimum in Rotated Sorted Array
 int findMin(vector<int>& nums);
 
+// Leetcode 154: Find Minimum in Rotated Sorted Array II
+int findMinII(vector<int>& nums);
 
 
 

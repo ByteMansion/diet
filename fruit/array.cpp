@@ -2802,6 +2802,7 @@ vector<int> productExceptSelf2(vector<int>& nums)
 
 /**
  * @brief   Leetcode 153: Find Minimum in Rotated Array
+ *  No duplicats exist in this array.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 100%
@@ -2823,4 +2824,39 @@ int findMin(vector<int>& nums)
         }
     }
     return (nums[left] > nums[right]) ? nums[right] : nums[left];
+}
+
+/**
+ * @brief   Leetcode 154: Find Minimum in Rotated Array II
+ *  Exist duplicates in the array.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.38%
+ */
+int findMinII(vector<int>& nums)
+{
+    int left = 0;
+    int right = nums.size() - 1;
+
+    if(nums[left] < nums[right]) {
+        return nums[left];
+    }
+    while(left + 1 < right) {
+        int mid = left + (right - left) / 2;
+        if(nums[mid] < nums[right]) {
+            right = mid;
+        } else if(nums[mid] > nums[right]){
+            left = mid;
+        } else {
+            while(nums[right] == nums[mid] && right >= mid) {
+                right -= 1;
+            }
+            if(right <= mid) {
+                right = mid;
+            } else {
+                left = mid;
+            }
+        }
+    }
+    return (nums[left] >= nums[right]) ? nums[right] : nums[left];
 }
