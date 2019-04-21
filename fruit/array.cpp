@@ -2906,3 +2906,28 @@ int findPeakElement2(vector<int>& nums)
     }
     return right;
 }
+
+/**
+ * @brief	Leetcode 209: Minimum Size Subarray Sum
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.52%
+ */
+int minSubArrayLen(int s, vector<int>& nums)
+{
+	int result = INT_MAX;
+	
+	int post = 0;
+	int sum = 0;
+	for (int i = 0; i < nums.size(); ++i) {
+		sum += nums[i];
+		while (sum >= s) {
+			result = std::min(result, i-post+1);
+			sum -= nums[post];
+			post += 1;
+		}
+	}
+	if(result == INT_MAX) result = 0;
+	
+	return result;
+}
