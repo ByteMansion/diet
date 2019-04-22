@@ -331,6 +331,7 @@ vector<vector<int>> combine3(int n, int k)
 
 /**
  * @brief   Leetcode 39: Combination Sum
+ *  No duplicates in candidates and results can contain duplicates.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 75%
@@ -347,7 +348,7 @@ static void combinationSumHelper(vector<int>& candidates,
     } else if(target < 0) {
         return;
     }
-    // start number determines whether we can same number repeatedly
+    // start number determines whether we can use same number repeatedly
     for(int i = start; i < candidates.size(); ++i) {
         if(candidates[i] > target) {
             break;
@@ -371,7 +372,7 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target)
 
 /**
  * @brief   Leetcode 39: Combination Sum
- *  Using Dynamic programming algorithm.
+ *  Use Dynamic programming algorithm.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 28.54%
@@ -399,7 +400,8 @@ vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
 
 /**
  * @brief   Leetcode 40: Combination Sum II
- *  Using Backtracking algorithm
+ *  Use Backtracking algorithm
+ *  Candidates contain duplicates and results cannot contain duplicates.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 99.58%
@@ -433,6 +435,18 @@ vector<vector<int>> combinationSumII(vector<int>& candidates, int target)
     combinationsumIIHelper(candidates, target, array, results, 0);
 
     return results;
+}
+
+/**
+ * @brief	Leetcode 216: Combination Sum III
+ *
+ */
+vector<vector<int>> combinationSum3(int k, int n)
+{
+	vector<vector<int>> results;
+	
+	
+	return results;
 }
 
 /**
@@ -2957,7 +2971,7 @@ static int findMinSubArrayLenHelper(vector<int>& nums,
     if(nums[right] >= sum) return right;
     return INT_MAX;
 }
-int minSubArrayLen(int s, vector<int>& nums)
+int minSubArrayLen2(int s, vector<int>& nums)
 {
     int result = INT_MAX;
 
@@ -3052,3 +3066,4 @@ int findLength3(vector<int>& A, vector<int>& B)
 
     return result;
 }
+
