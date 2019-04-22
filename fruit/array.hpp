@@ -209,6 +209,7 @@ int findPeakElement2(vector<int>& nums);
 
 // Leetcode 209: Minimum Size Subarray Sum
 int minSubArrayLen(int s, vector<int>& nums);
+int minSubArrayLen2(int s, vector<int>& nums);
 
 
 

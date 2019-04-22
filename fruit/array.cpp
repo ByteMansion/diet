@@ -2909,6 +2909,7 @@ int findPeakElement2(vector<int>& nums)
 
 /**
  * @brief	Leetcode 209: Minimum Size Subarray Sum
+ *  time complexity is O(n).
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 98.52%
@@ -2916,7 +2917,7 @@ int findPeakElement2(vector<int>& nums)
 int minSubArrayLen(int s, vector<int>& nums)
 {
 	int result = INT_MAX;
-	
+
 	int post = 0;
 	int sum = 0;
 	for (int i = 0; i < nums.size(); ++i) {
@@ -2928,6 +2929,52 @@ int minSubArrayLen(int s, vector<int>& nums)
 		}
 	}
 	if(result == INT_MAX) result = 0;
-	
+
 	return result;
+}
+
+/**
+ * @brief   Leetcode 209: Minimum Size Subarray Sum
+ *  time complexity is O(nlogn).
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 98.54%
+ */
+static int findMinSubArrayLenHelper(vector<int>& nums,
+                                     int start, int sum)
+{
+    int left = start;
+    int right = nums.size() - 1;
+    while(left + 1 < right) {
+        int mid = left + (right - left) / 2;
+        if(nums[mid] < sum) {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+    if(nums[left] >= sum) return left;
+    if(nums[right] >= sum) return right;
+    return INT_MAX;
+}
+int minSubArrayLen(int s, vector<int>& nums)
+{
+    int result = INT_MAX;
+
+    for(int i = 1; i < nums.size(); ++i) {
+        nums[i] += nums[i-1];
+    }
+
+    int sum;
+    for(int i = 0; i < nums.size(); ++i) {
+        if(i == 0) sum = s;
+        else sum = nums[i-1] + s;
+        int temp = findMinSubArrayLenHelper(nums, i, sum);
+        if(temp != INT_MAX) {
+            result = std::min(result, temp - i + 1);
+        }
+    }
+
+    if(result == INT_MAX) result = 0;
+    return result;
 }
