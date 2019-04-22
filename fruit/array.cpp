@@ -3004,3 +3004,51 @@ int findLength(vector<int>& A, vector<int>& B)
     }
     return result;
 }
+
+/**
+ * @brief   Leetcode 718: Maximum Length of Repeated Subarray
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 30%
+ */
+int findLength2(vector<int>& A, vector<int>& B)
+{
+    int result = 0;
+
+    int m = A.size();
+    int n = B.size();
+    vector<vector<int>> dp(m+1, vector<int>(n+1,0));
+    for(int i = m-1; i >= 0; --i) {
+        for(int j = n-1; j >= 0; --j) {
+            dp[i][j] = (A[i] == B[j]) ? 1+dp[i+1][j+1] : 0;
+            result = std::max(result, dp[i][j]);
+        }
+    }
+
+    return result;
+}
+
+/**
+ * @brief   Leetcode 718: Maximum Length of Repeated Subarray
+ *  Use dynamic programming.
+ *  dp[i][j] = (A[i]==B[j]) ? 1+dp[i+1][j+1] : 0;
+ *  dp[i][j]: max length of common subarray start at A[i] and B[j]
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 88%
+ */
+int findLength3(vector<int>& A, vector<int>& B)
+{
+    int m = A.size();
+    int n = B.size();
+    vector<int> dp(n+1, 0);
+    int result = 0;
+    for(int i = m-1; i >= 0; --i) {
+        for(int j = 0; j < n; ++j) {
+            dp[j] = (A[i] == B[j]) ? 1+dp[j+1] : 0;
+            result = std::max(result, dp[j]);
+        }
+    }
+
+    return result;
+}

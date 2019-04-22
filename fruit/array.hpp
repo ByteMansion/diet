@@ -213,6 +213,8 @@ int minSubArrayLen2(int s, vector<int>& nums);
 
 // Leetcode 718: Maximum Length of Repeated Subarray
 int findLength(vector<int>& A, vector<int>& B);
+int findLength2(vector<int>& A, vector<int>& B);
+int findLength3(vector<int>& A, vector<int>& B);
 
 
 
