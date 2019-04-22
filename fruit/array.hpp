@@ -211,6 +211,8 @@ int findPeakElement2(vector<int>& nums);
 int minSubArrayLen(int s, vector<int>& nums);
 int minSubArrayLen2(int s, vector<int>& nums);
 
+// Leetcode 718: Maximum Length of Repeated Subarray
+int findLength(vector<int>& A, vector<int>& B);
 
 
 

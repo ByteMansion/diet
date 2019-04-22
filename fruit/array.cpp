@@ -2978,3 +2978,29 @@ int minSubArrayLen(int s, vector<int>& nums)
     if(result == INT_MAX) result = 0;
     return result;
 }
+
+/**
+ * @brief   Leetcode 718: Maximum Length of Repeated Subarray
+ *  This is a brute force solution with high time complexity.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 5.45%
+ */
+int findLength(vector<int>& A, vector<int>& B)
+{
+    int result = INT_MIN;
+
+    for(int i = 0; i < A.size(); ++i) {
+        for(int j = 0; j < B.size(); ++j) {
+            int count = 0;
+            while(i+count < A.size() && j+count < B.size() &&
+                  A[i+count] == B[j+count]) {
+                count += 1;
+            }
+            result = std::max(count, result);
+            if(j+result >= B.size()) break;
+        }
+        if(i+result >= A.size()) break;
+    }
+    return result;
+}
