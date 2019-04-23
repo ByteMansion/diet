@@ -508,6 +508,38 @@ vector<vector<int>> combinationSum3(int k, int n)
 }
 
 /**
+ * @brief   Leetcode 216: Combination Sum III
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+vector<vector<int>> combinationSum32(int k, int n)
+{
+    vector<vector<int>> results;
+    vector<int> array(k, 0);
+    int index = 0;
+    int end = 10;
+    int sum = 0;
+    while(index >= 0) {
+        array[index] += 1;
+        sum += 1;
+        if(array[index] >= end) {
+            index -= 1;
+        } else if(index+1 == k) {
+            if(sum == n) {
+                results.push_back(array);
+            }
+        } else {
+            index += 1;
+            sum += array[index-1] - array[index];
+            array[index] = array[index-1];
+        }
+    }
+    return results;
+}
+
+
+/**
  * @brief   Leetcode 950: Reveal Cards In Increasing Order
  *  This method using less time, but more space.
  *

@@ -60,6 +60,7 @@ vector<vector<int>> combinationsumII(vector<int>& candidates, int target);
 
 // Leetcode 216: Combination Sum III
 vector<vector<int>> combinationSum3(int k, int n);
+vector<vector<int>> combinationSum32(int k, int n);
 
 
 // Leetcode 950: Reveal Cards In Increasing Order
