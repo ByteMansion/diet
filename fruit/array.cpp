@@ -28,6 +28,7 @@ using std::map;
 using std::unordered_set;
 using std::log;
 using std::string;
+using std::to_string;
 
 /**
  * @brief	Leetcode 31: Next Permutation
