@@ -16,6 +16,7 @@
 #include <map>
 #include <unordered_set>
 #include <cmath>
+#include <string>
 
 using std::swap;
 using std::sort;
@@ -26,6 +27,7 @@ using std::multimap;
 using std::map;
 using std::unordered_set;
 using std::log;
+using std::string;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -3157,3 +3159,44 @@ int findLength3(vector<int>& A, vector<int>& B)
     return result;
 }
 
+/**
+ * @brief   Leetcode 228: Summary Ranges
+ *  Sorted array with no duplicates
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+vector<string> summaryRanges(vector<int>& nums)
+{
+    // if nums array is empty
+    if(nums.empty()) {
+        return vector<string>{};
+    }
+    vector<string> results;
+    string str;
+    int i = 0;
+    str += to_string(nums[i]);
+    int count = 1;
+    for(i = 1; i < nums.size(); ++i) {
+        if(nums[i] == nums[i-1]+1) {
+            count += 1;
+            continue;
+        } else {
+            if(count > 1) {
+                str += "->";
+                str += to_string(nums[i-1]);
+            }
+            results.push_back(str);
+            str.clear();
+            count = 1;
+            str += to_string(nums[i]);
+        }
+    }
+    if(count > 1 && i == nums.size()) {
+        str += "->";
+        str += to_string(nums[nums.size()-1]);
+    }
+    if(!str.empty()) results.push_back(str);
+
+    return results;
+}

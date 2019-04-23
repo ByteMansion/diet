@@ -222,6 +222,8 @@ int findLength(vector<int>& A, vector<int>& B);
 int findLength2(vector<int>& A, vector<int>& B);
 int findLength3(vector<int>& A, vector<int>& B);
 
+// Leetcode 228: Summary Ranges
+vector<string> summaryRanges(vector<int>& nums);
 
 
 
