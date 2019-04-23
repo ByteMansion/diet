@@ -330,6 +330,40 @@ vector<vector<int>> combine3(int n, int k)
 }
 
 /**
+ * @brief   Leetcode 77: Combinations
+ *  if n=6, k=3, then the results is
+ *  [[1,2,3],[1,2,4],[1,3,4],[2,3,4],
+ *   [1,2,5],[1,3,5],[2,3,5],[1,4,5],[2,4,5],[3,4,5],
+ *   [1,2,6],[1,3,6],[2,3,6],[1,4,6],[2,4,6],[3,4,6],[1,5,6],[2,5,6],[3,5,6],[4,5,6]]
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99.97%
+ */
+vector<vector<int>> combine4(int n, int k)
+{
+    vector<vector<int>> results;
+    vector<int> nums;
+    for(int i = 1; i < k+1; ++i) {
+        nums.push_back(i);
+    }
+    nums.push_back(n+1);
+    // if n=6,k=3, then nums=[1,2,3,7]
+    int index = 0;
+    while(index < k) {
+        results.push_back(vector<int>(&nums[0], &nums[k]));
+
+        index = 0;
+        while(index < k && (nums[index+1] == nums[index]+1)) {
+            nums[index] = index + 1;
+            index += 1;
+        }
+        nums[index] = nums[index] + 1;
+    }
+
+    return results;
+}
+
+/**
  * @brief   Leetcode 39: Combination Sum
  *  No duplicates in candidates and results can contain duplicates.
  *

@@ -49,6 +49,7 @@ vector<vector<int>> permuteUnique3(vector<int>& nums);
 vector<vector<int>> combine(int n, int k);
 vector<vector<int>> combine2(int n, int k);
 vector<vector<int>> combine3(int n, int k);
+vector<vector<int>> combine4(int n, int k);
 
 // Leetcode 39: Combination Sum
 vector<vector<int>> combinationSum(vector<int>& candidates, int target);
