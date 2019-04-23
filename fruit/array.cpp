@@ -473,13 +473,37 @@ vector<vector<int>> combinationSumII(vector<int>& candidates, int target)
 
 /**
  * @brief	Leetcode 216: Combination Sum III
+ *  combinations of k numbers that add up to a number n
+ *  only 1 to 9 can be used and no Duplicates
  *
+ *  This method is transformed from problem 77, using Backtracking
+ *  algorithm.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
  */
+static void combinationSum3Helper(vector<vector<int>>& results,
+                                  vector<int>& array,
+                                  int k, int start, int end, int targetSum)
+{
+    if(array.size() == k) {
+        if(targetSum == 0) {
+            results.push_back(array);
+        }
+        return;
+    }
+    for(int i = start; i < end; ++i) {
+        array.push_back(i);
+        combinationSum3Helper(results, array, k, i+1, end, targetSum-i);
+        array.pop_back();
+    }
+}
 vector<vector<int>> combinationSum3(int k, int n)
 {
 	vector<vector<int>> results;
-	
-	
+	vector<int> array;
+    combinationSum3Helper(results, array, k, 1, 10, n);
+
 	return results;
 }
 
