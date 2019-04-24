@@ -3216,11 +3216,24 @@ vector<string> summaryRanges(vector<int>& nums)
  *               time complexity is O(n), space complexity is O(n)
  *            4) Floyd's tortoise and hare algorithm (cycle detection algorithm)
  *               time complexity is O(n), space complexity is O(1)
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99%
  */
 int findDuplicate(vector<int>& nums)
 {
-    int n = nums.size();
-
-
-    return result;
+	int tortoise = nums[0];
+	int hare = nums[0];
+	do {
+		tortoise = nums[tortoise];
+		hare = nums[nums[hare]];
+	} while (tortoise != hare);
+	
+	hare = nums[0];
+	while (hare != tortoise) {
+		tortoise = nums[tortoise];
+		hare = nums[hare];
+	}
+	
+	return hare;
 }
