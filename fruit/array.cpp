@@ -3201,3 +3201,26 @@ vector<string> summaryRanges(vector<int>& nums)
 
     return results;
 }
+
+/**
+ * @brief   Leetcode 287: Find the Duplicate Number
+ *  conditions: 1) O(1) extra space
+ *              2) less than O(n^2) time complexity
+ *              3) must NOT modify original array
+ *              4) elements range from 1 to n with length of array is n+1
+ * solutions: 1) two loops to compare every element with other elements
+ *               time complexity is O(n ^2)
+ *            2) sort and get duplicate number
+ *               time complexity of sorting is O(nlogn)
+ *            3) bit or hash set
+ *               time complexity is O(n), space complexity is O(n)
+ *            4) Floyd's tortoise and hare algorithm (cycle detection algorithm)
+ *               time complexity is O(n), space complexity is O(1)
+ */
+int findDuplicate(vector<int>& nums)
+{
+    int n = nums.size();
+
+
+    return result;
+}

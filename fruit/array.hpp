@@ -225,6 +225,11 @@ int findLength3(vector<int>& A, vector<int>& B);
 // Leetcode 228: Summary Ranges
 vector<string> summaryRanges(vector<int>& nums);
 
+// Leetcode 287: Find the Duplicate Number
+int findDuplicate(vector<int>& nums);
+
+
+
 
 
 #endif /* array_hpp */
