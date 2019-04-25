@@ -227,6 +227,7 @@ vector<string> summaryRanges(vector<int>& nums);
 
 // Leetcode 287: Find the Duplicate Number
 int findDuplicate(vector<int>& nums);
+int findDuplicate2(vector<int>& nums);
 
 
 

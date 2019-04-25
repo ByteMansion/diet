@@ -3228,12 +3228,54 @@ int findDuplicate(vector<int>& nums)
 		tortoise = nums[tortoise];
 		hare = nums[nums[hare]];
 	} while (tortoise != hare);
-	
+
 	hare = nums[0];
 	while (hare != tortoise) {
 		tortoise = nums[tortoise];
 		hare = nums[hare];
 	}
-	
+
 	return hare;
+}
+
+/**
+ * @brief   Leetcode 287: Find the Duplicate Number
+ *  Another efficient solution: use Brent's algorithm
+ *
+ *  lambda: the length of cycle
+ *  mu:     the smallest index of the cycle, or the first index of repetition
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 99%
+ */
+int findDuplicate2(vector<int>& nums)
+{
+    // get the length of cycle directly
+    int power = 1;
+    int lambda = 1;
+    int tortoise = nums[0];
+    int hare = nums[nums[0]];
+    while(tortoise != hare) {
+        if(power == lambda) {
+            tortoise = hare;
+            power *= 2;
+            lambda = 0;
+        }
+        hare = nums[hare];
+        lambda += 1;
+    }
+
+    // move forward first pointer by lambda steps
+    hare = nums[0];
+    for(int i = 0; i < lambda; ++i) {
+        hare = nums[hare];
+    }
+    // get mu when nums[mu] == nums[mu+lambda]
+    tortoise = nums[0];
+    while(hare != tortoise) {
+        hare = nums[hare];
+        tortoise = nums[tortoise];
+    }
+
+    return hare;
 }
