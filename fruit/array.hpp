@@ -232,6 +232,7 @@ int findDuplicate2(vector<int>& nums);
 // Leetcode 41: First Missing Positive
 int firstMissingPositive(vector<int>& nums);
 int firstMissingPositive2(vector<int>& nums);
+int firstMissingPositive3(vector<int>& nums);
 
 
 

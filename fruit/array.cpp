@@ -3343,3 +3343,31 @@ int firstMissingPositive2(vector<int>& nums)
     }
     return numOfPositive+1;
 }
+
+/**
+ * @brief   Leetcode 41: First Missing Position
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int firstMissingPositive3(vector<int>& nums)
+{
+    // if i > 0 && i <= nums.size(), then nums[i] = i+1
+    int i = 0;
+    for(i < nums.size()) {
+        if(nums[i] > 0 && nums[i] <= nums.size() && nums[i] != nums[nums[i]-1]) {
+            std::swap(nums[i], nums[nums[i]-1]);
+        } else {
+            i++;
+        }
+    }
+
+    // if nums[i] != i+1, then i+1 is the missing positive
+    for(int i = 0; i < nums.size(); ++i) {
+        if(nums[i] != i+1) {
+            return i+1;
+        }
+    }
+
+    return nums.size()+1;
+}
