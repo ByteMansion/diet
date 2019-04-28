@@ -3313,30 +3313,33 @@ int firstMissingPositive(vector<int>& nums)
 /**
  * @brief   Leetcode 41: First Missing Positive
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
  */
 int firstMissingPositive2(vector<int>& nums)
 {
-    int i, j;
-    for(i = 0, j = nums.size()-1; i < j; ++i) {
-        if(nums[i] <= 0) {
-            while(nums[j] <= 0) {
-                j -= 1;
-            }
-            std::swap(nums[i], nums[j--]);
+    // partition: left numbers are positive, the other are negative
+    int numOfPositive = -1;
+    for(int i = 0; i < nums.size(); ++i) {
+        if(nums[i] > 0) {
+            numOfPositive += 1;
+            std::swap(nums[numOfPositive], nums[i]);
+        }
+    }
+    numOfPositive += 1;
+
+    // if nums[i] exists ranging from 1 to k, set nums[nums[i]-1] to its negative
+    for(int i = 0; i < numOfPositive; ++i) {
+        int temp = std::abs(nums[i]);
+        if(temp <= numOfPositive) {
+            nums[temp] =  (nums[temp-1] < 0) ? nums[temp-1] : (-1 * nums[temp-1]);
         }
     }
 
-
-    for(i = 0; i <= j; ++i) {
-        if(std::abs(nums[i]) <= j+1) {
-            nums[nums[i]-1] =  (nums[nums[i]-1] < 0) ? nums[nums[i] : -1 * nums[nums[i]-1];
-        }
-    }
-
-    for(i = 0; i <= j; ++i) {
+    for(int i = 0; i < numOfPositive; ++i) {
         if(nums[i] > 0) {
             return i+1;
         }
     }
-    return j+1;
+    return numOfPositive+1;
 }
