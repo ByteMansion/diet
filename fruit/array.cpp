@@ -3285,7 +3285,6 @@ int findDuplicate2(vector<int>& nums)
  *  Given an unsorted integer array, find the smallest missing positive integer.
  *  the solution should run in O(n) time and uses constant extra space.
  *
- *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 100%
  */
@@ -3309,4 +3308,35 @@ int firstMissingPositive(vector<int>& nums)
         }
     }
     return result;
+}
+
+/**
+ * @brief   Leetcode 41: First Missing Positive
+ *
+ */
+int firstMissingPositive2(vector<int>& nums)
+{
+    int i, j;
+    for(i = 0, j = nums.size()-1; i < j; ++i) {
+        if(nums[i] <= 0) {
+            while(nums[j] <= 0) {
+                j -= 1;
+            }
+            std::swap(nums[i], nums[j--]);
+        }
+    }
+
+
+    for(i = 0; i <= j; ++i) {
+        if(std::abs(nums[i]) <= j+1) {
+            nums[nums[i]-1] =  (nums[nums[i]-1] < 0) ? nums[nums[i] : -1 * nums[nums[i]-1];
+        }
+    }
+
+    for(i = 0; i <= j; ++i) {
+        if(nums[i] > 0) {
+            return i+1;
+        }
+    }
+    return j+1;
 }
