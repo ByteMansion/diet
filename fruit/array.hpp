@@ -229,6 +229,9 @@ vector<string> summaryRanges(vector<int>& nums);
 int findDuplicate(vector<int>& nums);
 int findDuplicate2(vector<int>& nums);
 
+// Leetcode 41: First Missing Positive
+int firstMissingPositive(vector<int>& nums);
+
 
 
 

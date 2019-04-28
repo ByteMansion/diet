@@ -3279,3 +3279,34 @@ int findDuplicate2(vector<int>& nums)
 
     return hare;
 }
+
+/**
+ * @brief   Leetcode 41: First Missing Positive
+ *  Given an unsorted integer array, find the smallest missing positive integer.
+ *  the solution should run in O(n) time and uses constant extra space.
+ *
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+int firstMissingPositive(vector<int>& nums)
+{
+    int result = 1;
+    sort(nums.begin(), nums.end());
+    for(int i = 0; i < nums.size(); ++i) {
+        // jump over negative numbers
+        if(nums[i] <= 0) {
+            continue;
+        }
+        // if exist duplicates, jump over the second and after
+        if(i > 0 && nums[i] == nums[i-1]){
+            continue;
+        }
+        if(nums[i] > result) {
+            break;
+        } else {
+            result += 1;
+        }
+    }
+    return result;
+}
