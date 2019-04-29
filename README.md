@@ -19,6 +19,7 @@ I have to say, honeatly and earnestly, that not all solution are solved on my ow
 
 In **explorer** folder, I sometimes provide not just one solution to a problem. These solutions may vary from time/space complexity to original thoughts, some of which are my contribution, some are others(I have to thank those solution contributors again). 
 In order to cataloge all problems clearly, I create several files according to the problem tags on website and then provide solutions by problems indice.
+
 In **doc** folder, I list some important algorithms, in which I will give some introductions, code demos, applications and most important, related problems. These algorithms are not my inspirations or inventions, and I just collect them from wikipedia, blogs or books, and then file a document by my understanding. If anything wrong, please feel free to let me know.
 
 ## Contact
