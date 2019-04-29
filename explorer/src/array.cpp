@@ -8,7 +8,7 @@
  * Copyright © 2018 ChangruiShao. All rights reserved.
  */
 
-#include "array.hpp"
+#include "../include/array.hpp"
 
 #include <algorithm>
 #include <deque>
