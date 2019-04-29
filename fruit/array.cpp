@@ -3354,8 +3354,9 @@ int firstMissingPositive3(vector<int>& nums)
 {
     // if i > 0 && i <= nums.size(), then nums[i] = i+1
     int i = 0;
-    for(i < nums.size()) {
+    while(i < nums.size()) {
         if(nums[i] > 0 && nums[i] <= nums.size() && nums[i] != nums[nums[i]-1]) {
+            // i does not increase by 1 for we need to relocate the exchanged number
             std::swap(nums[i], nums[nums[i]-1]);
         } else {
             i++;
