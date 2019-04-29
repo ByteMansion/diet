@@ -10,7 +10,7 @@ I am still, and always, a freshman, and still know little about the whole comput
 
 "Zwei Dinge erfuellen das Gemuet mit immer neuer und zunehmender Bewunderung und Ehrfurcht, je oefter und anhaltender sich das Nachdenken damit beschaeftigt: der bestirnte Himmel ueber mir und das moralische Gesetz in mir."("Two things fill me with constantly increasing admiration and awe, the longer and more earnestly I reflect on them: the starry heavens without and the moral law within.") This is my favourite sentence written by Immanuel Kant. I modified the last two phrases and that is what I want to say:
 
-- **Two things fill me with constantly increasing admiration and awe, the longer and more earnestly I reflect on them: the unknown science fields and the simple and clear logics.**
+> **Two things fill me with constantly increasing admiration and awe, the longer and more earnestly I reflect on them: the unknown science fields and the simple and clear logics.**
 
 ## Brief Introduction
 
