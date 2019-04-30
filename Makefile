@@ -1,18 +1,9 @@
-# Define required macros here
+# Define required Macros here
 
-OBJS = main.o array.o linkedlist.o string.o tree.o util.o
-CFLAGS = -Wall -g -cpp11
-CC = g++
-INCLUDE = -I "./explorer/include"
-LIBS = -lm
+MAKE = make
+EXPLORER = ./explorer/src/ 
 
-solution: ${OBJS}
-	$(CC) ${CFLAGS} ${INCLUDE} -o $@ ${OBJS} ${LIBS}
+subsystem:
+	cd ${EXPLORER} && ${MAKE}
 
-clean:
-	-rm -f *.o core *.core
 
-.cpp.o:
-	${CC} ${CFLAGS} ${INCLUDE} -c $<
-
- 
