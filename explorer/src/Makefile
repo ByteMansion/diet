@@ -2,15 +2,17 @@
 
 INCLUDE = -I ../include
 CC = g++
-CFLAGS = -wall -g -std=c++11
-LIBS = -lm
+CFLAGS = -Wall -g -std=c++14
+LIBS =
 OBJS = array.o linkedlist.o string.o tree.o util.o main.o
+ROOTDIR = ../../
 
 solution: ${OBJS}
-	${CC} ${INCLUDE} ${CFLAGS} ${LIBS} -o $@
+	${CC} ${INCLUDE} ${CFLAGS} ${LIBS} ${OBJS} -o $@
+	cp $@ ${ROOTDIR}
 
 .cpp.o:
 	${CC} ${CFLAGS} ${INCLUDE} -c $<
 
 clean:
-	-rm -f *.o core *.core
+	-rm -f *.o core *.core solution

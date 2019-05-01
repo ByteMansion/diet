@@ -739,7 +739,7 @@ ListNode* addTwoNumbers(ListNode* index1, ListNode* index2)
 
     if(length1 < length2) {
         ListNode* tmp = index1;
-        index1 = index1;
+        index1 = index2;
         index2 = tmp;
     }
     ListNode* result = index1;
