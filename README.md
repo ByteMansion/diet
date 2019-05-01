@@ -22,6 +22,12 @@ In order to cataloge all problems clearly, I create several files according to t
 
 In **doc** folder, I list some important algorithms, in which I will give some introductions, code demos, applications and most important, related problems. These algorithms are not my inspirations or inventions, and I just collect them from wikipedia, blogs or books, and then file a document by my understanding. If anything wrong, please feel free to let me know.
 
+# Environment
+Your system should install gcc compiler and support c++ 11 standard.
+Execute make command and if succeed, executable file named **solution** will be created.
+- make: compile this project
+- make clean: clean .o, .core and core files
+
 ## Contact
 
 scrdyx@163.com

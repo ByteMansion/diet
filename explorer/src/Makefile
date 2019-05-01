@@ -1,18 +1,16 @@
-# Define required macros here
+# define required Macros here
 
-OBJS = array.o linkedlist.o string.o tree.o util.o main.o
-CFLAGS = -Wall -g -std=c++11
-CC = clang++
 INCLUDE = -I ../include
+CC = g++
+CFLAGS = -wall -g -std=c++11
 LIBS = -lm
-
-.o.cpp:
-	${CC} ${CFLAGS} ${INCLUDE} -c $<
+OBJS = array.o linkedlist.o string.o tree.o util.o main.o
 
 solution: ${OBJS}
-	${CC} ${CFLAGS} ${INCLUDE} -o $@ ${OBJS} ${LIBS}
+	${CC} ${INCLUDE} ${CFLAGS} ${LIBS} -o $@
+
+.cpp.o:
+	${CC} ${CFLAGS} ${INCLUDE} -c $<
 
 clean:
 	-rm -f *.o core *.core
-
-
