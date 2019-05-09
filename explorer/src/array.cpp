@@ -3377,7 +3377,7 @@ int firstMissingPositive3(vector<int>& nums)
  * @brief   Leetcode 229: Majority Element II
  *  The algorithm should run in linear time and in O(1) space.
  *
-* -------------------------------------------
+ * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 32.2%
  */
 vector<int> majorityElement(vector<int>& nums)
@@ -3401,6 +3401,34 @@ vector<int> majorityElement(vector<int>& nums)
     }
     if(count > limit) {
         result.push_back(nums[nums.size()-1]);
+    }
+
+    return result;
+}
+
+/**
+ * @brief   Leetcode 229: Majority Element II
+ *  The algorithm should run in linear time and in O(1) space.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 87.27%
+ */
+vector<int> majorityElement2(vector<int>& nums)
+{
+    if(nums.empty()) {
+        return vector<int>{};
+    }
+
+    vector<int> result;
+    const size_t limit = nums.size() / 3;
+    sort(nums.begin(), nums.end());
+    for(int i = 0; i < nums.size(); ++i) {
+        if(i+limit < nums.size() && nums[i] == nums[i+limit]) {
+            if(result.empty() || (!result.empty() && result[result.size()-1] != nums[i])) {
+                result.push_back(nums[i]);
+            }
+            i += limit;
+        }
     }
 
     return result;

@@ -236,6 +236,7 @@ int firstMissingPositive3(vector<int>& nums);
 
 // Leetcode 229: Majority Element II
 vector<int> majorityElement(vector<int>& nums);
+vector<int> majorityElement2(vector<int>& nums);
 
 
 
