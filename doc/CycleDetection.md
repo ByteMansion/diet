@@ -116,3 +116,6 @@ Like the tortoise and hare algorithm, this is a pointer algorithm that uses $O(\
 > 2. You must use only constant, **O(1) extra space**.
 > 3. Your runtime complexity should be **less than** O(n2).
 > 4. There is only one duplicate number in the array, but it could be repeated more than once.
+
+## Reference
+[Cycle Detection - Wikipedia](https://en.wikipedia.org/wiki/Cycle_detection)
