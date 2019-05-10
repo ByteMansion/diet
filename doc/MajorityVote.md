@@ -12,14 +12,39 @@ It does so in two repetitions. The first repetition eliminates all candidates bu
 ## Proof$^{[2]}$
 Compared to the second repetition, the first one is more interesting.
 We model the input sequence of votes by an array $a$, and the candidate to be chosen by a variable $p$, according to the following daclaration.
+$$
+\begin{alignedat}{2}
+\pmb{const}\space n:& Nat; \\
+a:& \pmb{array}\space [0,1,...,n) of\space Candidate;\\
+var\space p:& Candidate.
+\end{alignedat}
+$$
+The postcondition of the first repetition is that every candidate other than $p$ does not hold a majority:
+$$
+Q: (\forall q: q \neq p \Rightarrow \# \{i|a[i] = q\} \leq \frac{1}{2} \cdot n).
+$$
+In order to establish this postcondition, it is natural to inspect the elements of array $a$ one by one, and to introduce a loop variable
+$$
+\pmb{var} \space k: Nat.
+$$
+We know define $votes(k,q) = \#{i|i < k \land a[i] = q}$. Then we have
+$$
+Q\equiv (\forall q: q \neq p \Rightarrow 2 \cdot votes(n,q) \leq \cdot n).
+$$
+This suggests the generalization
+$$
+P: (\forall q: q \neq p \Rightarrow 2 \cdot votes(k,q) \leq k)
+$$
+It is clear that $Q$ follows from $P \land k=n$. On the other hand, $P$ holds trivially for $k=0$. When $P$ holds and testing yields $a[k] = p$, we can increment $k$ and sharpen the majority estimates since the values $votes(k,q)$ remain unchanged for $q \neq p$. We therefore introduce a variable $s$ to indicate the sharpening:
+$$
+\pmb{var} \space s: Int.
+$$
+The sharpening is expected in the proposed invariant
+$$
+J0: s \geq 0 \space \land \space k \leq n \space \land \space (\forall q: p \neq q \Rightarrow s + 2 \cdot votes(k,q) \leq k).
+$$
+We now choose $B: k \neq n$ as guard of the repetition to be developed. It is easy to verify that $[J0 \space \land \space \neg B \Rightarrow Q]$.
 
-$$
-\begin{align}
-\bold{const}\space n: Nat; \\
-a: \bold{array}\space [0,1,...,n) of\space Candidate;\\
-var\space p: Candidate.
-\end{align}
-$$
 
 ## Related Problem
 [Leetcode 229 Majority Element II](https://leetcode.com/problems/majority-element-ii/)
