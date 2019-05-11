@@ -3433,3 +3433,42 @@ vector<int> majorityElement2(vector<int>& nums)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 169: Majority Element
+ *  Boyer-Moore majority vote algorithm
+ * 
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 97.91%
+ */
+int majorityElement(vector<int>& nums)
+{
+    int result = nums[0];
+    int votes = 1;
+    for(int i = 1; i < nums.size(); ++i) {
+        if(nums[i] == result) {
+            votes += 1;
+            continue;
+        }
+        if(votes > 0) {
+            votes -= 1;
+        } else {
+            result = nums[i];
+            votes = 1;
+        }
+    }
+    return result;
+}
+
+/**
+ * @brief   Leetcode 229: Majority Element II
+ *  The algorithm should run in linear time and in O(1) space.
+ *  Boyer-Moore Majority Vote algorithm
+ * 
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats %
+ */
+vector<int> majorityElement3(vector<int>& nums)
+{
+    
+}
