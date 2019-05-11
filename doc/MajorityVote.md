@@ -22,15 +22,19 @@ $$
 
 The postcondition of the first repetition is that every candidate other than $p$ does not hold a majority:
 $$
-Q: (\forall q: q \neq p \Rightarrow \# \{i|a[i] = q\} \leq \frac{1}{2} \cdot n).
+Q: (\forall q: q \neq p \Rightarrow \# \{i|a[i] = q\} \leq \frac{1}{2} \cdot n)
 $$
 In order to establish this postcondition, it is natural to inspect the elements of array $a$ one by one, and to introduce a loop variable
 $$
 \boldsymbol{var} \space k: Nat.
 $$
-We know define $votes(k,q) = \#{i|i < k \land a[i] = q}$. Then we have
+We know define 
 $$
-Q\equiv (\forall q: q \neq p \Rightarrow 2 \cdot votes(n,q) \leq \cdot n).
+votes(k,q) = \#\{i|i < k \land a[i] = q\}
+$$
+Then we have
+$$
+Q\equiv (\forall q: q \neq p \Rightarrow 2 \cdot votes(n,q) \leq \cdot n)
 $$
 This suggests the generalization
 $$
@@ -42,7 +46,7 @@ $$
 $$
 The sharpening is expected in the proposed invariant
 $$
-J0: s \geq 0 \space \land \space k \leq n \space \land \space (\forall q: p \neq q \Rightarrow s + 2 \cdot votes(k,q) \leq k).
+J0: s \geq 0 \space \land \space k \leq n \space \land \space (\forall q: p \neq q \Rightarrow s + 2 \cdot votes(k,q) \leq k)
 $$
 We now choose $B: k \neq n$ as guard of the repetition to be developed. It is easy to verify that $[J0 \space \land \space \neg B \Rightarrow Q]$.
 
