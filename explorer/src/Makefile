@@ -10,10 +10,10 @@ ROOTDIR = ../../
 solution: ${OBJS}
 	${CC} ${INCLUDE} ${CFLAGS} ${LIBS} ${OBJS} -o $@
 	cp $@ ${ROOTDIR}
+	-rm -f *.o
 
 .cpp.o:
 	${CC} ${CFLAGS} ${INCLUDE} -c $<
-	-rm -f *.o
 
 clean:
 	-rm -f *.o core *.core solution
