@@ -22,7 +22,7 @@ $$
 
 The postcondition of the first repetition is that every candidate other than $p$ does not hold a majority:
 $$
-Q: (\forall q: q \neq p \Rightarrow \# \{i|a[i] = q\} \leq \frac{1}{2} \cdot n)
+Q: (\forall q: q \neq p \Rightarrow \\# \\{i|a[i] = q\\} \leq \frac{1}{2} \cdot n)
 $$
 In order to establish this postcondition, it is natural to inspect the elements of array $a$ one by one, and to introduce a loop variable
 $$
@@ -30,7 +30,7 @@ $$
 $$
 We know define 
 $$
-votes(k,q) = \#\{i|i < k \land a[i] = q\}
+votes(k,q) = \\#\\{i|i < k \land a[i] = q\\}
 $$
 Then we have
 $$
@@ -71,7 +71,7 @@ It is therefore preserved under arbitrary assignments to $p$, in particular unde
 $$
 \begin{alignedat}{1}
 S:\space\space& \boldsymbol{if} \space\space s = 0 \space\space \boldsymbol{then} \space\space p = a[k] \space\space \boldsymbol{end}; \\ \newline
-&\{J0 \land J1 \land B \land (s > 0 \lor a[k] = p)\} \\ \newline
+&\\{J0 \land J1 \land B \land (s > 0 \lor a[k] = p)\\} \\ \newline
 &\boldsymbol{if} \space\space p = a[k] \space\space \boldsymbol{then} \space\space s = s+1 \\ \newline
 &\boldsymbol{else} \space\space s = s-1 \space\space \boldsymbol{end}; \\ \newline
 &k = k+1
@@ -79,7 +79,7 @@ S:\space\space& \boldsymbol{if} \space\space s = 0 \space\space \boldsymbol{then
 $$
 The arguments given above show that $S$ satisfies the Hoare triple
 $$
-\{J0 \land J1 \land B\} \space\space S \space\space \{J0 \land J1\}
+\\{J0 \land J1 \land B\\} \space\space S \space\space \\{J0 \land J1\\}
 $$
 The variant function $vf = n - k$ remains nonnegative because of $J0$. It clearly decreases under command $S$. This proves that postcondition $Q$ is established by
 $$
