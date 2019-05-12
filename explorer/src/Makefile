@@ -13,6 +13,7 @@ solution: ${OBJS}
 
 .cpp.o:
 	${CC} ${CFLAGS} ${INCLUDE} -c $<
+	-rm -f *.o
 
 clean:
 	-rm -f *.o core *.core solution

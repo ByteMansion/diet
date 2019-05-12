@@ -3380,7 +3380,7 @@ int firstMissingPositive3(vector<int>& nums)
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 32.2%
  */
-vector<int> majorityElement(vector<int>& nums)
+vector<int> majorityElementII(vector<int>& nums)
 {
     if(nums.empty()) {
         return vector<int>{};
