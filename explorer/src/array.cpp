@@ -3464,9 +3464,9 @@ int majorityElement(vector<int>& nums)
  * @brief   Leetcode 229: Majority Element II
  *  The algorithm should run in linear time and in O(1) space.
  *  Boyer-Moore Majority Vote algorithm
- * 
+ *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution beats %
+ * Accepted Solutions Runtime Distribution beats 99%
  */
 vector<int> majorityElement3(vector<int>& nums)
 {
@@ -3513,4 +3513,36 @@ vector<int> majorityElement3(vector<int>& nums)
     }
 
     return result;
+}
+
+/**
+ * @brief   Leetcode 442: Find All Duplicates in an Array
+ *  You should not use extra space and solve it in O(n) time.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 97.17%
+ */
+vector<int> findDuplicates(vector<int>& nums)
+{
+    if(nums.empty() || nums.size() < 2) {
+        return vector<int>{};
+    }
+    // place value (i+1) into (i)th position
+    vector<int> results;
+    for(int i = 0; i < nums.size(); ++i) {
+        if(nums[i] != i+1) {
+            while(nums[i] != nums[nums[i]-1]) {
+                std::swap(nums[i], nums[nums[i]-1]);
+            }
+        }
+    }
+
+    // if nums[i] != i+1, value nums[i] is duplicated and value (i+1) is lost
+    for(int i = 0; i < nums.size(); ++i) {
+        if(nums[i] != i+1) {
+            results.push_back(nums[i]);
+        }
+    }
+
+    return results;
 }

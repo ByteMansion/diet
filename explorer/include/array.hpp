@@ -242,5 +242,11 @@ vector<int> majorityElement3(vector<int>& nums);
 // Leetcode 169: Majority Element
 int majorityElement(vector<int>& nums);
 
+// Leetcode 442: Find All Duplicates in an Array
+vector<int> findDuplicates(vector<int>& nums);
+
+
+
+
 
 #endif /* array_hpp */
