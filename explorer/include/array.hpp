@@ -245,6 +245,10 @@ int majorityElement(vector<int>& nums);
 // Leetcode 442: Find All Duplicates in an Array
 vector<int> findDuplicates(vector<int>& nums);
 
+// Leetcode 289: Game of Life
+void gameOfLife(vector<vector<int>>& board);
+
+
 
 
 

@@ -29,6 +29,8 @@ using std::unordered_set;
 using std::log;
 using std::string;
 using std::to_string;
+using std::pair;
+using std::make_pair;
 
 /**
  * @brief	Leetcode 31: Next Permutation
@@ -3545,4 +3547,45 @@ vector<int> findDuplicates(vector<int>& nums)
     }
 
     return results;
+}
+
+/**
+ * @brief   Leetcode 289: Game of Life
+ *  You should solve this problem in-place, not using O(m*n) extra space.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 100%
+ */
+void gameOfLife(vector<vector<int>>& board)
+{
+    if(board.empty() || board[0].empty()) {
+        return;
+    }
+
+    size_t row = board.size();
+    size_t col = board[0].size();
+    vector<vector<int>> result(row, vector<int>(col, 0));
+    vector<pair<int, int>> pos = {make_pair(-1,-1), make_pair(-1, 0), make_pair(-1,1), make_pair(0, -1),
+                                  make_pair( 0, 1), make_pair( 1,-1), make_pair( 1,0), make_pair(1,  1)};
+    for(int i = 0; i < row; ++i) {
+        for(int j = 0; j < col; ++j) {
+            int count = 0;
+            for(int m = 0; m < pos.size(); ++m) {
+                if(i+pos[m].first < row && i+pos[m].first >= 0 && j+pos[m].second >= 0 && j+pos[m].second < col)
+                    count += board[i+pos[m].first][j+pos[m].second];
+            }
+            if(count == 3) {
+                result[i][j] = 1;
+            } else if(count == 2) {
+                result[i][j] = board[i][j];
+            } else {
+                result[i][j] = 0;
+            }
+        }
+    }
+    for(int i = 0; i < row; ++i) {
+        for(int j = 0; j < col; ++j) {
+            board[i][j] = result[i][j];
+        }
+    }
 }
