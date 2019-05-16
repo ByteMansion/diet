@@ -3551,7 +3551,7 @@ vector<int> findDuplicates(vector<int>& nums)
 
 /**
  * @brief   Leetcode 289: Game of Life
- *  You should solve this problem in-place, not using O(m*n) extra space.
+ *  This method use O(m*n) extra space and iterate O(8*m*n) times. 
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 100%
@@ -3588,4 +3588,16 @@ void gameOfLife(vector<vector<int>>& board)
             board[i][j] = result[i][j];
         }
     }
+}
+
+/**
+ * @brief   Leetcode 289: Game of Life
+ *  A better solution is to solve this problem in-place, not using O(m*n) extra space.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats %
+ */
+void gameOfLife2(vector<vector<int>>& board)
+{
+    
 }

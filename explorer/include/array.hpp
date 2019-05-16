@@ -247,6 +247,7 @@ vector<int> findDuplicates(vector<int>& nums);
 
 // Leetcode 289: Game of Life
 void gameOfLife(vector<vector<int>>& board);
+void gameOfLife2(vector<vector<int>>& board);
 
 
 
