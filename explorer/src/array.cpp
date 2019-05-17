@@ -3565,6 +3565,7 @@ void gameOfLife(vector<vector<int>>& board)
     size_t row = board.size();
     size_t col = board[0].size();
     vector<vector<int>> result(row, vector<int>(col, 0));
+    // 8 relative positions to current position
     vector<pair<int, int>> pos = {make_pair(-1,-1), make_pair(-1, 0), make_pair(-1,1), make_pair(0, -1),
                                   make_pair( 0, 1), make_pair( 1,-1), make_pair( 1,0), make_pair(1,  1)};
     for(int i = 0; i < row; ++i) {
@@ -3574,12 +3575,8 @@ void gameOfLife(vector<vector<int>>& board)
                 if(i+pos[m].first < row && i+pos[m].first >= 0 && j+pos[m].second >= 0 && j+pos[m].second < col)
                     count += board[i+pos[m].first][j+pos[m].second];
             }
-            if(count == 3) {
+            if(count == 3 || (count == 2 && board[i][j] == 1)) {
                 result[i][j] = 1;
-            } else if(count == 2) {
-                result[i][j] = board[i][j];
-            } else {
-                result[i][j] = 0;
             }
         }
     }
@@ -3594,10 +3591,43 @@ void gameOfLife(vector<vector<int>>& board)
  * @brief   Leetcode 289: Game of Life
  *  A better solution is to solve this problem in-place, not using O(m*n) extra space.
  *
+ *  The most difficult part of this solution is how to save current state and next state
+ *  before reaching the end at the same time.
+ *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution beats %
+ * Accepted Solutions Runtime Distribution beats 97.28%
  */
 void gameOfLife2(vector<vector<int>>& board)
 {
-    
+    if(board.empty() || board[0].empty()) {
+        return;
+    }
+    size_t row = board.size();
+    size_t col = board[0].size();
+    // 8 relative positions to current position
+    vector<pair<int, int>> pos = {make_pair(-1,-1), make_pair(-1, 0), make_pair(-1,1), make_pair(0, -1),
+                                  make_pair( 0, 1), make_pair( 1,-1), make_pair( 1,0), make_pair(1,  1)};
+    for(int i = 0; i < row; ++i) {
+        for(int j = 0; j < col; ++j) {
+            int count = 0;
+            // calculate sum of adjacent cell value
+            for(auto& move : pos) {
+                int hor = i + move.first;
+                int ver = j + move.second;
+                if(hor >= 0 && hor < row && ver >= 0 && ver < col) {
+                    count += board[hor][ver] & 1;
+                }
+            }
+            // 1st bit is current state, 2nd bit is next state
+            if(count == 3 || (count == 2 && board[i][j] == 1)) {
+                board[i][j] |= 2;
+            }
+        }
+    }
+    // refresh current state of board
+    for(int i = 0; i < row; ++i) {
+        for(int j = 0; j < col; ++j) {
+            board[i][j] >>= 1;
+        }
+    }
 }
