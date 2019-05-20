@@ -3631,3 +3631,49 @@ void gameOfLife2(vector<vector<int>>& board)
         }
     }
 }
+
+/**
+ * @brief   Leetcode 457: Circular Array Loop
+ *  1. Movements follow a single direction.
+ *  2. Loop length > 1
+ *
+ *  Best solution can solve the problem in O(n) time complexity and O(1)
+ *  extra space.
+ *
+ */
+bool circularArrayLoop(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return false;
+    }
+    int length = 0;
+    for(int start = 0; start < nums.size(); ++start) {
+        int index = start;
+        // positive dierection
+        length = 0;
+        while(nums[index] > 0) {
+            length += nums[index];
+            index += nums[index];
+            if(index >= nums.size()) {
+                index -= nums.size();
+            }
+            if(index == start && length > 1) {
+                return true;
+            }
+        }
+        // negative dierection
+        length = 0;
+        while(nums[index] < 0) {
+            length -= nums[index];
+            index += nums[index];
+            if(index < 0) {
+                index += nums.size();
+            }
+            if(index == start && length > 1) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
