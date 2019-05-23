@@ -3688,3 +3688,15 @@ bool circularArrayLoop(vector<int>& nums) {
 
     return false;
 }
+
+/**
+ * Leetcode 665: Non-decreasing Array
+ *
+ */
+bool checkPossibility(vector<int>& nums)
+{
+    if(nums.size() < 2) {
+        return true;
+    }
+
+}

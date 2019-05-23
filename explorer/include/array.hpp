@@ -252,6 +252,9 @@ void gameOfLife2(vector<vector<int>>& board);
 // Leetcode 457: Circular Array Loop
 bool circularArrayLoop(vector<int>& nums);
 
+// Leetcode 665: Non-decreasing Array
+bool checkPossibility(vector<int>& nums);
+
 
 
 
