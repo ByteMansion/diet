@@ -3640,38 +3640,49 @@ void gameOfLife2(vector<vector<int>>& board)
  *  Best solution can solve the problem in O(n) time complexity and O(1)
  *  extra space.
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 36%
  */
-bool circularArrayLoop(vector<int>& nums)
+static bool directionCheck(vector<int>& nums, int& start, int next)
 {
+    if(next < 0) {
+        next += nums.size();
+    } else if(next >= nums.size()) {
+        next -= nums.size();
+    }
+    // single direction
+    if(nums[start] * nums[next] <= 0) {
+        return false;
+    }
+    start = next;
+    return true;
+}
+bool circularArrayLoop(vector<int>& nums) {
+
     if(nums.size() < 2) {
         return false;
     }
-    int length = 0;
+
+    // !Note: this operation may lead to 0 value.
+    for(int i = 0; i < nums.size(); ++i) {
+        nums[i] = (nums[i] > 0) ? (nums[i] % nums.size()) : -1 * (-1 * nums[i] % nums.size());
+    }
     for(int start = 0; start < nums.size(); ++start) {
-        int index = start;
-        // positive dierection
-        length = 0;
-        while(nums[index] > 0) {
-            length += nums[index];
-            index += nums[index];
-            if(index >= nums.size()) {
-                index -= nums.size();
-            }
-            if(index == start && length > 1) {
-                return true;
-            }
+        int slow = start;
+        int fast = start;
+        int length = 0;
+        while(slow != fast || length == 0) {
+            if(!directionCheck(nums, slow, slow + nums[slow])) break;
+            if(!directionCheck(nums, fast, fast + nums[fast])) break;
+            if(!directionCheck(nums, fast, fast + nums[fast])) break;
+
+            length += 1;
         }
-        // negative dierection
-        length = 0;
-        while(nums[index] < 0) {
-            length -= nums[index];
-            index += nums[index];
-            if(index < 0) {
-                index += nums.size();
-            }
-            if(index == start && length > 1) {
-                return true;
-            }
+        // if lack condition slow == fast, we can not cover below case.
+        // In this case, single direction check returns false, but length is greater than 1.
+        // [2,2,2,2,2,4,7]
+        if(slow == fast && length > 1) {
+            return true;
         }
     }
 
