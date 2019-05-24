@@ -254,6 +254,7 @@ bool circularArrayLoop(vector<int>& nums);
 
 // Leetcode 665: Non-decreasing Array
 bool checkPossibility(vector<int>& nums);
+bool checkPossibility2(vector<int>& nums);
 
 
 
