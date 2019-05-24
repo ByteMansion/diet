@@ -3692,11 +3692,38 @@ bool circularArrayLoop(vector<int>& nums) {
 /**
  * Leetcode 665: Non-decreasing Array
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 93%
  */
 bool checkPossibility(vector<int>& nums)
 {
     if(nums.size() < 2) {
         return true;
     }
-
+    // find the reversion point
+    int rCount = 1;
+    int rIndex = 0;
+    for(int i = 1; i < nums.size(); ++i) {
+        if(nums[i] < nums[i-1]) {
+            rCount += 1;
+            rIndex = i;
+        }
+    }
+    // if no reversion, return true
+    if(rCount == 1) {
+        return true;
+    }
+    // at most one reversion point
+    if(rCount == 2) {
+        // if index of the reversion point is start or end element,
+        // the result is possible
+        if(rIndex == 1 || rIndex == nums.size()-1) {
+            return true;
+        }
+        // reversion point is in the middle of the array
+        if(nums[rIndex-2] <= nums[rIndex] || nums[rIndex-1] <= nums[rIndex+1]) {
+            return true;
+        }
+    }
+    return false;
 }
