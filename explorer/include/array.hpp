@@ -256,6 +256,9 @@ bool circularArrayLoop(vector<int>& nums);
 bool checkPossibility(vector<int>& nums);
 bool checkPossibility2(vector<int>& nums);
 
+// Leetcode 565: Array Nesting
+int arrayNesting(vector<int>& nums);
+
 
 
 

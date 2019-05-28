@@ -3690,8 +3690,8 @@ bool circularArrayLoop(vector<int>& nums) {
 }
 
 /**
- * Leetcode 665: Non-decreasing Array
- * This solution does not change the array values.
+ * @brief   Leetcode 665: Non-decreasing Array
+ *  This solution does not change the array values.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 93%
@@ -3730,8 +3730,8 @@ bool checkPossibility(vector<int>& nums)
 }
 
 /**
- * Leetcode 665: Non-decreasing Array
- * This solution will change the array values.
+ * @brief   Leetcode 665: Non-decreasing Array
+ *  This solution will change the array values.
  *
  * -------------------------------------------
  * Accepted Solutions Runtime Distribution beats 93%
@@ -3756,4 +3756,27 @@ bool checkPossibility2(vector<int>& nums)
     }
 
     return cnt <= 1;
+}
+
+/**
+ * @brief   Leetcode 565: Array Nesting
+ *  Array elements are all distinct.
+ *  Each element of array is an integer within the range [0, N-1].
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 5%
+ */
+int arrayNesting(vector<int>& nums)
+{
+    int maxLen = 0;
+    for(int i = 0; i < nums.size(); ++i) {
+        int cnt = 1;
+        int itr = nums[i];
+        while(nums[itr] != nums[i]) {
+            cnt += 1;
+            itr = nums[itr];
+        }
+        maxLen = std::max(maxLen, cnt);
+    }
+    return maxLen;
 }
