@@ -3764,19 +3764,25 @@ bool checkPossibility2(vector<int>& nums)
  *  Each element of array is an integer within the range [0, N-1].
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution beats 5%
+ * Accepted Solutions Runtime Distribution beats 87.68%
  */
 int arrayNesting(vector<int>& nums)
 {
     int maxLen = 0;
     for(int i = 0; i < nums.size(); ++i) {
+        if(nums[i] == -1) {
+            continue;
+        }
         int cnt = 1;
         int itr = nums[i];
         while(nums[itr] != nums[i]) {
             cnt += 1;
-            itr = nums[itr];
+            int tmp = nums[itr];
+            nums[itr] = -1;
+            itr = tmp;
         }
         maxLen = std::max(maxLen, cnt);
     }
     return maxLen;
 }
+
