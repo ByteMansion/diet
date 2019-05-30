@@ -259,6 +259,8 @@ bool checkPossibility2(vector<int>& nums);
 // Leetcode 565: Array Nesting
 int arrayNesting(vector<int>& nums);
 
+// Leetcode 611: Valid Triangle Number
+int triangleNumber(vector<int>& nums);
 
 
 

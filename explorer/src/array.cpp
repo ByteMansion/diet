@@ -3786,3 +3786,70 @@ int arrayNesting(vector<int>& nums)
     return maxLen;
 }
 
+/**
+ * @brief   Leetcode 611: Valid Triangle Number
+ *  This problem is a tranformation of subsets.
+ *  If we get all subsets, adding an additional triangle check can get the 
+ *  result.
+ *  A better solution is getting all subsets with only three elements and then
+ *  giving an additional check.
+ *
+ * !Note: This solution can get correct result, but time limit exceeded.
+ */
+static bool isTriangle(vector<int>& edges)
+{
+    if(edges.size() != 3) {
+        return false;
+    }
+    if(edges[0] + edges[1] > edges[2] &&
+       edges[0] + edges[2] > edges[1] &&
+       edges[1] + edges[2] > edges[0])
+    {
+        return true;
+    }
+    return false;
+}
+static void triangleNumberHelper(vector<int>& nums,
+                                 vector<int>& subset,
+                                 int& result,
+                                 int start)
+{
+    if(start >= nums.size()) {
+        return;
+    }
+
+    if(subset.size() > 3) {
+        return;
+    }
+
+    for(int i = start; i < nums.size(); ++i) {
+        // if(i > start && nums[i] == nums[i-1]) {
+        //     continue;
+        // }
+        subset.push_back(nums[i]);
+
+        if(isTriangle(subset)) {
+            result += 1;
+        }
+        triangleNumberHelper(nums, subset, result, i+1);
+
+        subset.pop_back();
+    }
+}
+int triangleNumber(vector<int>& nums)
+{
+    if(nums.size() < 3) {
+        return 0;
+    }
+    std::sort(nums.begin(), nums.end());
+
+    int result = 0;
+
+    // get subset of number array
+    // Note: Maybe there are duplicates
+    vector<int> subset;
+    triangleNumberHelper(nums, subset, result, 0);
+
+    return result;
+}
+
