@@ -3796,19 +3796,6 @@ int arrayNesting(vector<int>& nums)
  *
  * !Note: This solution can get correct result, but time limit exceeded.
  */
-static bool isTriangle(vector<int>& edges)
-{
-    if(edges.size() != 3) {
-        return false;
-    }
-    if(edges[0] + edges[1] > edges[2] &&
-       edges[0] + edges[2] > edges[1] &&
-       edges[1] + edges[2] > edges[0])
-    {
-        return true;
-    }
-    return false;
-}
 static void triangleNumberHelper(vector<int>& nums,
                                  vector<int>& subset,
                                  int& result,
@@ -3818,7 +3805,7 @@ static void triangleNumberHelper(vector<int>& nums,
         return;
     }
 
-    if(subset.size() > 3) {
+    if(subset.size() >= 3) {
         return;
     }
 
@@ -3828,7 +3815,7 @@ static void triangleNumberHelper(vector<int>& nums,
         // }
         subset.push_back(nums[i]);
 
-        if(isTriangle(subset)) {
+        if(subset.size() == 3 && subset[0]+subset[1] > subset[2]) {
             result += 1;
         }
         triangleNumberHelper(nums, subset, result, i+1);
@@ -3853,3 +3840,28 @@ int triangleNumber(vector<int>& nums)
     return result;
 }
 
+/**
+ * @brief Leetcode 611: Valid Triangle Number
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 20.16%
+ */
+int triangleNumber2(vector<int>& nums)
+{
+    if(nums.size() < 3) {
+        return 0;
+    }
+    sort(nums.begin(), nums.end());
+    int result = 0;
+    for(int i = 0; i < nums.size()-2; ++i) {
+        for(int j = i+1; j < nums.size()-1; ++j) {
+            int k = j + 1;
+            while(k < nums.size() && nums[i]+nums[j] > nums[k]) {
+                k += 1;
+            }
+            result += k - j - 1;
+        }
+    }
+
+    return result;
+}
