@@ -3865,3 +3865,46 @@ int triangleNumber2(vector<int>& nums)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 611: Valid Triangle Number
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 35.57%
+ */
+static int binarySearch(vector<int>& nums, int sum, int left, int right)
+{
+    int last = -1;
+    while(left+1 < right) {
+        int mid = left + (right - left) / 2;
+        if(nums[mid] < sum) {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+    if(nums[left] < sum) {
+        last = left;
+    }
+    if(nums[right] < sum) {
+        last = right;
+    }
+    return last;
+}
+int triangleNumber3(vector<int>& nums)
+{
+    if(nums.size() < 3) {
+        return 0;
+    }
+    sort(nums.begin(), nums.end());
+    int result = 0;
+    for(int i = 0; i < nums.size()-2; ++i) {
+        for(int j = i+1; j < nums.size()-1; ++j) {
+            int k = binarySearch(nums, nums[i]+nums[j], j+1, nums.size()-1);
+            if(k > 0) {
+                result += k - j;
+            }
+        }
+    }
+    return result;
+}

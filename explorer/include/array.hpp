@@ -262,6 +262,7 @@ int arrayNesting(vector<int>& nums);
 // Leetcode 611: Valid Triangle Number
 int triangleNumber(vector<int>& nums);
 int triangleNumber2(vector<int>& nums);
+int triangleNumber3(vector<int>& nums);
 
 
 
