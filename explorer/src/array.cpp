@@ -3844,7 +3844,7 @@ int triangleNumber(vector<int>& nums)
  * @brief Leetcode 611: Valid Triangle Number
  *
  * -------------------------------------------
- * Accepted Solutions Runtime Distribution beats 20.16%
+ * Accepted Solutions Runtime Distribution beats 92%
  */
 int triangleNumber2(vector<int>& nums)
 {
@@ -3853,13 +3853,16 @@ int triangleNumber2(vector<int>& nums)
     }
     sort(nums.begin(), nums.end());
     int result = 0;
+    int k = 2;
     for(int i = 0; i < nums.size()-2; ++i) {
+        k = i + 2;
         for(int j = i+1; j < nums.size()-1; ++j) {
-            int k = j + 1;
             while(k < nums.size() && nums[i]+nums[j] > nums[k]) {
                 k += 1;
             }
-            result += k - j - 1;
+            if(k > j) {
+                result += k - j - 1;
+            }
         }
     }
 
