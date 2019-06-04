@@ -3911,3 +3911,36 @@ int triangleNumber3(vector<int>& nums)
     }
     return result;
 }
+
+/**
+ * @brief   Leetcode 621: Task Scheduler
+ *  the number of tasks is in the range [1, 10000]
+ *  the integer n is in the range [0, 100]
+ *
+ */
+int leastInterval(vector<char>& tasks, int n)
+{
+    if(tasks.empty() || tasks.size() < 2 || n == 0) {
+        return 0;
+    }
+
+    sort(tasks.begin(), tasks.end());
+    int taskCnt = 0;
+    vector<int> taskArr(26, 0);
+    for(int i = 0; i < tasks.size(); ++i) {
+        int index = tasks[i] - 'A';
+        if(i > 0 && tasks[i-1] != tasks[i]) {
+            taskCnt += 1;
+        }
+        taskArr[index] += 1;
+    }
+    sort(taskArr.begin(), taskArr.end());
+    int result = (taskArr[0] - 1) * n;
+    for(int i = 1; i < 26; ++i) {
+        if(taskArr[i] == 0) {
+            break;
+        }
+        
+    }
+
+}
