@@ -10,6 +10,9 @@
 
 #include "linkedlist.hpp"
 
+#include <limits.h>
+#include <stdlib.h>
+
 #include <vector>
 #include <queue>
 #include <algorithm>

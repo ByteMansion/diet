@@ -11,13 +11,18 @@
 #include "string.hpp"
 #include "array.hpp"
 
+#include <limits.h>
+#include <stdlib.h>
+
 #include <functional>
 #include <unordered_set>
+#include <algorithm>
 
 using std::pair;
 using std::function;
 using std::vector;
 using std::unordered_set;
+using std::next_permutation;
 
 /**
  * @brief   Leetcode 60: Permutation Sequence

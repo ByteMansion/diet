@@ -3,43 +3,38 @@
 ## Preface
 
 **Stay hungry, Stay foolish.**
-As as as I am concerned, as a software engineer, it is important to keep yourself
- curious about new tech and embrace new concepts that ever emerge. 
+
+Time elapses, knowledge emerges.
+As a software engineer, it is important to keep yourself curious about new tech and embrace new concepts that ever emerge. 
 
 Actions speak louder than words. I believe, and then I do.
 
-I am still, and always, a freshman, and still know little about the whole computer
- science. I will learn more and work harder.
+I am a freshman, and still know little about the whole computer science field. Keep forward and work hard.
 
-"Zwei Dinge erfuellen das Gemuet mit immer neuer und zunehmender Bewunderung und 
- Ehrfurcht, je oefter und anhaltender sich das Nachdenken damit beschaeftigt: der 
- bestirnte Himmel ueber mir und das moralische Gesetz in mir." 
+"Zwei Dinge erfuellen das Gemuet mit immer neuer und zunehmender Bewunderung und Ehrfurcht, je oefter und anhaltender sich das Nachdenken damit beschaeftigt: der bestirnte Himmel ueber mir und das moralische Gesetz in mir." 
 
-("Two things fill me with constantly increasing admiration and awe, the longer
- and more earnestly I reflect on them: the starry heavens without and the moral law within.") 
+("Two things fill me with constantly increasing admiration and awe, the longer and more earnestly I reflect on them: the starry heavens without and the moral law within.") 
 
 This is my favourite sentence written by Immanuel Kant. I modified the last two phrases:
-> **Two things fill me with constantly increasing admiration and awe, the longer and more 
->  earnestly I reflect on them: the unknown science fields and the simple and clear logics.**
+> **Two things fill me with constantly increasing admiration and awe, the longer and more earnestly I reflect on them: the unknown science fields and the simple and clear logics.**
 
 ## Intro
 
-This repo is about the solutions to Leetcode problems, which is a well-known website for all IT engineers.
+This repo is about some solutions to Leetcode problems. Leetcode, a well-known website for all IT engineers, is platform to enhance our technical skills using some real interview questions.
 
-I have to say, honeatly and earnestly, that not all solutions are solved on my own. 
-Sometimes, some problems need specific knowledge or tricks which I have never heard before.
-In order to solve them, I refered to the problem discussions and methods posted by others and so on. I didn't
- list all reference links, but I am really appreciate their kindness and selflessness.
+I confess, honeatly and earnestly, not all solutions are posted by myself. 
+Some problems are easy and obvious, some problems need specific knowledge or tricks which I have never heard before.
+In order to solve those medium or hard problems, I referred to the `Discussions` and `Solutions` pages. 
+I didn't list all reference links, but really appreciate their kindness and selflessness.
 
 ## Folders
-In **explorer** folder, I cataloge solutions by problem tags and  provide my solutions to those problems.
-Sometimes I provide not just one solution to a problem, that  may vary from time/space complexity to original thoughts.
-In each file, I add a comment before problem solution and denote its index.
+In **explorer** folder, I classify all solutions by problem tags, such as array, tree, string, etc.
+In some cases, I provide a couple of solutions to a problem, that may be different in time/space complexity or method theory.
+To make file readable and easy-searched, I add a problem index before each solution.
 
-In **doc** folder, I list some important algorithms used in some solutions, including algorithm introduction, code demos, 
- basic proofs and the most important, related problems. These algorithms are not my inspirations or inventions, but  collecting
- from wikipedia, blogs or books. I document and integrate those reference into a file by my understanding. 
-If anything is wrong, please feel free to let me know.
+In **doc** folder, I listed some important algorithms used in some solutions, including algorithm introduction, code demos, basic proofs and similar problems. 
+These algorithms come from wikipedia, blogs or technical manuals. I document and integrate those references into a file to make it more informative. 
+Anything wrong, please feel free to let me know.
 
 # Prereqisite and Build
 Your system should install gcc compiler and support **c++ 11** standard.

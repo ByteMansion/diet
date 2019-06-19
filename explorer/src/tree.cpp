@@ -10,9 +10,14 @@
 
 #include "tree.hpp"
 
+#include <limits.h>
+#include <stdlib.h>
+#include <stdint.h>
+
 #include <stack>
 #include <list>
 #include <queue>
+#include <algorithm>
 
 using std::stack;
 using std::list;

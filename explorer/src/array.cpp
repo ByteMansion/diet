@@ -8,7 +8,10 @@
  * Copyright © 2018 ChangruiShao. All rights reserved.
  */
 
-#include "../include/array.hpp"
+#include "array.hpp"
+
+#include <limits.h>
+#include <stdlib.h>
 
 #include <algorithm>
 #include <deque>
@@ -3924,23 +3927,6 @@ int leastInterval(vector<char>& tasks, int n)
         return 0;
     }
 
-    sort(tasks.begin(), tasks.end());
-    int taskCnt = 0;
-    vector<int> taskArr(26, 0);
-    for(int i = 0; i < tasks.size(); ++i) {
-        int index = tasks[i] - 'A';
-        if(i > 0 && tasks[i-1] != tasks[i]) {
-            taskCnt += 1;
-        }
-        taskArr[index] += 1;
-    }
-    sort(taskArr.begin(), taskArr.end());
-    int result = (taskArr[0] - 1) * n;
-    for(int i = 1; i < 26; ++i) {
-        if(taskArr[i] == 0) {
-            break;
-        }
-        
-    }
 
+    return 0;
 }
