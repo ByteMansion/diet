@@ -3927,6 +3927,27 @@ int leastInterval(vector<char>& tasks, int n)
         return 0;
     }
 
+    map<int, int> taskMap;
+    for(int i = 0; i < tasks.size(); ++i) {
+        taskMap[tasks[i] - 'A'] += 1;
+    }
+    sort(taskMap.begin(), taskMap.end(),
+         [](auto& m, auto& n) { return m->second > n->second} );
 
-    return 0;
+    auto iter = taskMap.begin();
+    while(iter->second > 0) {
+      int i = 0;
+      while(i < n) {
+          iter += i;
+          if(iter->second > 0) {
+              iter->second -= 1;
+          }
+          result += 1;
+          sort(taskMap.begin(), taskMap.end(),
+               [](auto& m, auto& n) { return m->second > n->second});
+          iter = taskMap.begin();
+      }
+    }
+
+    return result;
 }
