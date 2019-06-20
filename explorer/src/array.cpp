@@ -3920,33 +3920,36 @@ int triangleNumber3(vector<int>& nums)
  *  the number of tasks is in the range [1, 10000]
  *  the integer n is in the range [0, 100]
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 40.49%
  */
 int leastInterval(vector<char>& tasks, int n)
 {
-    if(tasks.empty() || tasks.size() < 2 || n == 0) {
-        return 0;
-    }
-
-    map<int, int> taskMap;
+    int result = 0;
+    vector<int> tCnt(26, 0);
     for(int i = 0; i < tasks.size(); ++i) {
-        taskMap[tasks[i] - 'A'] += 1;
+        tCnt[tasks[i] - 'A'] += 1;
     }
-    sort(taskMap.begin(), taskMap.end(),
-         [](auto& m, auto& n) { return m->second > n->second} );
+    // sort task count in descending order
+    sort(tCnt.begin(), tCnt.end(),
+         [](auto l, auto m) { return l > m; } );
 
-    auto iter = taskMap.begin();
-    while(iter->second > 0) {
-      int i = 0;
-      while(i < n) {
-          iter += i;
-          if(iter->second > 0) {
-              iter->second -= 1;
-          }
-          result += 1;
-          sort(taskMap.begin(), taskMap.end(),
-               [](auto& m, auto& n) { return m->second > n->second});
-          iter = taskMap.begin();
-      }
+    while(tCnt[0] > 0) {
+        int i = 0;
+        while(i <= n) {
+            // reach the end of task
+            if(tCnt[0] == 0 && tCnt[i] == 0) {
+                break;
+            }
+            // have to check the scope of i
+            if(i < 26 && tCnt[i] > 0) {
+                tCnt[i] -= 1;
+            }
+            result++;
+            i++;
+        }
+        sort(tCnt.begin(), tCnt.end(),
+             [](auto l, auto m) { return l > m; } );
     }
 
     return result;
