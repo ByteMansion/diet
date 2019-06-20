@@ -35,6 +35,8 @@ using std::string;
 using std::to_string;
 using std::pair;
 using std::make_pair;
+using std::max;
+using std::min;
 
 /**
  * @brief	Leetcode 31: Next Permutation
