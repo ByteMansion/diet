@@ -20,6 +20,7 @@
 #include <unordered_set>
 #include <cmath>
 #include <string>
+#include <iostream>
 
 using std::swap;
 using std::sort;
@@ -3932,7 +3933,7 @@ int leastInterval(vector<char>& tasks, int n)
     }
     // sort task count in descending order
     sort(tCnt.begin(), tCnt.end(),
-         [](auto l, auto m) { return l > m; } );
+         [](int& l, int& m) { return l > m; } );
 
     while(tCnt[0] > 0) {
         int i = 0;
@@ -3949,7 +3950,7 @@ int leastInterval(vector<char>& tasks, int n)
             i++;
         }
         sort(tCnt.begin(), tCnt.end(),
-             [](auto l, auto m) { return l > m; } );
+             [](int& l, int& m) { return l > m; } );
     }
 
     return result;
