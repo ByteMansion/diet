@@ -266,6 +266,7 @@ int triangleNumber3(vector<int>& nums);
 
 // Leetcode 621: Task Scheduler
 int leastInterval(vector<char>& tasks, int n);
+int leastInterval2(vector<char>& tasks, int n);
 
 
 

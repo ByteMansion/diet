@@ -3955,3 +3955,44 @@ int leastInterval(vector<char>& tasks, int n)
 
     return result;
 }
+
+/**
+ * @brief   Leetcode 621: Task Scheduler
+ *  The second method is to get idle slot directly and then get
+ *  the result easily.
+ *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 87.11%
+ */
+int leastInterval2(vector<char>& tasks, int n)
+{
+    // get tasks with most frequency
+    int maxTaskCount = 0;
+    int maxTask = 0;
+    vector<int> counter(26, 0);
+    for(auto& task: tasks) {
+        counter[task-'A']++;
+        if(maxTask == counter[task-'A']) {
+            maxTaskCount++;
+        } else if(maxTask < counter[task-'A']) {
+            maxTaskCount = 1;
+            maxTask = counter[task-'A'];
+        }
+    }
+
+    int partCount = maxTask - 1;
+    int partLength = n - (maxTaskCount - 1);
+    int emptySlots = partCount * partLength;
+    int availableTasks = tasks.size() - maxTaskCount * maxTask;
+    int idleSlots = max(0, emptySlots - availableTasks);
+
+    return idleSlots + tasks.size();
+#if 0
+    // calculate total slots directly
+    int total = (maxTask - 1) * (n + 1) + maxTaskCount;
+    if(total > tasks.size()) {
+        return total;
+    }
+    return tasks.size();
+#endif
+}
