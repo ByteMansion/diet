@@ -502,6 +502,8 @@ string reorganizeString(string S)
 /**
  * @brief   Leetcode 767: Reorganize String
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 86%
  */
 string reorganizeString2(string S)
 {
@@ -509,7 +511,7 @@ string reorganizeString2(string S)
     vector<int> charStat(26, 0);
     for(int i = 0; i < S.length(); ++i) {
         charStat[S[i] - 'a']++;
-        if(charStat[S[i] - 'a'] > S.length() / 2) {
+        if(charStat[S[i] - 'a'] > (S.length() + 1) / 2) {
             return "";
         }
     }
