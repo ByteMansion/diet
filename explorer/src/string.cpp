@@ -25,6 +25,7 @@ using std::vector;
 using std::unordered_set;
 using std::next_permutation;
 using std::sort;
+using std::stable_sort;
 
 /**
  * @brief   Leetcode 60: Permutation Sequence
@@ -456,6 +457,8 @@ vector<int> partitionLabels2(string S)
  * @brief	Leetcode 767: Reorganize String
  *  S consists of lowercase letters and has length of [1, 500]
  *
+ * -------------------------------------------
+ * Accepted Solutions Runtime Distribution beats 86.51%
  */
 string reorganizeString(string S)
 {
@@ -467,8 +470,9 @@ string reorganizeString(string S)
 		int index = ch - 'a';
 		idxToCnt[index].second++;
 	}
-	sort(idxToCnt.begin(), idxToCnt.end(),
-		 [](auto m, auto n) { return m.second > n.second; } );
+	// use stable sort to maintain element order
+	stable_sort(idxToCnt.begin(), idxToCnt.end(),
+				[](auto m, auto n) { return m.second > n.second; } );
 	int mostChar = idxToCnt[0].second;
 	if(mostChar - 1 > S.length() - mostChar) {
 		return "";
@@ -484,8 +488,9 @@ string reorganizeString(string S)
 		} else {
 			break;
 		}
-		sort(idxToCnt.begin(), idxToCnt.end(),
-			 [](auto m, auto n) { return m.second > n.second; } );
+		// use stable sort
+		stable_sort(idxToCnt.begin(), idxToCnt.end(),
+					[](auto m, auto n) { return m.second > n.second; } );
 	}
 	
 	return S;
