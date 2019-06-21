@@ -17,6 +17,7 @@
 #include <functional>
 #include <unordered_set>
 #include <algorithm>
+#include <queue>
 
 using std::pair;
 using std::make_pair;
@@ -26,6 +27,7 @@ using std::unordered_set;
 using std::next_permutation;
 using std::sort;
 using std::stable_sort;
+using std::priority_queue;
 
 /**
  * @brief   Leetcode 60: Permutation Sequence
@@ -289,35 +291,35 @@ int minCut3(string s)
  */
 string convert(string s, int numRows)
 {
-	if(numRows == 1) {
-		return s;
-	}
-	
-	const size_t N = s.length();
-	vector<string> resGroup(numRows, "");
-	
-	int index = 0;
-	int num = 0;
-	bool isPositive = true;
-	while(index < N) {
-		if(num == numRows - 1) {
-			isPositive = false;
-		} else if(num == 0) {
-			isPositive = true;
-		}
-		resGroup[num].push_back(s[index++]);
-		
-		if(isPositive) {
-			num += 1;
-		} else {
-			num -= 1;
-		}
-	}
-	for(int i = 1; i < numRows; ++i) {
-		resGroup[0].insert(resGroup[0].end(), resGroup[i].begin(), resGroup[i].end());
-	}
-	
-	return resGroup[0];
+    if(numRows == 1) {
+        return s;
+    }
+
+    const size_t N = s.length();
+    vector<string> resGroup(numRows, "");
+
+    int index = 0;
+    int num = 0;
+    bool isPositive = true;
+    while(index < N) {
+        if(num == numRows - 1) {
+            isPositive = false;
+        } else if(num == 0) {
+            isPositive = true;
+        }
+        resGroup[num].push_back(s[index++]);
+
+        if(isPositive) {
+            num += 1;
+        } else {
+            num -= 1;
+        }
+    }
+    for(int i = 1; i < numRows; ++i) {
+        resGroup[0].insert(resGroup[0].end(), resGroup[i].begin(), resGroup[i].end());
+    }
+
+    return resGroup[0];
 }
 
 /**
@@ -328,61 +330,61 @@ string convert(string s, int numRows)
  */
 static bool isInteger(char ch)
 {
-	if(ch >= '0' && ch <= '9') {
-		return true;
-	}
-	return false;
+    if(ch >= '0' && ch <= '9') {
+        return true;
+    }
+    return false;
 }
 int myAtoi(string str)
 {
-	// judge if the string is valid
-	size_t N = str.length();
-	int start = 0;
-	for(start = 0; start < N; ++start) {
-		if(str[start] != ' ') {
-			break;
-		}
-	}
-	if(start == N || ((str[start] > '9' || str[start] < '0') &&
-					  (str[start] != '+' && str[start] != '-'))) {
-		return 0;
-	}
+    // judge if the string is valid
+    size_t N = str.length();
+    int start = 0;
+    for(start = 0; start < N; ++start) {
+        if(str[start] != ' ') {
+            break;
+        }
+    }
+    if(start == N || ((str[start] > '9' || str[start] < '0') &&
+      (str[start] != '+' && str[start] != '-'))) {
+        return 0;
+    }
 
-	// judge if integer is positive
-	int startIndex = start;
-	bool isPositive = true;
-	if(str[start] == '-' && start+1 < N && isInteger(str[start+1])) {
-		isPositive = false;
-		startIndex = (str[start] == '-') ? (start+1) : start;
-	} else if((str[start] == '+' && start+1 < N && isInteger(str[start+1])) || isInteger(str[start])) {
-		isPositive = true;
-		startIndex = (str[start] == '+') ? (start+1) : start;
-	} else {
-		return 0;
-	}
+    // judge if integer is positive
+    int startIndex = start;
+    bool isPositive = true;
+    if(str[start] == '-' && start+1 < N && isInteger(str[start+1])) {
+        isPositive = false;
+        startIndex = (str[start] == '-') ? (start+1) : start;
+    } else if((str[start] == '+' && start+1 < N && isInteger(str[start+1])) || isInteger(str[start])) {
+        isPositive = true;
+        startIndex = (str[start] == '+') ? (start+1) : start;
+    } else {
+        return 0;
+    }
 
-	// get the end of valid string
-	int endIndex = startIndex;
-	while(endIndex+1 < N && isInteger(str[endIndex+1])) {
-		endIndex += 1;
-	}
+    // get the end of valid string
+    int endIndex = startIndex;
+    while(endIndex+1 < N && isInteger(str[endIndex+1])) {
+        endIndex += 1;
+    }
 
-	// convert from string to integer
-	int result = 0;
-	for(int i = startIndex; i <= endIndex; ++i) {
-		if(isPositive){
-			if(result > INT_MAX/10 || (result == INT_MAX/10 && INT_MAX%10 <= str[i] - '0')) {
-				return INT_MAX;
-			}
-		} else {
-			if(result >  INT_MAX/10 || (result == INT_MAX/10 && INT_MIN%10*(-1) <= str[i] - '0')){
-				return INT_MIN;
-			}
-		}
-		result = (str[i] - '0') + result * 10;
-	}
+    // convert from string to integer
+    int result = 0;
+    for(int i = startIndex; i <= endIndex; ++i) {
+        if(isPositive){
+            if(result > INT_MAX/10 || (result == INT_MAX/10 && INT_MAX%10 <= str[i] - '0')) {
+                return INT_MAX;
+            }
+        } else {
+            if(result >  INT_MAX/10 || (result == INT_MAX/10 && INT_MIN%10*(-1) <= str[i] - '0')){
+                return INT_MIN;
+            }
+        }
+        result = (str[i] - '0') + result * 10;
+    }
 
-	return (isPositive ? result : (-1 * result));
+    return (isPositive ? result : (-1 * result));
 }
 
 /**
@@ -462,36 +464,75 @@ vector<int> partitionLabels2(string S)
  */
 string reorganizeString(string S)
 {
-	vector<pair<char,int>> idxToCnt;
-	for (int i = 0; i < 26; ++i) {
-		idxToCnt.push_back(make_pair(i+'a', 0));
-	}
-	for(auto& ch: S) {
-		int index = ch - 'a';
-		idxToCnt[index].second++;
-	}
-	// use stable sort to maintain element order
-	stable_sort(idxToCnt.begin(), idxToCnt.end(),
-				[](auto m, auto n) { return m.second > n.second; } );
-	int mostChar = idxToCnt[0].second;
-	if(mostChar - 1 > S.length() - mostChar) {
-		return "";
-	}
-	
-	int i = 0;
-	while(idxToCnt[0].second > 0) {
-		S[i++] = idxToCnt[0].first;
-		idxToCnt[0].second--;
-		if(idxToCnt[1].second > 0) {
-			S[i++] = idxToCnt[1].first;
-			idxToCnt[1].second--;
-		} else {
-			break;
-		}
-		// use stable sort
-		stable_sort(idxToCnt.begin(), idxToCnt.end(),
-					[](auto m, auto n) { return m.second > n.second; } );
-	}
-	
-	return S;
+    vector<pair<char,int>> idxToCnt;
+    for (int i = 0; i < 26; ++i) {
+        idxToCnt.push_back(make_pair(i+'a', 0));
+    }
+    for(auto& ch: S) {
+        int index = ch - 'a';
+        idxToCnt[index].second++;
+    }
+    // use stable sort to maintain element order
+    // sort is not stable, may lead to adjacent elements
+    stable_sort(idxToCnt.begin(), idxToCnt.end(),
+                [](auto m, auto n) { return m.second > n.second; } );
+    int mostChar = idxToCnt[0].second;
+    if(mostChar - 1 > S.length() - mostChar) {
+        return "";
+    }
+
+    int i = 0;
+    while(idxToCnt[0].second > 0) {
+        S[i++] = idxToCnt[0].first;
+        idxToCnt[0].second--;
+        if(idxToCnt[1].second > 0) {
+            S[i++] = idxToCnt[1].first;
+            idxToCnt[1].second--;
+        } else {
+            break;
+        }
+        // use stable sort
+        stable_sort(idxToCnt.begin(), idxToCnt.end(),
+                    [](auto m, auto n) { return m.second > n.second; } );
+    }
+
+    return S;
+}
+
+/**
+ * @brief   Leetcode 767: Reorganize String
+ *
+ */
+string reorganizeString2(string S)
+{
+    // get count of each character
+    vector<int> charStat(26, 0);
+    for(int i = 0; i < S.length(); ++i) {
+        charStat[S[i] - 'a']++;
+        if(charStat[S[i] - 'a'] > S.length() / 2) {
+            return "";
+        }
+    }
+    // construct priority queue by char count descending order
+    priority_queue<pair<int, char>> qChar;
+    for(int i = 0; i < 26; ++i) {
+        if(charStat[i] > 0) {
+            qChar.emplace(make_pair(charStat[i], i + 'a'));
+        }
+    }
+
+    int i = 0;
+    pair<int, char> prev;  // save previous char info
+    while(!qChar.empty()) {
+        auto curr = qChar.top();
+        qChar.pop();
+        S[i++] = curr.second;
+        curr.first--;
+        if(prev.first > 0) {  // after current char processed, push previous char
+            qChar.emplace(prev);
+        }
+        prev = curr;
+    }
+
+    return S;
 }

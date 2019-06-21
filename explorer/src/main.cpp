@@ -156,4 +156,10 @@ int main(int argc, char *argv[])
 {
 	string S = "aab";
 	cout << reorganizeString(S) << endl;
+	S = "aaba";
+	cout << reorganizeString(S) << endl;
+	S = "aaabbbcccde";
+	cout << reorganizeString(S) << endl;
+	S = "a";
+	cout << reorganizeString(S) << endl;
 }
