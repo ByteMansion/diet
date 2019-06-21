@@ -19,10 +19,12 @@
 #include <algorithm>
 
 using std::pair;
+using std::make_pair;
 using std::function;
 using std::vector;
 using std::unordered_set;
 using std::next_permutation;
+using std::sort;
 
 /**
  * @brief   Leetcode 60: Permutation Sequence
@@ -448,4 +450,43 @@ vector<int> partitionLabels2(string S)
     }
 
     return results;
+}
+
+/**
+ * @brief	Leetcode 767: Reorganize String
+ *  S consists of lowercase letters and has length of [1, 500]
+ *
+ */
+string reorganizeString(string S)
+{
+	vector<pair<char,int>> idxToCnt;
+	for (int i = 0; i < 26; ++i) {
+		idxToCnt.push_back(make_pair(i+'a', 0));
+	}
+	for(auto& ch: S) {
+		int index = ch - 'a';
+		idxToCnt[index].second++;
+	}
+	sort(idxToCnt.begin(), idxToCnt.end(),
+		 [](auto m, auto n) { return m.second > n.second; } );
+	int mostChar = idxToCnt[0].second;
+	if(mostChar - 1 > S.length() - mostChar) {
+		return "";
+	}
+	
+	int i = 0;
+	while(idxToCnt[0].second > 0) {
+		S[i++] = idxToCnt[0].first;
+		idxToCnt[0].second--;
+		if(idxToCnt[1].second > 0) {
+			S[i++] = idxToCnt[1].first;
+			idxToCnt[1].second--;
+		} else {
+			break;
+		}
+		sort(idxToCnt.begin(), idxToCnt.end(),
+			 [](auto m, auto n) { return m.second > n.second; } );
+	}
+	
+	return S;
 }

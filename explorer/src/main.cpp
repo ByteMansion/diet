@@ -50,8 +50,8 @@ void printList(ListNode* head)
 	}
 	cout << endl;
 }
-// test tree related solutions
 #if 0
+// test tree related solutions
 int main(int argc, const char * argv[]) {
 
 /**
@@ -99,7 +99,6 @@ int main(int argc, const char * argv[]) {
 	
 	return 0;
 }
-#endif
 
 // test list related solutions
 int main()
@@ -123,7 +122,6 @@ int main()
 	return 0;
 }
 
-#if 0
 // test RandomListNode
 int main()
 {
@@ -153,4 +151,9 @@ int main()
     return 0;
 }
 #endif
-
+// test string solutions
+int main(int argc, char *argv[])
+{
+	string S = "aab";
+	cout << reorganizeString(S) << endl;
+}

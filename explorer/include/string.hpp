@@ -41,7 +41,8 @@ int myAtoi(string str);
 vector<int> partitionLabels(string S);
 vector<int> partitionLabels2(string S);
 
-
+// Leetcode 767: Reorganize String
+string reorganizeString(string S);
 
 
 #endif
