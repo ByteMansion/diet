@@ -538,3 +538,68 @@ string reorganizeString2(string S)
 
     return S;
 }
+
+/**
+ * @brief   Leetcode 358: Rearrange String k Distance Apart
+ *  Given a non-empty string str and an integer k, rearrange the string such that
+ *  the same characters are at least distance k from each other.
+ *  All input strings are given in lowercase letters. If it is not possible to rearrange
+ *  the string, return an empty string "".
+ *
+ */
+ string rearrangeString(string str, int k)
+{
+    if(str.length() < 2 || k == 1) {
+        return str;
+    }
+
+    int mostChar = 0;
+    int mostCharCnt = 0;
+    vector<int> cCnt(26, 0);
+    for(int i = 0; i < str.size(); ++i) {
+        int index = str[i] - 'a';
+        cCnt[index] += 1;
+        if(cCnt[index] == mostChar) {
+            mostCharCnt += 1;
+        } else if(cCnt[index] > mostChar) {
+            mostChar    = cCnt[index];
+            mostCharCnt = 1;
+        }
+    }
+    // check if we can rearrange the string
+    int leftover = str.length() - mostChar * mostCharCnt;
+    int needed   = (mostChar - 1) * (k - mostCharCnt);
+    if(k > mostCharCnt && leftover < needed) {  // in this case, we can not get what we want
+        return "";
+    }
+
+    // we can get rearranged string
+    // construct priority queue
+    priority_queue<pair<int, char>> qCnt;
+    for(int i = 0; i < 26; ++i) {
+        if(cCnt[i] == 0) continue;
+        qCnt.emplace(make_pair(cCnt[i], i + 'a'));
+    }
+
+    int pos = 0;
+    while(!qCnt.empty()) {
+        priority_queue<pair<int, char>> tempQ;
+        int i = 0;
+        while(i++ < k && !qCnt.empty()) {
+            auto ele = qCnt.top();
+            qCnt.pop();
+            str[pos++] = ele.second;
+            ele.first--;
+            if(ele.first > 0) {
+                tempQ.emplace(ele);
+            }
+        }
+        while(!tempQ.empty()) {
+            auto ele = tempQ.top();
+            tempQ.pop();
+            qCnt.emplace(ele);
+        }
+    }
+
+    return str;
+}

@@ -154,12 +154,11 @@ int main()
 // test string solutions
 int main(int argc, char *argv[])
 {
-	string S = "aab";
-	cout << reorganizeString(S) << endl;
-	S = "aaba";
-	cout << reorganizeString(S) << endl;
-	S = "aaabbbcccde";
-	cout << reorganizeString(S) << endl;
-	S = "a";
-	cout << reorganizeString(S) << endl;
+    vector<string> strs = {"a", "bba", "aabbccd", "aaaaabbbbbccccd",
+                           "geeksforgeeks", "abbcdessssss"};
+    for(auto& str: strs) {
+        cout << str << "\t" << rearrangeString(str, 4) << endl;
+    }
+
+    return 0;
 }

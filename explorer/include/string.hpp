@@ -44,5 +44,8 @@ vector<int> partitionLabels2(string S);
 // Leetcode 767: Reorganize String
 string reorganizeString(string S);
 
+// Leetcode 358: Rearrange String k Distance Apart
+string rearrangeString(string str, int k);
+
 
 #endif
